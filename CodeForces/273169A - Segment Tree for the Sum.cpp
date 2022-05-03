@@ -82,4 +82,4 @@ int main(){
 	return 0;	
 }
 
-//https://codeforces.com/edu/course/2/lesson/4/1/practice/contest/273169/problem/A?csrf_token=003a81928ee888a39030a174a08f6114
+//https://codeforces.com/edu/course/2/lesson/4/1/practice/contest/273169/problem/A
