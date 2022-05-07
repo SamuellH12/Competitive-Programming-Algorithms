@@ -1,6 +1,7 @@
 #include <iostream>
 #include <bits/stdc++.h>
 using namespace std;
+//https://olimpiada.ic.unicamp.br/pratique/p2/2020/f1/fissura/
 
 char mapa[550][550];
  
