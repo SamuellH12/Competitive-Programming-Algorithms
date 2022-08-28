@@ -5,7 +5,7 @@ My solutions for competitive programming on contests and online judges.
 # Sources
 
 ## [Atcoder](https://atcoder.jp/)
-<img src="https://img.atcoder.jp/assets/logo.png " style="height: 150px; background-color: #222222;">
+<img src="https://secure-dcdn.cdn.nimg.jp/nicochannel/material/design/2504203/logo2.png" style="height: 150px; background-color: #222222;">
 
 ## [Beecrownd](https://beecrowd.com.br/)
 <img src="https://www.beecrowd.com.br/judge/favicon.ico?1635097036" style="height: 150px; background-color: #222222;">
