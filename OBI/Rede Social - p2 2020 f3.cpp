@@ -6,42 +6,39 @@
 #define vi vector<int>
 #define pii pair<int,int>
 #define MAXN 110
-#define INF 10000010
-#define debug cout<<"ate aqui ok\n"
+#define INF 0x3f3f3f3f
+#define debug cerr<<"ate aqui ok\n"
 using namespace std;
-
+//https://olimpiada.ic.unicamp.br/pratique/p2/2020/f3/rede/
 
 
 int main(){
-	int n, resp=0;
-	vi p;
-	
-	cin>>n;
+	int n; cin >> n;
 
-	for(int i=0; i<n; i++)
+	vi msg (n);
+	for(int i=0, x; i<n; i++)
 	{
-		int aux; cin>>aux;
-		p.push_back(aux);
+		cin >> x;
+		msg[i] = x;
 	}
 
-	sort(ALL(p));
+	sort(ALL(msg));
 
-	int inicio=0, fim = n-1;
-	
-	while(inicio<fim)
+
+	int l=1, r=msg.size(), mid, resp = 0, siz = msg.size();
+	while(l <= r)
 	{
-		int meio = (inicio+fim)/2 + 1;
+		mid=(l+r)/2;
 
-		if(p[meio] >= p.size() - meio)
+		if( msg[siz - mid] >= mid )
 		{
-			resp = p.size() - meio;
-			fim = meio - 1;
+			resp = max(resp, mid);
+			l = mid+1;
 		}
-		else 
-			inicio = meio;
+		else r = mid-1;
 	}
-
-	cout<<resp<<endl;
+	
+	cout << resp << endl;
 
 	return 0;	
 }
