@@ -2,8 +2,15 @@
 #define endl "\n"
 using namespace std;
 
-//questão de Busca Binária
+/*
+Eu usei busca binária aqui, mas depois percebi que foi o clássico "matar formiga com bala de canhão",
+não era preciso nem de longe isso, era só ter feito um IF na hora de ler o problema (*^~^)
+
+//questão de Busca Binária = FALSE
 //Vídeo aula sobre -> https://youtu.be/dYt4O_U3AUo
+*/
+
+
 
 int main(){
 	int n; 		cin >> n;
