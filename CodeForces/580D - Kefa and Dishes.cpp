@@ -8,7 +8,7 @@ using namespace std;
 
 int n, m, k;
 vi dish;
-map<pair<int, int>, int> rule;
+int rule[20][20];
 int memo[600000][20];
 
 //      get - pegos, last, 
@@ -23,9 +23,7 @@ int solve(int g,  int l)
     {
         if((1<<i & g)) continue;
 
-        int ans = solve(g | 1<<i, i) + dish[i];
-        if(rule.find({l, i}) != rule.end()) ans += rule[{l, i}]; 
-
+        int ans = solve(g | 1<<i, i) + dish[i] + rule[l][i]; 
 
         resp = max(resp, ans);
     }
@@ -47,7 +45,7 @@ int32_t main(){
 
     for(int i=0, x, y, c; i<k; i++){
         cin >> x >> y >> c;
-        rule[ {x, y} ] = c; //1<<x | 1<<y
+        rule[x][y] = c; //1<<x | 1<<y
     }
 
     memset(memo, -1, sizeof(memo));
