@@ -39,6 +39,5 @@ int main(){
 		cout << (espelho(w) ? "yes" : "no") << endl;
 	}
 	
-	
 	return 0;	
 }
