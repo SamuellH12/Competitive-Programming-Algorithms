@@ -39,11 +39,7 @@ vi kmp(string& s, string& p)
 
 		if(p[j] == s[i]) j++;
 
-		if( j == p.size() )
-		{
-			match.push_back(i-j+1);
-			j = pre[j-1];
-		}
+		if( j == p.size() )	match.push_back(i-j+1),	j = pre[j-1];
 	}
 
 	return match;
