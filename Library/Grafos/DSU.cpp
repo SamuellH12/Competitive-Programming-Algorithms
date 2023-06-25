@@ -6,13 +6,14 @@ const int MAXN = 1e6 + 5;
 int pai[MAXN], sz[MAXN];
 
 inline int find(int u){ 
-	return ( pai[u] == -1 ?  u  :  pai[u] = find(pai[u])  ); 
+	return (  pai[u] == -1 || pai[u] == u  ?  u  :  pai[u] = find(pai[u])  ); 
 }
 
 inline void join(int u, int v){
 	u = find(u);
 	v = find(v);
 
+	if(u == v) return;
 	if(sz[v] > sz[u]) swap(u, v);
 
 	pai[v] = u;

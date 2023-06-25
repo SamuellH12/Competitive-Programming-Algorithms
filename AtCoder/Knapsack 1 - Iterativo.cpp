@@ -38,6 +38,7 @@ int main(){
 			else
 				dp[i+1][j] = dp[i][j];
 
+			
 		}
 
 	}
