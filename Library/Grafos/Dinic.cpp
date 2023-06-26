@@ -18,9 +18,7 @@ struct Dinic {
 	vector<int> level, ptr; //pointer para a próxima aresta não saturada de cada vértice
 
 
-	Dinic(int n, int source, int sink) : n(n), source(source), sink(sink) {
-		adj.resize(n);
-	}
+	Dinic(int n, int source, int sink) : n(n), source(source), sink(sink) { adj.resize(n); }
 
 
 	void addAresta(int u, int v, ll cap)
@@ -82,7 +80,9 @@ struct Dinic {
 		return level[sink] < n;
 	}
 
+
 	bool inCut(int u){ return level[u] < n; }
+
 
 	ll maxFlow(){
 		ll ans = 0;
