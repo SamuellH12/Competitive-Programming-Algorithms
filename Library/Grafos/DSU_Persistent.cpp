@@ -3,10 +3,11 @@ using namespace std;
 
 const int MAXN = 1e6 + 5;
 
-int pai[MAXN], sz[MAXN];
+int pai[MAXN], sz[MAXN], tim[MAXN], t=1;
 
-inline int find(int u){ 
-	return (  pai[u] == -1 || pai[u] == u  ?  u  :  pai[u] = find(pai[u])  ); 
+inline int find(int u, int q = INT_MAX){ 
+	if( pai[u] == u || pai[u] == -1 || q < tim[u] ) return u;
+	return find(pai[u], q); 
 }
 
 inline void join(int u, int v){
@@ -17,27 +18,31 @@ inline void join(int u, int v){
 	if(sz[v] > sz[u]) swap(u, v);
 
 	pai[v] = u;
+	tim[v] = t++;
 	sz[u] += sz[v];
 }
 
 inline void resetDSU(){
 	memset(pai, -1, sizeof pai);
 	for(int i=0; i<MAXN; i++) sz[i] = 1;
+	memset(tim, 0, sizeof tim);
 }
 
 
 
 int main(){
 	resetDSU();
-	cout << "Disjoint Set Union - Union Find" << endl;
+	cout << "Persistent Disjoint Set Union - Persistent Union Find" << endl;
 	return 0;	
 }
 
 /*************************************************
 -> Complexity:
 
- - Find: O( α(n) ) -> Inverse Ackermann function 
- - Join: O( α(n) ) -> Inverse Ackermann function 
+ - Find: O( Log N )
 
-α(n) <= 4 Para todos os casos práticos
+  find(u, q) -> Retorna o representante do conjunto de U no tempo Q
+
+ * Não é possível utilizar Path Compression
+ * tim -> tempo em que o pai de U foi alterado
 *************************************************/
