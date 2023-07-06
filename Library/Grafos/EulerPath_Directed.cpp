@@ -5,14 +5,14 @@ using namespace std;
 
 const int MAXN = 1e6 + 5;
 
-vector<int> grafo[MAXN];
-vector<int> path;
+vector<pair<int, int>> grafo[MAXN];
+vector<int> path, pathId;
 int in[MAXN], out[MAXN], idx[MAXN];
-int N, startVertex, noEdge;
+int N, startVertex, noEdge, ida=0;
 
 
 void addEdge(int u, int v){
-	grafo[u].push_back(v);	
+	grafo[u].push_back({v, ida++});	
 	out[u]++;
 	in[v]++;
 }
@@ -33,10 +33,10 @@ bool isConnected(int s){
 		fila.pop();
 
 		for(auto v : grafo[u])
-			if(!vis[v])
+			if(!vis[v.first])
 			{
-				vis[v] = true;
-				fila.push(v);
+				vis[v.first] = true;
+				fila.push(v.first);
 				cnt++;
 			}
 	}
@@ -64,7 +64,7 @@ bool hasEuler()
 	if(start == -1  && end != -1) return false;
 	if(start != -1  && end == -1) return false;
 
-	while(start == -1 && out[++start] == 0);
+	if(start == -1) while(out[++start] == 0 && start < N-1);
 	startVertex = start;
 
 	if(!isConnected(startVertex)) return false;
@@ -75,8 +75,11 @@ bool hasEuler()
 
 void findPath(int u)
 {
-	while(idx[u] < grafo[u].size())
-		findPath(grafo[u][idx[u]++]);
+	while(idx[u] < grafo[u].size()){
+		auto v = grafo[u][idx[u]++];
+		findPath(v.first);
+		pathId.push_back(v.second);
+	}
 	
 	path.push_back(u);
 }
@@ -107,11 +110,13 @@ O(V + E)
 	findPath(startVertex) -> dfs que encontra o caminho Euleriano a partir do {startVertex}
 
 	vi path -> Lista de vértices do Euler Path na ordem REVERSA a que são visitados
+	vi pathId -> id das Arestas do Euler Path na ordem REVERSA a que são visitadas
 	in[u] -> Quantidade de vértices que chegam em U
 	out[u] -> Quantidade de vértices que saem de U
 	idx[u] -> Para a DFS do findPath() saber qual o próximo vértice a ser visitado para cada U
 	startVertex -> Vértice Inicial do Euler Path. Pega o elemento de início obrigatório se houver ou o primeiro com arestas de saída
 	noEdge -> Quantidade de vértices que não possuem arestas. Essa quantidade é descontada na verificação de conectividade
+	ida -> id de cada aresta adicionada no addEdge
 
 
 IMPORTANTE! O algoritmo está 0-indexado

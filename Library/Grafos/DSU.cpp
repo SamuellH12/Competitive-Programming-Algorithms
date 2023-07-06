@@ -3,11 +3,14 @@ using namespace std;
 
 const int MAXN = 1e6 + 5;
 
+
 int pai[MAXN], sz[MAXN];
+
 
 inline int find(int u){ 
 	return (  pai[u] == -1 || pai[u] == u  ?  u  :  pai[u] = find(pai[u])  ); 
 }
+
 
 inline void join(int u, int v){
 	u = find(u);
@@ -20,10 +23,12 @@ inline void join(int u, int v){
 	sz[u] += sz[v];
 }
 
+
 inline void resetDSU(){
 	memset(pai, -1, sizeof pai);
 	for(int i=0; i<MAXN; i++) sz[i] = 1;
 }
+
 
 
 
