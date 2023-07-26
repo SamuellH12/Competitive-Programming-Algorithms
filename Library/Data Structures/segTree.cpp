@@ -6,7 +6,7 @@ int seg[4*MAXN];
 
 
 int query(int no, int l, int r, int a, int b){
-	if(b <  l || r <  a ) return 0;
+	if(b <  l || r <  a) return 0;
 	if(a <= l && r <= b) return seg[no];
 
 	int m=(l+r)/2, e=no*2, d=no*2+1;
