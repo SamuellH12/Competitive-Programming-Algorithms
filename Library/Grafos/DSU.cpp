@@ -8,7 +8,7 @@ int pai[MAXN], sz[MAXN];
 
 
 inline int find(int u){ 
-	return (  pai[u] == -1 || pai[u] == u  ?  u  :  pai[u] = find(pai[u])  ); 
+	return ( pai[u] == u  ?  u  :  pai[u] = find(pai[u]) ); 
 }
 
 
@@ -25,8 +25,8 @@ inline void join(int u, int v){
 
 
 inline void resetDSU(){
-	memset(pai, -1, sizeof pai);
-	for(int i=0; i<MAXN; i++) sz[i] = 1;
+	for(int i=0; i<MAXN; i++) 
+		sz[i] = 1, pai[i] = i;
 }
 
 

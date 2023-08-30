@@ -3,9 +3,10 @@ using namespace std;
 
 #define vi vector<int>
 
-vi Zfunction(string &s){
+vi Zfunction(string &s)
+{
 	int n = s.size();
-	vi z (n);
+	vi z (n, 0);
 
 	for(int i=1, l=0, r=0; i<n;  i++)
 	{

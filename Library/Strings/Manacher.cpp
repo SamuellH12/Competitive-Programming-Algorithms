@@ -11,7 +11,7 @@ vi manacher(string &st)
 
 	int n = s.size()-2;
 
-	vi p(n+2);
+	vi p(n+2, 0);
 	int l=1, r=1;
 
 	for(int i=1, j; i<=n; i++)
@@ -37,4 +37,4 @@ int main(){
 
 Complexidade: O(N)
 
-****************** /
+******************/

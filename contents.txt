@@ -1,0 +1,35 @@
+# Any line followed by a '#' character is ignored
+# Section headings must be in square brackets
+# Subsections within a section should follow the format:
+#   [filename within code directory][tab character \t][subsection title]
+# tab character:	
+
+[Data Structures]
+Data Structures/BIT.cpp	BIT - Binary Indexed Tree
+Data Structures/BIT2D.cpp	BIT2D
+Data Structures/PrefixSum2D.cpp	Prefix Sum 2D
+Data Structures/segTree.cpp	Segment Tree
+Data Structures/segTreeLazy.cpp	Segment Tree Lazy
+
+[Graph]
+Grafos/dinic.cpp	Dinic
+Grafos/Dijkstra.cpp	Dijkstra
+Grafos/Tarjan.cpp	Tarjan - Pontes
+Grafos/LCA.cpp	LCA
+Grafos/DSU Persistente.cpp	DSU Persistente
+Grafos/Euler Path - Directed.cpp	Euler Path - Directed
+
+[Dynamic Programming]
+dp/LCS.cpp	Longest Common Subsequence
+dp/LIS.cpp	Longest Increasing Subsequence
+
+[String]
+Strings/hash.cpp	Hash
+Strings/hash2.cpp	Double Hash
+Strings/Z-Function.cpp	Z-Function
+Strings/Manacher.cpp	Manacher
+Strings/KMP.cpp	KMP
+Strings/trie.cpp	Trie
+
+[Outros]
+others/Hungarian.cpp	Hungaro
