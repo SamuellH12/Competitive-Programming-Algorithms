@@ -7,7 +7,7 @@
 [Data Structures]
 Data Structures/BIT.cpp	BIT - Binary Indexed Tree
 Data Structures/BIT2D.cpp	BIT2D
-Data Structures/PrefixSum2D.cpp	Prefix Sum 2D
+# Data Structures/PrefixSum2D.cpp	Prefix Sum 2D
 Data Structures/segTree.cpp	Segment Tree
 Data Structures/segTreeLazy.cpp	Segment Tree Lazy
 
@@ -17,7 +17,7 @@ Grafos/Dijkstra.cpp	Dijkstra
 Grafos/Tarjan.cpp	Tarjan - Pontes
 Grafos/LCA.cpp	LCA
 Grafos/DSU Persistente.cpp	DSU Persistente
-Grafos/Euler Path - Directed.cpp	Euler Path - Directed
+# Grafos/Euler Path - Directed.cpp	Euler Path - Directed
 
 [Dynamic Programming]
 dp/LCS.cpp	Longest Common Subsequence
