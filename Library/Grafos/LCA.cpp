@@ -29,21 +29,17 @@ void buildBL(){
 
 int lca(int u, int v){
 	if(lvl[u] < lvl[v]) swap(u, v);
-	
 
 	for(int i=MAXLG-1; i>=0; i--)
 		if(lvl[u] - (1<<i) >= lvl[v])
 			u = bl[i][u];
 	
-
 	if(u == v) return u;
-
 
 	for(int i=MAXLG-1; i>=0; i--)
 		if(bl[i][u] != bl[i][v])
 			u = bl[i][u],
 			v = bl[i][v];
-
 
 	return bl[0][u];
 }
