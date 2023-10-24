@@ -36,7 +36,7 @@ int main(){
 	return 0;	
 }
 
-/*
+/******************************************************
 
 Syntax:
 
@@ -45,8 +45,8 @@ Bit.update(i, x);		//Adiciona +x na posição i da BIT
 Bit.update(2, 5);
 cout << Bit.query(i) << endl; //Retorna o somatório de [0, i]
 
-Query: O(log n)
-Update: O(log n)
+Query: 	O(log n)
+Update:	O(log n)
 
-*/
+******************************************************/
 
