@@ -1,7 +1,4 @@
 #include <bits/stdc++.h>
-#define ll lowng lowng
-#define pii pair<int,int>
-#define INF 0x3f3f3f3f
 using namespace std;
 
 const int MAXN = 1e6 + 5;
@@ -12,7 +9,7 @@ int pre[MAXN], low[MAXN], clk=0;
 vector<pair<int, int>> pontes;
 vector<int> cut;
 
-
+// lembrar do memset(pre, -1, sizeof pre);
 void tarjan(int u, int p = -1){
 	pre[u] = low[u] = clk++;
 	
@@ -44,17 +41,13 @@ void tarjan(int u, int p = -1){
 
 int main(){
 	memset(pre, -1, sizeof pre);
-
 	cout << "Tarjan - Pontes e Pontos de Articulação" << endl;
-	
 	return 0;	
 }
 
 
 /**************************************
-Algoritmo para encontrar todas as pontes
-e vértices de articulação, ou vértice de 
-corte, de um grafo.
+Algoritmo para encontrar todas as pontes e pontos de articulação, ou vértice de corte, de um grafo.
 
 Complexity:
 O(V + E)
@@ -69,5 +62,7 @@ any = Marca se alguma aresta de retorno em qualquer dos componentes filhos de U 
 
 if(low[v] >  pre[u]) pontes.emplace_back(u, v); -> se a mais alta aresta de retorno de V (ou o menor low) estiver abaixo de U, então U-V é ponte
 if(low[v] >= pre[u]) any = true;				-> se a mais alta aresta de retorno de V (ou o menor low) estiver abaixo de U ou igual a U, então U é Ponto de Articulação
+
+IMPORTANTE! Lembre do memset(pre, -1, sizeof pre);
 
 ***************************************/
