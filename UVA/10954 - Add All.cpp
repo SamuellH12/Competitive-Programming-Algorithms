@@ -27,13 +27,14 @@ int main(){
 
             int y = pq.top();
             pq.pop();
+
             custo += x + y;
             pq.push(x+y);
         }
 
         cout << custo << endl;
-	}
+    }
 
 
-	return 0;	
+    return 0;	
 }
