@@ -148,3 +148,37 @@ O( sqrt(V) * E )  ->  Para grafos com capacidade = 1 para todos os vértices:
 IMPORTANTE! O algoritmo está 0-indexado
 
 ***************************************/
+/**************************************
+* Use Cases of Flow
+	   
++ Minimum cut: the minimum cut is equal to maximum flow.
+  i.e. to split the graph in two parts, one on the source side and another on sink side.
+  The capacity of each edge is it weight.
+
++ Edge-disjoint paths: maximum number of edge-disjoint paths equals maximum flow of the
+  graph, assuming that the capacity of each edge is one. (paths can be found greedily)
+
++ Node-disjoint paths: can be reduced to maximum flow. each node should appear in at most one 
+  path, so limit the flow through a node dividing each node in two. One with incoming edges,
+  other with outgoing edges and a new edge from the first to the second with capacity 1.
+
++ Maximum matching (bipartite): maximum matching is equal to maximum flow. Add a source and
+  a sink, edges from the source to every node at one partition and from each node of the 
+  other partition to the sink.
+
++ Minimum node cover (bipartite): minimum set of nodes such each edge has at least one 
+  endpoint. The size of minimum node cover is equal to maximum matching (Konig’s theorem).
+
++ Maximum independent set (bipartite): largest set of nodes such that no two nodes are 
+  connected with an edge. Contain the nodes that dont aren't in "Min node cover" (N - MAXFLOW).
+
++ Minimum path cover (DAG): set of paths such that each node belongs to at least one path. 
+  - Node-disjoint: construc a matching where each node is represented by two nodes, a left and 
+    a right at the matching and add the edges (from l to r). Each edge in the matching
+    corresponds to an edge in the path cover. The number of paths in the cover is (N - MAXFLOW).
+  - General: almost like a minimum node-disjoint. Just add edges to the matching whenever there 
+    is an path from U to V in the graph (possibly through several edges).
+  - Antichain: a set of nodes such that there is no path from any node to another. In a DAG, the 
+    size of min general path cover equals the size of maximum antichain (Dilworth’s theorem).
+
+***************************************/
