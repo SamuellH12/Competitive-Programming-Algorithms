@@ -7,7 +7,6 @@ const int MAXLG = 16;
 vector<int> grafo[MAXN];
 
 int bl[MAXLG][MAXN], lvl[MAXN];
-int N;
 
 
 void dfs(int u, int p, int l=0){
@@ -20,7 +19,7 @@ void dfs(int u, int p, int l=0){
 }
 
 
-void buildBL(){
+void buildBL(int N){
 	for(int i=1; i<MAXLG; i++)
 		for(int u=0; u<N; u++)
 			bl[i][u] = bl[i-1][bl[i-1][u]];	

@@ -170,7 +170,7 @@ IMPORTANTE! O algoritmo está 0-indexado
   endpoint. The size of minimum node cover is equal to maximum matching (Konig’s theorem).
 
 + Maximum independent set (bipartite): largest set of nodes such that no two nodes are 
-  connected with an edge. Contain the nodes that dont aren't in "Min node cover" (N - MAXFLOW).
+  connected with an edge. Contain the nodes that aren't in "Min node cover" (N - MAXFLOW).
 
 + Minimum path cover (DAG): set of paths such that each node belongs to at least one path. 
   - Node-disjoint: construc a matching where each node is represented by two nodes, a left and 
