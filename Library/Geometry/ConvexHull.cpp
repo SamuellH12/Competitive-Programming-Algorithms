@@ -39,8 +39,3 @@ vector<PT> ConvexHull(vector<PT> pts, bool sorted=false) {
 	h.resize(s-1);
 	return h;
 }
-
-
-int main(){
-	return 0;	
-}

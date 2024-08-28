@@ -10,13 +10,11 @@ const ll base = 153;
 
 ll expBase[MAXN];
 
-
 void precalc(){
 	expBase[0] = 1;
 	for(int i=1; i<MAXN; i++) 
 		expBase[i] = (expBase[i-1]*base)%MOD;
 }
-
 
 struct StringHash{
 	vector<ll> hsh;
@@ -33,14 +31,6 @@ struct StringHash{
 		return (MOD + hsh[r+1] - (hsh[l]*expBase[r-l+1]) % MOD ) % MOD;
 	}
 };
-
-
-
-int main(){	
-	cout << "String Hash" << endl;
-	return 0;	
-}
-
 /******************************************************
 String Hash
 
@@ -59,14 +49,10 @@ const ll base = 127;         -> Random number larger than the Alphabet
 
 *******************************************************/
 
-
 /************************
 Some Big Prime Numbers:
 127
 157
-1'201
-1'000'003
-1'000'037
 37'139'213
 127'065'427
 131'807'699

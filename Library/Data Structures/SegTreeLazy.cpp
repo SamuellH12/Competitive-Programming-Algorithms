@@ -8,7 +8,7 @@ int lazy[4*MAXN];
 void unlazy(int no, int l, int r){
 	if(lazy[no] == 0) return;
 
-	int m=(l+r)>>1, e=no*2, d=no*2+1;
+	int m=(l+r)/2, e=no*2, d=no*2+1;
 
 	seg[no] += (r-l+1) * lazy[no];
 
@@ -25,7 +25,7 @@ int query(int no, int l, int r, int a, int b){
 	if(b <  l || r <  a) return 0;
 	if(a <= l && r <= b) return seg[no];
 	
-	int m=(l+r)>>1, e=no*2, d=no*2+1;
+	int m=(l+r)/2, e=no*2, d=no*2+1;
 
 	return query(e, l, m, a, b) + query(d, m+1, r, a, b);
 } 
@@ -40,7 +40,7 @@ void update(int no, int l, int r, int a, int b, int v){
 		return;
 	}
 
-	int m=(l+r)>>1, e=no*2, d=no*2+1;
+	int m=(l+r)/2, e=no*2, d=no*2+1;
 
 	update(e, l,   m, a, b, v);
 	update(d, m+1, r, a, b, v);
@@ -48,11 +48,10 @@ void update(int no, int l, int r, int a, int b, int v){
 	seg[no] = seg[e] + seg[d];
 }
 
-
 void build(int no, int l, int r, vector<int> &lista){
 	if(l == r){ seg[no] = lista[l-1]; return; }
 
-	int m=(l+r)>>1, e=no*2, d=no*2+1;
+	int m=(l+r)/2, e=no*2, d=no*2+1;
 
 	build(e, l,   m, lista);
 	build(d, m+1, r, lista);
@@ -60,25 +59,15 @@ void build(int no, int l, int r, vector<int> &lista){
 	seg[no] = seg[e] + seg[d];
 }
 
-
-int main()
-{
-	cout << "Segment Tree - Lazy Propagation" << endl;
-	return 0;
-}
-
 /******************************************************
-
 -> Segment Tree - Lazy Propagation com:
 	- Query em Range
 	- Update em Range
+	
+build (1, 1, n, lista);
+query (1, 1, n, a, b);
+update(1, 1, n, a, b, x);
 
--> Chamadas padrão:
-	build(1, 1, n, lista);
-	query(1, 1, n, a, b);
-	update(1, 1, n, a, b, x);
-
--> Em que:
 |   n    | o tamanho máximo da lista
 | [a, b] | o intervalo da busca ou update
 |   x    | o novo valor a ser somada no intervalo [a, b]
@@ -88,5 +77,4 @@ Build:  O(N)
 Query:  O(log N)
 Update: O(log N)
 Unlazy: O(1)
-
 *******************************************************/

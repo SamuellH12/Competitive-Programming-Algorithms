@@ -2,9 +2,8 @@
 using namespace std;
 
 const int MAXN = 1e6 + 5;
-
-vector<int> grafo [MAXN];
 int pre[MAXN], low[MAXN], clk=0;
+vector<int> grafo [MAXN];
 
 vector<pair<int, int>> pontes;
 vector<int> cut;
@@ -38,22 +37,14 @@ void tarjan(int u, int p = -1){
 	if(p != -1 && any)      cut.push_back(u);
 }
 
-
-int main(){
-	memset(pre, -1, sizeof pre);
-	cout << "Tarjan - Pontes e Pontos de Articulação" << endl;
-	return 0;	
-}
-
-
 /**************************************
-Algoritmo para encontrar todas as pontes e pontos de articulação, ou vértice de corte, de um grafo.
+	Tarjan - Pontes e Pontos de Articulação
+Algoritmo para encontrar pontes e pontos de articulação.
 
-Complexity:
-O(V + E)
+Complexity: O(V + E)
+IMPORTANTE! Lembre do memset(pre, -1, sizeof pre);
 
 *** Variáveis e explicações ***
-
 pre[u] = "Altura", ou, x-ésimo elemento visitado na DFS. Usado para saber a posição de um vértice na árvore de DFS
 low[u] = Low Link de U, ou a menor aresta de retorno (mais próxima da raiz) que U alcança entre seus filhos
 
@@ -62,7 +53,4 @@ any = Marca se alguma aresta de retorno em qualquer dos componentes filhos de U 
 
 if(low[v] >  pre[u]) pontes.emplace_back(u, v); -> se a mais alta aresta de retorno de V (ou o menor low) estiver abaixo de U, então U-V é ponte
 if(low[v] >= pre[u]) any = true;				-> se a mais alta aresta de retorno de V (ou o menor low) estiver abaixo de U ou igual a U, então U é Ponto de Articulação
-
-IMPORTANTE! Lembre do memset(pre, -1, sizeof pre);
-
 ***************************************/

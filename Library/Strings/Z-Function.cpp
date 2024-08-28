@@ -1,12 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define vi vector<int>
-
-vi Zfunction(string &s)
+vector<int> Zfunction(string &s)
 {
 	int n = s.size();
-	vi z (n, 0);
+	vector<int> z (n, 0);
 
 	for(int i=1, l=0, r=0; i<n;  i++)
 	{
@@ -19,15 +17,7 @@ vi Zfunction(string &s)
 
 	return z;
 }
-
-
-int main(){
-	cout << "Z-Function" << endl;
-	return 0;	
-}
-
 /******************
-
+Z-Function
 Complexidade: O(N)
-
 *******************/

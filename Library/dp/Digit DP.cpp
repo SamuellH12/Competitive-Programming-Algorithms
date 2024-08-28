@@ -22,15 +22,14 @@ ll solve(ll k){
     memset(dp, -1, sizeof dp);
 	
 	int sz=0;
-	while(k)
-	{
+	while(k){
 		limite[sz++] = k % 10LL;
 		k /= 10LL;
 	}
 
  	return digitDP(sz-1, 0, true);
 }
- 
+
 /*********************
 Digit DP - Sum of Digits
 
@@ -39,9 +38,4 @@ dp[D][S][f]  ->  D: Quantidade de dígitos; S: Soma dos dígitos; f: Flag que in
 int limite[D] -> Guarda os dígitos de K.
 
 Complexity: O(D^2 * B^2)  (B = Base = 10)
-
 *********************/
-int main(){ 
-	cout << "Digit DP - Sum of Digits" << endl;
-    return 0;
-}

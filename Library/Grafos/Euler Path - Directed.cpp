@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-//Código pra grafo Direcionado
+//Código para grafo Direcionado
 
 const int MAXN = 1e6 + 5;
 
@@ -10,16 +10,13 @@ vector<int> path, pathId;
 int in[MAXN], out[MAXN], idx[MAXN];
 int N, startVertex, noEdge, ida=0;
 
-
 void addEdge(int u, int v){
 	grafo[u].push_back({v, ida++});	
 	out[u]++;
 	in[v]++;
 }
 
-
 bool isConnected(int s){
-
 	vector<bool> vis (N, false);
 	queue<int> fila;
 
@@ -43,7 +40,6 @@ bool isConnected(int s){
 
 	return cnt == N - noEdge;
 }
-
 
 bool hasEuler()
 {
@@ -83,27 +79,18 @@ void findPath(int u)
 	
 	path.push_back(u);
 }
-
-
-
-
-
-int main(){
-	cout << "Hierholzer - Euler Path in a DIRECTED Graph" << endl;
-	return 0;	
-}
-
-
 /**************************************
+	Hierholzer - Euler Path in a DIRECTED Graph
 Algoritmo de Hierholzer para encontrar caminho
 Euleriano (Euler Path) em um grafo direcionado
 
-Complexity:
-O(V + E)
+IMPORTANTE! O algoritmo está 0-indexado
+IMPORTANTE! Lembre de dar reverse(path.begin(), path.end()) após chamar o findPath()
+IMPORTANTE! findPath() deve ser chamado a partir do startVertexv
 
+Complexity: O(V + E)
 
 * Informações
-
 	addEdge(u, v) -> Adiciona uma aresta de U para V
 	hasEuler() -> Retorna se existe um Euler Path
 	isConnected() -> Retona se o grafo é conexo (chamado dentro do hasEuler())
@@ -117,15 +104,7 @@ O(V + E)
 	startVertex -> Vértice Inicial do Euler Path. Pega o elemento de início obrigatório se houver ou o primeiro com arestas de saída
 	noEdge -> Quantidade de vértices que não possuem arestas. Essa quantidade é descontada na verificação de conectividade
 	ida -> id de cada aresta adicionada no addEdge
-
-
-IMPORTANTE! O algoritmo está 0-indexado
-IMPORTANTE! Lembre de dar reverse(path.begin(), path.end()) após chamar o findPath()
-IMPORTANTE! findPath() deve ser chamado a partir do startVertexv
 **************************************/
-
-
-
 /**************************************
 Para saber se um grafo possui um Caminho Euleriano:
 

@@ -6,9 +6,7 @@ const int sigma = 26;
 
 int trie[MAXS][sigma], terminal[MAXS], z = 1;
 
-
-void insert(string &p)
-{
+void insert(string &p){
 	int cur = 0;
 
 	for(int i=0; i<p.size(); i++){
@@ -26,10 +24,7 @@ void insert(string &p)
 	terminal[cur]++;
 }
 
-
-
-int count(string &p)
-{
+int count(string &p){
 	int cur = 0;
 
 	for(int i=0; i<p.size(); i++)
@@ -44,30 +39,18 @@ int count(string &p)
 	return terminal[cur];
 }
 
-
-
-
 void init(){
 	memset(trie[0], -1, sizeof trie[0]);
 	z = 1;
 }
 
-
-
-
-int main(){
-	cout << "Trie - Árvore de Prefixos" << endl;
-	return 0;	
-}
-
 /******************
+Trie - Árvore de Prefixos
 
 Complexidade:
-
 insert(P) - O(|P|)
 count(P)  - O(|P|)
 
 MAXS  - Soma do tamanho de todas as Strings
 sigma - Tamanho do alfabeto
-
 ******************/

@@ -2,17 +2,13 @@
 using namespace std;
 
 const int MAXN = 1e6 + 5;
-
-
 int pai[MAXN], sz[MAXN];
 
-
-inline int find(int u){ 
+int find(int u){ 
 	return ( pai[u] == u  ?  u  :  pai[u] = find(pai[u]) ); 
 }
 
-
-inline void join(int u, int v){
+void join(int u, int v){
 	u = find(u);
 	v = find(v);
 
@@ -23,26 +19,14 @@ inline void join(int u, int v){
 	sz[u] += sz[v];
 }
 
-
-inline void resetDSU(){
+void resetDSU(){
 	for(int i=0; i<MAXN; i++) 
 		sz[i] = 1, pai[i] = i;
 }
-
-
-
-
-int main(){
-	resetDSU();
-	cout << "Disjoint Set Union - Union Find" << endl;
-	return 0;	
-}
-
 /*************************************************
+	Disjoint Set Union - Union Find
 -> Complexity:
-
  - Find: O( α(n) ) -> Inverse Ackermann function 
  - Join: O( α(n) ) -> Inverse Ackermann function 
-
 α(n) <= 4 Para todos os casos práticos
 *************************************************/

@@ -1,16 +1,15 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+const int MAXN = 1e6 + 5;
 #define INF 0x3f3f3f3f
 #define vi vector<int>
 #define pii pair<int,int>
 
-const int MAXN = 1e6 + 5;
-
 vector<pii> grafo [MAXN];
 
 vi dijkstra(int s){
-	vi dist (MAXN, INF);
+	vi dist (MAXN, INF); // !!! Change MAXN to N
 
 	priority_queue<pii, vector<pii>, greater<pii>> fila;
 	fila.push({0, s});
@@ -33,21 +32,13 @@ vi dijkstra(int s){
 
 	return dist;
 }
-
-
-int main(){
-	cout << "Dijkstra - Shortest Paths from Source" << endl;
-	return 0;
-}
-
-
 /**************************************
-Algoritmo para encontrar o caminho 
-minimo de um vertice u para todos os
-outros vertices de um grafo qualquer
+Dijkstra - Shortest Paths from Source
 
-Complexity:
-O(N Log N)
+caminho minimo de um vertice u para todos os
+outros vertices de um grafo ponderado
+
+Complexity: O(N Log N)
 
 dijkstra(s)				->  s : Source, Origem. As distancias serao calculadas com base no vertice s
 grafo[u] = {v, c};  	->  u : Vertice inicial, v : Vertice final, c : Custo da aresta

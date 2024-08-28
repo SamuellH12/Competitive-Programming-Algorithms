@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-
 struct Node	{
 	int val = 0;
 
@@ -9,7 +8,6 @@ struct Node	{
 
 	Node(int v = 0) : val(v), L(NULL), R(NULL) {}
 };
-
 
 Node* build(int l, int r){
 	if(l == r) return new Node();
@@ -25,7 +23,6 @@ Node* build(int l, int r){
 
 	return node;
 }
-
 
 Node* update(Node *node, int l, int r, int pos, int v)
 {
@@ -47,7 +44,6 @@ Node* update(Node *node, int l, int r, int pos, int v)
 	return nw;
 }
 
-
 int query(Node *node, int l, int r, int a, int b){
 	if(b <  l || r <  a) return 0;
 	if(a <= l && r <= b) return node->val;
@@ -60,7 +56,6 @@ int query(Node *node, int l, int r, int a, int b){
 	return query(node->L, l, m, a, b) + query(node->R, m+1, r, a, b);
 }
 
-
 int kth(Node *Left, Node *Right, int l, int r, int k){
 	if(l == r) return l;
 
@@ -72,18 +67,10 @@ int kth(Node *Left, Node *Right, int l, int r, int k){
 	return kth(Left->R, Right->R, m+1, r, k - sum);
 }
 
-
-int main(){
-	cout << "Segment Tree - Persistent" << endl;
-	return 0;	
-}
-
 /******************************************************
-
 -> Segment Tree Persistente com:
 	- Query em Range
 	- Update em Ponto
-
 
 Build(1, N) -> Cria uma Seg Tree completa de tamanho N;	RETORNA um *Ponteiro pra Raíz
 Update(Root, 1, N, pos, v) 	-> Soma +V na posição POS; RETORNA um *Ponteiro pra Raíz da nova versão;
@@ -96,12 +83,10 @@ Para guardar as Raízes, use:
 -> vector<Node*> roots; ou
 -> Node* roots [MAXN];
 
-
 Build:  O(N)
 Query:  O(log N)
 Update: O(log N)
 Kth:	O(Log N)
-
 
 Comportamento do K-th(SegL, SegR, 1, N, K):
 	-> Retorna índice da primeira posição i cuja soma de prefixos [1, i] é >= k 
@@ -113,5 +98,4 @@ Comportamento do K-th(SegL, SegR, 1, N, K):
 
 IMPORTANTE! Cuidado com o Kth ao acessar uma Seg que está esparsa (RTE). Nesse caso, 
 chame o Build antes ou garanta criar os nós L e R antes de acessá-los (como na query).
-
 *******************************************************/

@@ -29,9 +29,4 @@ computa para cada mask a soma dos valores de todas as suas submasks.
 N -> Número Máximo de Bits
 iVal[mask] -> initial Value / Valor Inicial da Mask
 dp[mask]   -> Soma de todos os SubSets
-
 *********************/
-int main(){ 
-	cout << "SOS DP - Sum over Subsets" << endl;
-    return 0;
-}

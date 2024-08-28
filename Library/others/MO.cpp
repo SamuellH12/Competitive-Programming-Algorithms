@@ -14,11 +14,9 @@ struct Query{
 	}
 };
 
-
 void add(int idx);
 void remove(int idx);
 int getAnswer();
-
 
 vector<int> MO(vector<Query> &queries){
 	vector<int> ans(queries.size());

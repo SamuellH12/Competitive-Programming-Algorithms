@@ -2,15 +2,14 @@
 using namespace std;
 
 const int MAXN = 1e6 + 5;
-
 int pai[MAXN], sz[MAXN], tim[MAXN], t=1;
 
-inline int find(int u, int q = INT_MAX){ 
-	if( pai[u] == u || pai[u] == -1 || q < tim[u] ) return u;
+int find(int u, int q = INT_MAX){ 
+	if( pai[u] == u || q < tim[u] ) return u;
 	return find(pai[u], q); 
 }
 
-inline void join(int u, int v){
+void join(int u, int v){
 	u = find(u);
 	v = find(v);
 
@@ -22,26 +21,15 @@ inline void join(int u, int v){
 	sz[u] += sz[v];
 }
 
-inline void resetDSU(){
-	memset(pai, -1, sizeof pai);
-	for(int i=0; i<MAXN; i++) sz[i] = 1;
+void resetDSU(){
+	for(int i=0; i<MAXN; i++) sz[i] = 1, pai[i] = i;
 	memset(tim, 0, sizeof tim);
 }
-
-
-
-int main(){
-	resetDSU();
-	cout << "Persistent Disjoint Set Union - Persistent Union Find" << endl;
-	return 0;	
-}
-
 /*************************************************
--> Complexity:
+	SemiPersistent Disjoint Set Union
 
- - Find: O( Log N )
-
-  find(u, q) -> Retorna o representante do conjunto de U no tempo Q
+-> Complexity: O( Log N )
+find(u, q) -> Retorna o representante do conjunto de U no tempo Q
 
  * Não é possível utilizar Path Compression
  * tim -> tempo em que o pai de U foi alterado

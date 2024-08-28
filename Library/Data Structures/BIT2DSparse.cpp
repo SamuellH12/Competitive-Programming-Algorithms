@@ -72,8 +72,3 @@ BIT2D(pts);   // pts -> vecotor<pii> com todos os pontos em que serão feitas qu
 
 Credits: TFG (TFG50 on Git: https://github.com/tfg50/Competitive-Programming/blob/master/Biblioteca/Data%20Structures/Bit2D.cpp)
 ************************************/
-
-int main(){
-	cout << "Sparse Binary Indexed Tree 2D - Fenwick Tree 2D Offline" << endl;
-	return 0;	
-}

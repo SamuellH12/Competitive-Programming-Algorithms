@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-
 #define vi vector<int>
 
 vi manacher(string &st)
@@ -28,13 +27,8 @@ vi manacher(string &st)
 	return p;
 }
 
-int main(){
-	cout << "Manacher" << endl;
-	return 0;	
-}
-
 /******************
-
+Manacher Algorithm
+Find every palindrome in string
 Complexidade: O(N)
-
 ******************/

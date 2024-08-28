@@ -30,18 +30,8 @@ vector<int> kmp(string &s, string &t){
 
 	return occ;
 }
-
-
-
-int main()
-{
-	cout << "KMP - Pattern Searching" << endl;
-
-	return 0;
-}
-
 /**************************
-Knuth–Morris–Pratt Algorithm / KMP
+KMP - Knuth–Morris–Pratt Pattern Searching
 
 Complexity: O(|S|+|T|)
 

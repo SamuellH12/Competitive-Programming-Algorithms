@@ -21,6 +21,21 @@ struct PT {
 	bool operator<<(const PT&a) const{ PT p=*this; return (p%a == 0) ? (p*p < a*a) : (p%a < 0);  } //angle(p) < angle(a)
 };
 
+/******************** 
+// FOR DOUBLE POINT // 
+const ld EPS = 1e-9;
+bool eq(ld a, ld b){ return abs(a-b) < EPS; } // ==
+bool lt(ld a, ld b){ return a + EPS < b;    } // <
+bool gt(ld a, ld b){ return a > b + EPS;    } // >
+bool le(ld a, ld b){ return a < b + EPS;    } // <= 
+bool ge(ld a, ld b){ return a + EPS > b;    } // >= 
+bool operator==(const PT&a) const{ return eq(x, a.x) && eq(y, a.y); }				// for double point
+bool operator< (const PT&a) const{ return eq(x, a.x) ? lt(y, a.y) : lt(x, a.x); }	// for double point
+bool operator<<(PT&a){ PT&p=*this; return eq(p%a, 0) ? lt(p*p, a*a) : lt(p%a, 0);  } //angle(this) < angle(a)
+//Change LL to LD and uncomment this
+//Also, consider replacing comparisons with these functions
+*********************/
+
 ld dist  (PT a, PT b){ return sqrtl((a-b)*(a-b)); }	                   // distance from A to B
 ld angle (PT a, PT b){ return acos((a*b) / sqrtl(a*a) / sqrtl(b*b)); } //Angle between A and B
 PT rotate(PT p, double ang){ return PT(p.x*cos(ang) - p.y*sin(ang), p.x*sin(ang) + p.y*cos(ang)); } //Left rotation. Angle in radian
@@ -48,23 +63,3 @@ ld dist_pt_segm(PT a, PT s1, PT s2){
 
   return dist(a, s1+(d*t));
 }
-
-
-int main(){
-	return 0;	
-}
-
-/******************** 
-// FOR DOUBLE POINT // 
-const ld EPS = 1e-9;
-bool eq(ld a, ld b){ return abs(a-b) < EPS; } // ==
-bool lt(ld a, ld b){ return a + EPS < b;    } // <
-bool gt(ld a, ld b){ return a > b + EPS;    } // >
-bool le(ld a, ld b){ return a < b + EPS;    } // <= 
-bool ge(ld a, ld b){ return a + EPS > b;    } // >= 
-bool operator==(const PT&a) const{ return eq(x, a.x) && eq(y, a.y); }				// for double point
-bool operator< (const PT&a) const{ return eq(x, a.x) ? lt(y, a.y) : lt(x, a.x); }	// for double point
-bool operator<<(PT&a){ PT&p=*this; return eq(p%a, 0) ? lt(p*p, a*a) : lt(p%a, 0);  } //angle(this) < angle(a)
-//Change LL to LD and uncomment this
-//Also, consider replacing comparisons with these functions
-*********************/

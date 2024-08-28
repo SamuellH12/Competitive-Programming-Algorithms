@@ -11,7 +11,6 @@ vi comp, order;
 vector<bool> vis; 
 int C;
 
-
 void dfs(int u){
 	vis[u] = true;
 	for(auto v : grafo[u])
@@ -26,7 +25,6 @@ void dfs2(int u){
 		if(comp[v] == -1)
 			dfs2(v);
 }
-
 
 void kosaraju(int n){
 	order.clear();
@@ -59,34 +57,21 @@ void kosaraju(int n){
 		for(auto v : grafo[u]) marc[comp[v]] = false;
 	}
 }
-
-
-int main(){
-	cout << "Kosaraju - Strongly Connected Component" << endl;
-	return 0;	
-}
-
-
-
-/*
+/**************************************
+Kosaraju - Strongly Connected Component
 Algoritmo de Kosaraju para encontrar Componentes Fortemente Conexas
 
 Complexity: O(V + E)
-
+IMPORTANTE! O algoritmo está 0-indexado
 
 *** Variáveis e explicações ***
-
 int C   -> C é a quantidade de Componetes Conexas. As componetes estão numeradas de 0 a C-1
 dag     -> Após rodar o Kosaraju, o grafo das componentes conexas será criado aqui
 comp[u] -> Diz a qual componente conexa U faz parte
 order   -> Ordem de saída dos vértices. Necessário para o Kosaraju
 grafo   -> grafo direcionado
-greve	-> grafo reverso (que deve ser construido junto ao grafo normal)
-
-
-IMPORTANTE! O algoritmo está 0-indexado
+greve	-> grafo reverso (que deve ser construido junto ao grafo normal) !!!
 
 NOTA: A ordem que o Kosaraju descobre as componentes é uma Ordenação Topológica do SCC
 em que o dag[0] não possui grau de entrada e o dag[C-1] não possui grau de saida
-*/
-
+**************************************/
