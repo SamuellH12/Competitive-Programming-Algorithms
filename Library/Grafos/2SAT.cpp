@@ -9,7 +9,7 @@ struct TwoSat {
 	inline int eval(int u) const{ return u < 0 ? ((~u)+N)%(2*N) : u; }
 
 	void add_or(int u, int v){
-    	E[eval(~u)].push_back(eval(v));
+		E[eval(~u)].push_back(eval(v));
 		E[eval(~v)].push_back(eval(u));
   	}
 	void add_nand(int u, int v) {
@@ -30,7 +30,7 @@ struct TwoSat {
 
 		for (int u = 0; u < N; u++)
 			if(scc[u] == scc[u+N]) return {}; //false
-			else ans[u] = scc[eval(~u)] > scc[u];
+			else ans[u] = scc[u+N] > scc[u];
 
 		return ans;	//true
 	}

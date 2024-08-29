@@ -10,9 +10,9 @@ print(title)
 def get_sections():
     sections = []
     section_name = None
-    with open('contents.txt', 'r') as f:
+    with open('contents.txt', 'r', encoding="utf-16") as f:
         for line in f:
-            if '#' in line: line = line[:line.find('#')]
+            if '#' in line: continue
             line = line.strip()
             if len(line) == 0: continue
             if line[0] == '[':
@@ -22,8 +22,7 @@ def get_sections():
                     sections.append((section_name, subsections))
             else:
                 tmp = line.split('\t', 1)
-                if len(tmp) == 1:
-                    raise ValueError('Subsection parse error: %s' % line)
+                if len(tmp) == 1: raise ValueError('Subsection parse error: %s' % line)
                 filename = tmp[0]
                 subsection_name = tmp[1]
                 if section_name is None:
@@ -59,11 +58,17 @@ def get_tex(sections):
         tex += '\n'
     return tex
 
+import os
 if __name__ == "__main__":
     sections = get_sections()
     tex = get_tex(sections)
     with open('contents.tex', 'w') as f:
         f.write(tex)
-    latexmk_options = ["latexmk", "-pdf", "notebook.tex"]
-    print("ok ok")
-    subprocess.call(latexmk_options)
+    os.system("latexmk -pdf -f notebook.tex")
+    os.system("mv notebook.pdf SH12-Notebook.pdf")
+    os.system("rm contents.tex")
+    os.system("mv notebook.tex _notebook.tex")
+    os.system("rm notebook.*")
+    os.system("mv _notebook.tex notebook.tex")
+    os.system("rm testApp")   
+
