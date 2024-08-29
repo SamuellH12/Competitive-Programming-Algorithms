@@ -64,11 +64,11 @@ if __name__ == "__main__":
     tex = get_tex(sections)
     with open('contents.tex', 'w') as f:
         f.write(tex)
+    os.system("pdflatex notebook.tex")
     os.system("latexmk -pdf -f notebook.tex")
     os.system("mv notebook.pdf SH12-Notebook.pdf")
     os.system("rm contents.tex")
     os.system("mv notebook.tex _notebook.tex")
     os.system("rm notebook.*")
     os.system("mv _notebook.tex notebook.tex")
-    os.system("rm testApp")   
 
