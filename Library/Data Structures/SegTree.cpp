@@ -28,7 +28,7 @@ void update(int no, int l, int r, int pos, int v){
 void build(int no, int l, int r, vector<int> &lista){
 	if(l == r){ seg[no] = lista[l]; return; }
 
-	int m=(l+r)>>1, e=no*2, d=no*2+1;
+	int m=(l+r)/2, e=no*2, d=no*2+1;
 
 	build(e, l,   m, lista);
 	build(d, m+1, r, lista);
