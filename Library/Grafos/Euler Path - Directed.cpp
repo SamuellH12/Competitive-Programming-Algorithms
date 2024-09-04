@@ -11,7 +11,7 @@ int in[MAXN], out[MAXN], idx[MAXN];
 int N, startVertex, noEdge, ida=0;
 
 void addEdge(int u, int v){
-	grafo[u].push_back({v, ida++});	
+	grafo[u].emplace_back(v, ida++);	
 	out[u]++;
 	in[v]++;
 }
@@ -104,18 +104,4 @@ Complexity: O(V + E)
 	startVertex -> Vértice Inicial do Euler Path. Pega o elemento de início obrigatório se houver ou o primeiro com arestas de saída
 	noEdge -> Quantidade de vértices que não possuem arestas. Essa quantidade é descontada na verificação de conectividade
 	ida -> id de cada aresta adicionada no addEdge
-**************************************/
-/**************************************
-Para saber se um grafo possui um Caminho Euleriano:
-
-Undirected graph:
-	- Cada vértice deve ter um número par de arestas (circuito); OU
-	- Exatamente dois vértices devem ter um número ímpar de arestas (caminho);
-
-Directed graph:
-	- Cada vértice deve ter a mesma quantidade de arestas de entrada e de saída (circuito); OU
-	- Exatamente um vértice deve ter uma aresta de entrada a mais e exatemente um vértice deve ter uma aresta de saída a mais (caminho);
-
- * Circuito -> Sai do vértice U e retorna ao mesmo vértice no final
- * Caminho -> Sai de um vértice U e chega em um vértice V no final
 **************************************/
