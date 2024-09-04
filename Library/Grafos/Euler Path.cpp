@@ -8,10 +8,8 @@ const bool BIDIRECIONAL = true;
 
 vector<pii> grafo[MAXN];
 vector<bool> used;
-int selfLoop [MAXN];
 
 void addEdge(int u, int v){
-	if(u == v) selfLoop[u]++;
 	grafo[u].emplace_back(v, used.size()); if(BIDIRECIONAL && u != v) 
 	grafo[v].emplace_back(u, used.size());	
 	used.emplace_back(false);
@@ -19,9 +17,11 @@ void addEdge(int u, int v){
 
 pair<vi, vi> EulerPath(int n, int src=0){
 	int s=-1, t=-1;
+	vector<int> selfLoop(n*BIDIRECIONAL, 0);
 
 	if(BIDIRECIONAL)
 	{
+		for(int u=0; u<n; u++) for(auto&[v, id] : grafo[u]) if(u==v) selfLoop[u]++;
 		for(int u=0; u<n; u++)
 			if((grafo[u].size() - selfLoop[u])%2)
 				if(t != -1) return {vi(), vi()};   // mais que 2 com grau ímpar
@@ -92,13 +92,11 @@ Euler Path - Algoritmo de Hierholzer para caminho Euleriano
 Complexity: O(V + E)
 
 IMPORTANTE! O algoritmo está 0-indexado
-IMPORTANTE! Se fizer grafo[u].clear() defina selfLoops[u] = 0;
 
 * Informações
 	addEdge(u, v) -> Adiciona uma aresta de U para V
 	EulerPath(n) -> Retorna o Euler Path, ou um vetor vazio se impossível
-	selfLoop[u] -> Quantos self Loops U possui
-	vi path -> Lista de vértices do Euler Path na ordem
+	vi path -> vértices do Euler Path na ordem
 	vi pathId -> id das Arestas do Euler Path na ordem
 
 Euler em Undirected graph:
