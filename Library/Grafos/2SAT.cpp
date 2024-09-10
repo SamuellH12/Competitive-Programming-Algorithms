@@ -36,31 +36,24 @@ struct TwoSat {
 	}
 private:
 	vector<int> tarjan() {
-		int clk = 0, ncomps = 0;
-		
 		vector<int> low(2*N), pre(2*N, -1), scc(2*N, -1);
 		stack<int> st;
-
-		auto getComp = [&](int u) {
-			int v = -1;
-			while(v != u) {
-				v = st.top(); st.pop();
-				scc[v] = ncomps;
-			}
-			ncomps++;
-		};
+		int clk = 0, ncomps = 0;
 
 		auto dfs = [&](auto&& dfs, int u) -> void {
 			pre[u] = low[u] = clk++;
 			st.push(u);
 			
 			for(auto v : E[u])
-				if(pre[v] == -1) 
-					dfs(dfs, v), low[u] = min(low[u], low[v]);
+				if(pre[v] == -1) dfs(dfs, v), low[u] = min(low[u], low[v]);
 				else 
 				if(scc[v] == -1) low[u] = min(low[u], pre[v]);
 
-			if(low[u] == pre[u]) getComp(u);
+			if(low[u] == pre[u]){ 
+				int v = -1;
+				while(v != u) scc[v = st.top()] = ncomps, st.pop();
+				ncomps++;
+			} 
 		};
 
 		for(int u=0; u < 2*N; u++)
