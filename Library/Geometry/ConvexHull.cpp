@@ -1,12 +1,6 @@
 #include <bits/stdc++.h>
 #define ll long long
-#define ld long double
 using namespace std;
-
-/******************** 
-// FOR DOUBLE POINT // 
-See Geometry - General
-*********************/
 
 struct PT {
 	ll x, y;
@@ -39,3 +33,7 @@ vector<PT> ConvexHull(vector<PT> pts, bool sorted=false) {
 	h.resize(s-1);
 	return h;
 }
+/******************** 
+// FOR DOUBLE POINT // 
+See Geometry - General
+*********************/

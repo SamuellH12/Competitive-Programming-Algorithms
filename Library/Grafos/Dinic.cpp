@@ -93,7 +93,7 @@ IMPORTANTE! O algoritmo está 0-indexado
 
 Complexity:
 O( V^2 * E )      ->  caso geral
-O( sqrt(V) * E )  ->  grafos com capacidade = 1 para toda aresta
+O( sqrt(V) * E )  ->  grafos com cap = 1 para toda aresta // matching bipartido
 
 * Informações:
 	Crie o Dinic:
