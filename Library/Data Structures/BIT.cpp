@@ -1,13 +1,15 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int MAXN = 1e6 + 5;
-
 struct BIT {
-	int bit[MAXN];
+	vector<int> bit;
+	int N;
+
+	BIT(){}
+	BIT(int n) : N(n+1), bit(n+1){}
 
 	void update(int pos, int val){
-		for(; pos < MAXN; pos += pos&(-pos))
+		for(; pos < N; pos += pos&(-pos))
 			bit[pos] += val;
 	}
 
@@ -18,11 +20,3 @@ struct BIT {
 		return sum;
 	}
 };
-
-/******************************************************
-Syntax:
-Bit.update(i, x);	//Adiciona +x na posição i da BIT
-Bit.query(i)  		//Retorna o somatório de [1, i]
-Query: 	O(log n)
-Update:	O(log n)
-******************************************************/

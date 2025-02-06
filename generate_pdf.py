@@ -47,13 +47,25 @@ def texify(s):
     #s = s.replace('\"', '\\\"')
     return s
 
+def get_firstline(path): # to ignore #include <bits/stdc++.h> and namespace std
+    ln = 1
+    with open(path, 'r') as f:
+        for line in f:
+            if ('#include <bits/stdc++.h>' not in line) and ('using namespace std;' not in line):
+                if len(line) > 0:
+                    break
+            ln += 1
+    return ln
+
 def get_tex(sections):
     tex = ''
     for (section_name, subsections) in sections:
         tex += '\\section{%s}\n' % texify(section_name)
         for (filename, subsection_name) in subsections:
+            frstline = str(get_firstline(f"{code_dir}\\{filename}"))
+            print(f"{code_dir}/{filename} {frstline}")
             tex += '\\subsection{%s}\n' % texify(subsection_name)
-            tex += '\\raggedbottom\\lstinputlisting[style=%s]{%s/%s}\n' % (get_style(filename), code_dir, filename)
+            tex += '\\raggedbottom\\lstinputlisting[style=%s, firstline=%s]{%s/%s}\n' % (get_style(filename), frstline, code_dir, filename)
             tex += '\\hrulefill\n'
         tex += '\n'
     return tex
@@ -62,6 +74,7 @@ import os
 if __name__ == "__main__":
     sections = get_sections()
     tex = get_tex(sections)
+    print("ok ok?")
     with open('contents.tex', 'w') as f:
         f.write(tex)
     os.system("pdflatex notebook.tex")

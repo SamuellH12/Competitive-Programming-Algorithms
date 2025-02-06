@@ -5,7 +5,7 @@ using namespace std;
 const int N = 20;
 ll dp[1<<N], iVal[1<<N];
 
-void sosDP()
+void sosDP() // O(N * 2^N) 
 {
     for(int i=0; i<(1<<N); i++) 
         dp[i] = iVal[i];
@@ -19,14 +19,12 @@ void sosDP()
 /*********************
 SOS DP - Sum over Subsets
 
-Complexity: O(N * 2^N)    
-(in CF with N=20 and without I/O -> Used:  77 ms,   8196 KB )
-(in CF with N=23 and without I/O -> Used: 483 ms, 131328 KB )
-
-Dado que cada mask possui um valor inicial (iVal),
-computa para cada mask a soma dos valores de todas as suas submasks.
+Dado que cada mask possui um valor inicial (iVal), computa 
+para cada mask a soma dos valores de todas as suas submasks.
 
 N -> Número Máximo de Bits
 iVal[mask] -> initial Value / Valor Inicial da Mask
 dp[mask]   -> Soma de todos os SubSets
+
+Iterar por todas as submasks: for(int sub=mask; sub>0; sub=(sub-1)&mask)
 *********************/

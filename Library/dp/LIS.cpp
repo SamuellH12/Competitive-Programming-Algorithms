@@ -1,8 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int LIS(vector<int>& nums)
-{
+int LIS(vector<int>& nums){
 	vector<int> lis;
 
 	for(auto x : nums)

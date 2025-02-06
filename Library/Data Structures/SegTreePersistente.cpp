@@ -3,9 +3,7 @@ using namespace std;
 
 struct Node	{
 	int val = 0;
-
 	Node *L = NULL, *R = NULL;
-
 	Node(int v = 0) : val(v), L(NULL), R(NULL) {}
 };
 
@@ -18,14 +16,12 @@ Node* build(int l, int r){
 
 	node->L = build(l,   m);
 	node->R = build(m+1, r);
-
 	node->val = node->L->val + node->R->val;
 
 	return node;
 }
 
-Node* update(Node *node, int l, int r, int pos, int v)
-{
+Node* update(Node *node, int l, int r, int pos, int v){
 	if( pos < l || r < pos ) return node;
 	if(l == r) return new Node(node->val + v);
 
@@ -38,7 +34,6 @@ Node* update(Node *node, int l, int r, int pos, int v)
 
 	nw->L = update(node->L, l,   m, pos, v);
 	nw->R = update(node->R, m+1, r, pos, v);
-
 	nw->val = nw->L->val + nw->R->val;
 
 	return nw;

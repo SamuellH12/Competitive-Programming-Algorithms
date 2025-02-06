@@ -32,8 +32,7 @@ struct BIT2D {
 	}
 };
 
-/*
-Syntax:
+/* Complexity: O(Log^2 N)
 Bit.update(x, y, v);	//Adiciona +v na posição {x, y} da BIT
 Bit.query(x, y);		//Retorna o somatorio do retangulo de inicio {1, 1} e fim {x, y}
 Bit.queryArea(xi, yi, xf, yf);     //Retorna o somatorio do retangulo de inicio {xi, yi} e fim {xf, yf}
@@ -41,5 +40,4 @@ Bit.updateArea(xi, yi, xf, yf, v); //adiciona +v no retangulo de inicio {xi, yi}
 
 IMPORTANTE! UpdateArea NÃO atualiza o valor de todas as células no retângulo!!! Deve ser usado para Color Update
 IMPORTANTE! Use query(x, y) Para acessar o valor da posição (x, y) quando estiver usando UpdateArea
-IMPORTANTE! Use queryArea(x, y, x, y) Para acessar o valor da posição (x, y) quando estiver usando Update Padrão
-*/
+IMPORTANTE! Use queryArea(x, y, x, y) Para acessar o valor da posição (x, y) quando estiver usando Update Padrão  */

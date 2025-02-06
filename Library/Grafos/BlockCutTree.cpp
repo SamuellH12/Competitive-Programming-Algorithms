@@ -86,7 +86,7 @@ void tarjan(int u, bool root = true){
 	if(root) newComponent(-1);
 }
 
-//ATENÇÃO: ESTÁ 1-INDEXADO
+//ATENCAO: ESTA 1-INDEXADO
 void buildBCC(int n){
 	vector<bool> marc(C+1, false);
 
@@ -128,5 +128,5 @@ addEdge(u, v);
 tarjan(Root);
 buildBCC(n);
 
-No fim o grafo da Block Cut Tree estará em _vector<int> tree []_
+No fim o grafo da Block Cut Tree estara em _vector<int> tree []_
 ***********************/

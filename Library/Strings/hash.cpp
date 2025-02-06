@@ -1,8 +1,6 @@
 #include <bits/stdc++.h>
-#define ll long long
 using namespace std;
-
-
+#define ll long long
 const int MAXN = 1e6 + 5;
 
 const ll MOD = 1e9 + 7; //WA? Muda o MOD e a base
@@ -18,13 +16,11 @@ void precalc(){
 
 struct StringHash{
 	vector<ll> hsh;
-	int size;
 
-	StringHash(string &_s){
-		hsh = vector<ll>(_s.size()+1, 0);
-		size = _s.length();
-		for(int i=0; i<_s.size(); i++)
-			hsh[i+1] = ((hsh[i]*base) % MOD +_s[i]) % MOD;
+	StringHash(string &s){
+		hsh = vector<ll>(s.size()+1, 0);
+		for(int i=0; i<s.size(); i++)
+			hsh[i+1] = ((hsh[i]*base) % MOD +s[i]) % MOD;
 	}
 	
 	ll gethash(int l, int r){
@@ -33,8 +29,6 @@ struct StringHash{
 };
 /******************************************************
 String Hash
-
-Complexidade:
 precalc()    -> O(N)
 StringHash() -> O(|S|)
 gethash()    -> O(1)
@@ -46,14 +40,4 @@ IMPORTANTE! Chamar precalc() no início do código
 
 const ll MOD  = 131'807'699; -> Big Prime Number 
 const ll base = 127;         -> Random number larger than the Alphabet
-
 *******************************************************/
-
-/************************
-Some Big Prime Numbers:
-127
-157
-37'139'213
-127'065'427
-131'807'699
-*************************/

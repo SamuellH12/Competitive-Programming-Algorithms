@@ -1,16 +1,14 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define vi vector<int>
 
-vi manacher(string &st)
-{
+vector<int> manacher(string &st){
 	string s = "$_";
 	for(char c : st){ s += c; s += "_"; }
 	s += "#";
 
 	int n = s.size()-2;
 
-	vi p(n+2, 0);
+	vector<int> p(n+2, 0);
 	int l=1, r=1;
 
 	for(int i=1, j; i<=n; i++)

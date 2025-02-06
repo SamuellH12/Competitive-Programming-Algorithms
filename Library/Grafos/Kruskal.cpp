@@ -24,7 +24,7 @@ int kruskal(){
 }
 /*************************************************************
 	Kruskal - Minimum Spanning Tree
-Algoritmo para encontrar a Árvore Geradora Mínima (MST)
+Algoritmo para encontrar a Arvore Geradora Minima (MST)
 -> Complexity: O(E log E) 
 E : Numero de Arestas
 ***************************************************************/

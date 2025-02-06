@@ -62,9 +62,6 @@ Sparse Binary Indexed Tree 2D
 Recebe o conjunto de pontos que serão usados para fazer os updates e
 as queries e cria uma BIT 2D esparsa que independe do "tamanho do grid".
 
-IMPORTANTE! O código deve ser OFFLINE
-
-Complexity: 
 Build: O(N Log N) (N -> Quantidade de Pontos)
 Query/Update: O(Log N) 
 

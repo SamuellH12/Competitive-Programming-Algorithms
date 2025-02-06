@@ -1,7 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
 #define ll long long
-
 ll MOD = 1e9 + 7;
 
 ll fexp(ll b, ll p){
@@ -15,7 +12,4 @@ ll fexp(ll b, ll p){
 
 	return ans % MOD;
 }
-/****************************************
-Fast Exponentiation - O(Log P)
-b - Base // p - Potência // MOD - Módulo
-*****************************************/
+// O(Log P) // b - Base // p - Potência

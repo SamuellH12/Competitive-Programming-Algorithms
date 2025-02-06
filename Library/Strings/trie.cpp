@@ -10,7 +10,6 @@ void insert(string &p){
 	int cur = 0;
 
 	for(int i=0; i<p.size(); i++){
-
 		int id = p[i] - 'a';
 
 		if(trie[cur][id] == -1 ){
@@ -27,15 +26,13 @@ void insert(string &p){
 int count(string &p){
 	int cur = 0;
 
-	for(int i=0; i<p.size(); i++)
-	{
+	for(int i=0; i<p.size(); i++){
 		int id = (p[i] - 'a');
 
 		if(trie[cur][id] == -1) return 0;
 
 		cur = trie[cur][id];
 	}
-
 	return terminal[cur];
 }
 
@@ -43,14 +40,10 @@ void init(){
 	memset(trie[0], -1, sizeof trie[0]);
 	z = 1;
 }
-
 /******************
-Trie - Árvore de Prefixos
-
-Complexidade:
+Trie - Arvore de Prefixos
 insert(P) - O(|P|)
 count(P)  - O(|P|)
-
 MAXS  - Soma do tamanho de todas as Strings
 sigma - Tamanho do alfabeto
 ******************/

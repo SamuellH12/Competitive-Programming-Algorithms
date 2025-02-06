@@ -10,7 +10,7 @@ template<typename T> struct SegTree {
 		n = base.size();
 		seg.resize(2*n);
 		for(int i=0; i<n; i++) seg[i+n] = base[i];
-		for(int i=n-1; i; i--) seg[i] = join(seg[i*2], seg[i*2+1]);
+		for(int i=n-1; i>0; i--) seg[i] = join(seg[i*2], seg[i*2+1]);
 	}
 
 	T query(int l, int r){ //[L, R] & [0, n-1]
