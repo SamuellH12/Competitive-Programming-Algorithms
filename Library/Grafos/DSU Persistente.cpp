@@ -1,36 +1,31 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int MAXN = 1e6 + 5;
-int pai[MAXN], sz[MAXN], tim[MAXN], t=1;
+struct DSUp {
+	vector<int> pai, sz, tim;
+	int t=1;
+	DSUp(int n) : pai(n+1), sz(n+1, 1), tim(n+1) {
+		for(int i=0; i<=n; i++) pai[i] = i;
+	}
+	
+	int find(int u, int q = INT_MAX){ 
+		if( pai[u] == u || q < tim[u] ) return u;
+		return find(pai[u], q); 
+	}
 
-int find(int u, int q = INT_MAX){ 
-	if( pai[u] == u || q < tim[u] ) return u;
-	return find(pai[u], q); 
-}
+	void join(int u, int v){
+		u = find(u), v = find(v);
+		
+		if(u == v) return;
+		if(sz[v] > sz[u]) swap(u, v);
 
-void join(int u, int v){
-	u = find(u);
-	v = find(v);
-
-	if(u == v) return;
-	if(sz[v] > sz[u]) swap(u, v);
-
-	pai[v] = u;
-	tim[v] = t++;
-	sz[u] += sz[v];
-}
-
-void resetDSU(){
-	for(int i=0; i<MAXN; i++) sz[i] = 1, pai[i] = i;
-	memset(tim, 0, sizeof tim);
-}
+		pai[v] = u;
+		tim[v] = t++;
+		sz[u] += sz[v];
+	}
+};
 /*************************************************
-	SemiPersistent Disjoint Set Union
-
--> Complexity: O( Log N )
-find(u, q) -> Retorna o representante do conjunto de U no tempo Q
-
- * Não é possível utilizar Path Compression
- * tim -> tempo em que o pai de U foi alterado
+SemiPersistent Disjoint Set Union - O(Log n)
+find(u, q) -> Retorna o pai de U no tempo q
+* tim -> tempo em que o pai de U foi alterado
 *************************************************/
