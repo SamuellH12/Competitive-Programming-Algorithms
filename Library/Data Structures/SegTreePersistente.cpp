@@ -27,9 +27,6 @@ Node* update(Node *node, int l, int r, int pos, int v){
 
 	int m = (l+r)/2;
 
-	if(!node->L) node->L = new Node();
-	if(!node->R) node->R = new Node();
-
 	Node *nw = new Node();
 
 	nw->L = update(node->L, l,   m, pos, v);
@@ -45,9 +42,6 @@ int query(Node *node, int l, int r, int a, int b){
 
 	int m = (l+r)/2;
 
-	if(!node->L) node->L = new Node();
-	if(!node->R) node->R = new Node();
-
 	return query(node->L, l, m, a, b) + query(node->R, m+1, r, a, b);
 }
 
@@ -58,27 +52,19 @@ int kth(Node *Left, Node *Right, int l, int r, int k){
 	int m = (l+r)/2;
 
 	if(sum >= k) return kth(Left->L, Right->L, l, m, k);
-
 	return kth(Left->R, Right->R, m+1, r, k - sum);
 }
 
 /******************************************************
--> Segment Tree Persistente com:
-	- Query em Range
-	- Update em Ponto
-
+-> Segment Tree Persistente
 Build(1, N) -> Cria uma Seg Tree completa de tamanho N;	RETORNA um *Ponteiro pra Raíz
 Update(Root, 1, N, pos, v) 	-> Soma +V na posição POS; RETORNA um *Ponteiro pra Raíz da nova versão;
 Query(Root, 1, N, a, b) 	-> RETORNA o valor calculado no range [a, b];
 Kth(RootL, RootR, 1, N, K) 	-> Faz uma Busca Binária na Seg; Mais detalhes abaixo;
-
 [ Root -> Nó Raiz da Versão da Seg na qual se quer realizar a operação ]
+Para guardar as Raízes, use: vector<Node*> roots
 
-Para guardar as Raízes, use: 
--> vector<Node*> roots; ou
--> Node* roots [MAXN];
-
-Build:  O(N)
+Build:  O(N) !!! Sempre chame o Build
 Query:  O(log N)
 Update: O(log N)
 Kth:	O(Log N)
@@ -90,7 +76,4 @@ Comportamento do K-th(SegL, SegR, 1, N, K):
 	Para isso a Seg deve ser utilizada como um array de frequências. Comece com a Seg zerada (Build). 
 	Para cada valor V do Array chame um update(roots.back(), 1, N, V, 1) e guarde o ponteiro da seg.
 	Para consultar o K-ésimo menor valor de [L, R] chame kth(roots[L-1], roots[R], 1, N, K);
-
-IMPORTANTE! Cuidado com o Kth ao acessar uma Seg que está esparsa (RTE). Nesse caso, 
-chame o Build antes ou garanta criar os nós L e R antes de acessá-los (como na query).
 *******************************************************/
