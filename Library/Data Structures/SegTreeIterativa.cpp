@@ -22,7 +22,7 @@ template<typename T> struct SegTree {
 		return ans;
 	}
 
-	void update(int i, T v){
-		for(seg[i+=n] = v; i/=2;) seg[i] = join(seg[i*2], seg[i*2+1]);
+	void update(int i, T v){ // Set Value seg[i+=n] = v // change to += v to sum
+		for(seg[i+=n] = v; i/=2;) seg[i] = join(seg[i*2], seg[i*2+1]); 
 	}
 };
