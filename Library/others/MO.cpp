@@ -26,8 +26,7 @@ vector<int> MO(vector<Query> &queries){
 	int L = 0, R = 0;
 	add(0);
 
-	for(auto [l, r, idx] : queries)
-	{
+	for(auto [l, r, idx] : queries){
 		while(l < L) add(--L);
 		while(r > R) add(++R);
 		while(l > L) remove(L++);
@@ -48,4 +47,20 @@ IMPORTANTE! Queries devem ter seus índices (Idx) 0-indexados!
 
 Modifique as operações de Add, Remove e GetAnswer de acordo com o problema.
 BLOCK_SZ pode ser alterado para aproximadamente SQRT(MAX_N)
+
+IF you want to use hilbert curves on MO
+vector<ll> h(ans.size());
+for (int i = 0; i < ans.size(); i++) h[i] = hilbert(queries[i].l, queries[i].r);
+sort(queries.begin(), queries.end(), [&](Query&a, Query&b) { return h[a.idx] < h[b.idx]; });
+
+inline ll hilbert(int x, int y) {
+	static int N = 1 << (__builtin_clz(0) - __builtin_clz(MAXN));
+	int rx, ry, s; ll d = 0;
+	for (s = N/2; s > 0; s /= 2) {
+		rx = (x & s) > 0, ry = (y & s) > 0;
+		d += s * (ll)(s) * ((3 * rx) ^ ry);
+		if (ry == 0) { if (rx == 1) x = N-1 - x, y = N-1 - y; swap(x, y); } 
+		}
+	return d;
+}
 ***************************************/

@@ -12,15 +12,23 @@ using namespace std;
 
 const int BLOCK_SZ = 500;
 
+inline ll hilbert(int x, int y) {
+	static int N = 1 << (__builtin_clz(0) - __builtin_clz(MAXN));
+	int rx, ry, s;
+	ll d = 0;
+	for (s = N/2; s > 0; s /= 2) {
+		rx = (x & s) > 0, ry = (y & s) > 0;
+		d += s * (ll)(s) * ((3 * rx) ^ ry);
+		if (ry == 0) {
+			if (rx == 1) x = N-1 - x, y = N-1 - y;
+			swap(x, y);
+		}
+	}
+	return d;
+}
 struct Query{
 	int l, r, idx;
-
 	Query(int l, int r, int idx) : l(l), r(r), idx(idx) {}
-	
-	bool operator < (Query q) const {
-		if(l / BLOCK_SZ != q.l / BLOCK_SZ) return l < q.l;
-		return (l / BLOCK_SZ &1) ? ( r < q.r ) : (r > q.r );
-	}
 };
 
 vector<int> g[MAXN];
@@ -28,14 +36,13 @@ int gender[MAXN];
 int num[MAXN];
 
 int tin[MAXN], tout[MAXN];
-int pai[MAXN], idg[MAXN];
-vector<int> order;
+int pai[MAXN], order[MAXN];
 int TIME = 0;
 
 void dfs(int u, int p=0){
 	tin[u] = TIME++;
 	pai[u] = p;
-	order.emplace_back(u);
+	order[tin[u]] = u;
 
 	for(auto v : g[u])
 		if(tin[v] == -1)
@@ -60,38 +67,38 @@ void go_to(int ti, int tp, int otp){
 	int u = order[ti], v;
 	int to = tout[u];
 	
-	while(!(ti <= tp && tp <= to)){
+	while(!(ti <= tp && tp <= to)){ //subo com U (ti) até ser ancestral de W
 		v = pai[u];
 
 		if(ti <= otp && otp <= to) add(v);
 		else remove(u);
 
-		u = pai[u];
+		u = v;
 		ti = tin[u];
 		to = tout[u];
 	}
 
-	while(ti < tp){
-		int &i = idg[u];
+	int w = order[tp]; 
+	to = tout[w];
 
-		while(tout[g[u][i]] < tp) i++;
-		while(tin [g[u][i]] > tp) i--;
-		
-		v = g[u][i];
-		ti = tin [v];
-		to = tout[v];
+	while(ti < tp){ //subo com W (tp) até U
+		v = pai[w];
 
-		if(ti <= otp && otp <= to) remove(u);
-		else add(v);
+		if(tp <= otp && otp <= to) remove(v);
+		else add(w);
 		
-		u = g[u][i];
+		w = v;
+		tp = tin[w];
+		to = tout[w];
 	}
 }
 
 vector<ll> MO(vector<Query> &queries){
 	vector<ll> ans(queries.size());
 
-	sort(queries.begin(), queries.end());
+	vector<ll> h(ans.size());
+	for (int i = 0; i < ans.size(); i++) h[i] = hilbert(queries[i].l, queries[i].r);
+	sort(queries.begin(), queries.end(), [&](Query&a, Query&b) { return h[a.idx] < h[b.idx]; });
 
 	int L = 0, R = 0;
 	add(0);
@@ -131,13 +138,6 @@ int main(){
 
 	dfs(0);
 
-	for(int i=1; i<n; i++){
-		for(int j=0; j+1<g[i].size(); j++)
-			if(g[i][j] == pai[i])
-				swap(g[i][j], g[i][j+1]);
-		g[i].pop_back();
-	}
-
 	vector<Query> queries;
 	
 	int q; cin >> q;
@@ -157,22 +157,7 @@ int main(){
 
 /*
 // if hilbert
-// vector<ll> h(ans.size());
-// for (int i = 0; i < ans.size(); i++) h[i] = hilbert(queries[i].l, queries[i].r);
-// sort(queries.begin(), queries.end(), [&](Query&a, Query&b) { return h[a.idx] < h[b.idx]; });
 
-inline ll hilbert(int x, int y) {
-	static int N = 1 << (__builtin_clz(0) - __builtin_clz(MAXN));
-	int rx, ry, s;
-	ll d = 0;
-	for (s = N/2; s > 0; s /= 2) {
-		rx = (x & s) > 0, ry = (y & s) > 0;
-		d += s * (ll)(s) * ((3 * rx) ^ ry);
-		if (ry == 0) {
-			if (rx == 1) x = N-1 - x, y = N-1 - y;
-			swap(x, y);
-		}
-	}
-	return d;
-}
+
+
 */
