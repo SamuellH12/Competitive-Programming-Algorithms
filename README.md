@@ -2,7 +2,10 @@
 
 To generate a new PDF choose the contents in "contents.txt" and then run "python3 generate_pdf.py". Latex is needed.
 
+
 <hr>
+
+<!--- BEGIN OF INDEX -->
 
 ### Grafos
 
@@ -72,3 +75,5 @@ To generate a new PDF choose the contents in "contents.txt" and then run "python
 
 - [Hungarian](./Library/others/Hungarian.cpp)
 - [MO](./Library/others/MO.cpp)
+
+<!--- BEGIN OF INDEX -->

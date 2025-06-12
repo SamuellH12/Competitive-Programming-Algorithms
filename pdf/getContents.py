@@ -1,6 +1,6 @@
 import os
 
-code_dir = ".\Library"
+code_dir = "../Library"
 
 note = '''
 # Any line followed by a '#' character is ignored

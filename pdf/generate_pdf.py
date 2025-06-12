@@ -1,8 +1,7 @@
 #!/usr/bin/python
 # Credit for this file goes to the Stanford University ACM team
 
-import subprocess
-code_dir = "Library"
+code_dir = "../Library"
 title = "SamuellH12 - ICPC Library"
 
 print(title)
@@ -43,8 +42,6 @@ def get_style(filename):
 
 # TODO: check if this is everything we need
 def texify(s):
-    #s = s.replace('\'', '\\\'')
-    #s = s.replace('\"', '\\\"')
     return s
 
 def get_firstline(path): # to ignore #include <bits/stdc++.h> and namespace std
@@ -70,18 +67,13 @@ def get_tex(sections):
         tex += '\n'
     return tex
 
-import os
+
 if __name__ == "__main__":
+    
     sections = get_sections()
     tex = get_tex(sections)
-    print("ok ok?")
+    
     with open('contents.tex', 'w') as f:
         f.write(tex)
-    os.system("pdflatex notebook.tex")
-    os.system("latexmk -pdf -f notebook.tex")
-    os.system("mv notebook.pdf SH12-Notebook.pdf")
-    os.system("rm contents.tex")
-    os.system("mv notebook.tex _notebook.tex")
-    os.system("rm notebook.*")
-    os.system("mv _notebook.tex notebook.tex")
+    
 
