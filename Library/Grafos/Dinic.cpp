@@ -145,4 +145,15 @@ O( sqrt(V) * E )  ->  grafos com cap = 1 para toda aresta // matching bipartido
     is an path from U to V in the graph (possibly through several edges).
   - Antichain: a set of nodes such that there is no path from any node to another. In a DAG, the 
     size of min general path cover equals the size of maximum antichain (Dilworth’s theorem).
+
++ Project selection: Given N projects, each w profit pi, and M machines, each w cost ci. 
+  A project requires a set of machines (can be shared). Choose a set that maximizes value 
+  of the profit(projects) - the cost(machines). Add an edge (cap pi) from Source to project.
+  An edge (cap ci) from machine to Sink. An edge (cap INF) from a project to each machine it 
+  requires. ans = SUM(pi) - MAXFLOW. If the edge of a machine is saturated, buy it.
+
++ Closure Problem (directed graph): Each node has a weight w (+ or -). choose a closure with 
+  maximum sum. a closure is a set of nodes such that there is no edge from a node inside
+  the set to a node outside. Is a general case of project selection. Original edges with cap INF.
+  Add edges from Source to nodes with W > 0; and from nodes with W < 0 to Sink (cap |W|).
 ***************************************/
