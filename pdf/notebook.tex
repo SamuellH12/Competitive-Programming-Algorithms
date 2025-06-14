@@ -1,10 +1,11 @@
-\documentclass[10pt]{article}
-\usepackage[left=0.5cm, right=0.5cm, top=0.5cm,bottom=0.5cm]{geometry}
-% \usepackage[landscape, left=0.5cm, right=0.5cm, top=1cm, bottom=1.5cm]{geometry}
+\documentclass[10pt,a4paper]{article}
+\usepackage[left=0.6cm, right=0.6cm, top=0.6cm, bottom=0.6cm]{geometry}
 \usepackage{hyperref}
 \usepackage{fancyhdr}
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{listings}
 \usepackage{tocloft}
 \usepackage{pdflscape}
 \usepackage{multicol}
@@ -13,16 +14,14 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{titlesec}
+\usepackage{setspace}
+\renewcommand{\arraystretch}{0.85}
 
 \renewcommand*{\ttdefault}{pcr}
 \renewcommand\cftsecfont{\fontsize{10}{11}\bfseries}
 \renewcommand\cftsecpagefont{\fontsize{10}{11}\mdseries}
-\renewcommand\cftsubsecfont{\fontsize{7}{8}\mdseries}
-\renewcommand\cftsubsecpagefont{\fontsize{7}{8}\mdseries}
-% \renewcommand\cftsecfont{\fontsize{8}{9}\bfseries}
-% \renewcommand\cftsecpagefont{\fontsize{8}{9}\mdseries}
-% \renewcommand\cftsubsecfont{\fontsize{5}{6}\mdseries}
-% \renewcommand\cftsubsecpagefont{\fontsize{5}{6}\mdseries}
+\renewcommand\cftsubsecfont{\fontsize{8}{9}\mdseries}
+\renewcommand\cftsubsecpagefont{\fontsize{8}{9}\mdseries}
 \renewcommand\cftsecafterpnum{\vspace{-1ex}}
 \renewcommand\cftsubsecafterpnum{\vspace{-1ex}}
 
@@ -30,10 +29,9 @@
 \lstdefinestyle{shared}{
   belowcaptionskip=0.05\baselineskip,
   breaklines=true,
-  xleftmargin=\parindent,
+  xleftmargin=0pt,
   showstringspaces=false,
-  % basicstyle=\fontsize{6.5}{6}\ttfamily,
-  basicstyle=\fontsize{7.5}{7}\ttfamily,
+  basicstyle=\fontsize{7}{8}\ttfamily,
 }
 \lstdefinestyle{cpp}{
   style=shared,
@@ -66,14 +64,38 @@
   escapechar=@,
   tabsize=2,
 }
+\tcbset{
+  colback=gray!10,
+  colframe=gray!40,
+  boxrule=0.5pt,
+  arc=2pt,
+  left=3pt,
+  right=3pt,
+  top=3pt,
+  bottom=3pt,
+  boxsep=2pt
+}
+\lstdefinestyle{description}{
+  backgroundcolor=\color{gray!10},
+  frame=single,
+  rulecolor=\color{gray!70},
+  frameround=tttt,
+  basicstyle=\fontsize{6}{6.5}\ttfamily,
+  breaklines=true,
+  showstringspaces=false,
+  xleftmargin=0.5em,
+  xrightmargin=0.5em,
+  aboveskip=0.5em,
+  belowskip=0.5em,
+}
+
 
 \pagestyle{fancy}
 \fancyhead[L]{Universidade Federal de Pernambuco - SamuellH12}
 \fancyhead[R]{\thepage}
 \fancyfoot[C]{}
 
-\fancypagestyle{plain}
-{
+\fancypagestyle{plain}{
 \fancyhead[L]{Universidade Federal de Pernambuco - SamuellH12}
 \fancyhead[R]{\thepage}
 \fancyfoot[C]{}
