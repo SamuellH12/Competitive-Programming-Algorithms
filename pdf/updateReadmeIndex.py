@@ -30,7 +30,7 @@ def generate_index():
     for section, files in sections.items():
         md_content += f"\n### {section}\n\n"
         for file_name, file_name_clean in files:
-            md_content += f"- [{file_name_clean}](./{os.path.join('Library', section, file_name)})\n"
+            md_content += f"- [{file_name_clean}](./{os.path.join('Library', section, file_name).replace('\\', '/').replace(' ', '%20')})\n"
     
     return md_content
 
