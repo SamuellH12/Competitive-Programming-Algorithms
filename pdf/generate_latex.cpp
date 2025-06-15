@@ -11,7 +11,7 @@ const vector<string> IGNORED_LINES = {
     "#define pii pair<int, int>",
     "#define pii pair<int,int>",
     "#define ll long long",
-    "/*LATEX IGNORED LINE*/",
+    "LATEX_IGNORED_LINE",
     "Credits: ",
     "/********",
     "********/",
@@ -24,11 +24,15 @@ const vector<string> IGNORED_SUBSTRINGS = {
     "LATEX_DESC_END*/",
 };
 
-bool ADD_DESC = true;
+const bool ADD_DESC = true;
 const string DESC_BGN = "/*LATEX_DESC_BEGIN";
 const string DESC_END = "LATEX_DESC_END*/";
-const string MY_DESC_BGN = "/********";
-const string MY_DESC_END = "********/";
+// const string MY_DESC_BGN = "/********";
+// const string MY_DESC_END = "********/";
+
+// hash incompleto - não usar
+const bool USE_HASH = false;
+const int HASH_LEN = 3;
 
 map<char32_t, char> char_changes = {
     {0x00E7, 'c'}/*ç*/, {0x00E3, 'a'}/*ã*/, {0x00E1, 'a'}/*á*/,
@@ -43,10 +47,6 @@ map<char32_t, char> char_changes = {
     {U'ñ', 'n'}, {U'ç', 'c'}, {U'ý', 'y'}, {U'ÿ', 'y'},
     {U'\x2019', '\''}, {U'\x3b1', 'a'}, {U'\x2013', '-'},
 };
-
-// hash incompleto - não usar
-const bool USE_HASH = false;
-const int HASH_LEN = 3;
 
 void remove_ignored_substrings(string& s) {
     size_t pos = 0;
@@ -152,7 +152,7 @@ bool convert_files(const string& input_path, const string& output_path, string& 
         bool blank_line = line.empty();
 
         // pra pegar a descrição
-        if(line.find(DESC_BGN) != string::npos) isInDesc = true; if(line.find(MY_DESC_BGN) != string::npos) isInDesc = true;
+        if(line.find(DESC_BGN) != string::npos) isInDesc = true; //if(line.find(MY_DESC_BGN) != string::npos) isInDesc = true;
 
         if(!blank_line)
         for(const auto& pattern : IGNORED_LINES)
@@ -162,7 +162,7 @@ bool convert_files(const string& input_path, const string& output_path, string& 
             }
 
         if(ADD_DESC && isInDesc && !ignore){ description += line + "\n"; continue; }
-        if(line.find(DESC_END) != string::npos) isInDesc = false; if(line.find(MY_DESC_END) != string::npos) isInDesc = false;
+        if(line.find(DESC_END) != string::npos) isInDesc = false; //if(line.find(MY_DESC_END) != string::npos) isInDesc = false;
 
         if(!ignore && !blank_line) can_begin = true;
         if(!can_begin || ignore) continue;
