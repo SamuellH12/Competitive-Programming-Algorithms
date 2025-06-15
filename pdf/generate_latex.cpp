@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-// #include <openssl/evp.h>
 #include <regex>
 using namespace std;
 
@@ -213,6 +212,11 @@ string get_tex(const vector<pair<string, vector<pair<string, string>>>>& section
         tex += "\\section{" + section_name + "}\n";
         
         for(auto [filename, subsection_name] : subsections) {
+            if(subsection_name == "tex"){
+                tex += "\\input " + filename + "\n";
+                continue;
+            }
+            
             string full_path = code_dir + "/" + filename;
             cout << full_path << endl;
 
@@ -220,20 +224,17 @@ string get_tex(const vector<pair<string, vector<pair<string, string>>>>& section
             if(convert_files(full_path, newpath, description, PRINT_HASH)) 
                 full_path = newpath;
 
-            tex += "\\vspace{-1ex}\n";
+            tex += "\\vspace{-2pt}\n";
             tex += "\\subsection{" + subsection_name + "}\n";
-            tex += "\\vspace{-4pt}\n";
             
             if (!description.empty()) {
-                tex += "\\begin{descbox}\n";
-                // tex += "\\vspace{-4pt}\n";
+                tex += "\\vspace{-4pt}\n";
                 tex += "\\begin{lstlisting}[style=description]\n";
                 tex += description + "\n";
                 tex += "\\end{lstlisting}\n";
-                tex += "\\end{descbox}\n";
-                tex += "\\vspace{-4pt}\n";
             } 
             
+            tex += "\\vspace{-5pt}\n";
             tex += "\\raggedbottom\\lstinputlisting[style="+get_style(filename) + "]{" + full_path + "}\n";
             tex += "\\hrulefill\n\n";
         }
@@ -307,7 +308,7 @@ int main(){
 
 
 /*
-
+// #include <openssl/evp.h>
 // compute MD5 hash of a string
 string compute_md5_hash(const string& content, int size) {
     unsigned char digest[EVP_MAX_MD_SIZE];

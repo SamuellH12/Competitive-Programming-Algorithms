@@ -15,7 +15,6 @@
 \usepackage{titlesec}
 \usepackage{setspace}
 \usepackage{amsmath} 
-
 \usepackage{etoolbox}
 \usepackage{needspace}
 
@@ -68,6 +67,22 @@
 \lstdefinestyle{txt}{
   style=shared,
 }
+\lstdefinestyle{description}{
+  frame=single,
+  xleftmargin=0pt,
+  basicstyle=\fontsize{7}{8}\ttfamily,
+  rulesepcolor=\color{gray},
+  rulecolor=\color{gray!30},
+  frameround=tttt,
+  breaklines=true,
+  breakatwhitespace=true,
+  showstringspaces=false,
+  tabsize=2,
+  keepspaces=true,                 
+  numbersep=5pt,                  
+  showspaces=false,                
+  showtabs=false,           
+}
 \lstset{
   escapechar=@,
   tabsize=2,
@@ -83,70 +98,6 @@
   bottom=3pt,
   boxsep=2pt
 }
-\lstdefinestyle{description}{
-  % backgroundcolor=\color{gray!5},
-  % frame=single,
-  % rulecolor=\color{gray!30},
-  % frameround=tttt,
-  basicstyle=\fontsize{6}{7}\ttfamily,
-  breaklines=true,
-  breakatwhitespace=true,
-  showstringspaces=false,
-  tabsize=2,
-}
-\newtcolorbox{descbox}{
-  enhanced,
-  colback=gray!5,
-  colframe=gray!30,
-  boxrule=0.5pt,
-  arc=1pt,
-  left=2pt,
-  right=2pt,
-  top=2pt,
-  bottom=2pt,
-  % oversize=0pt,
-  enforce breakable,
-  % before skip=2pt,
-  % after skip=2pt,
-  boxsep=2pt,
-}
-
-\newtcolorbox{descbox54}[1][]{
-  enhanced,
-  colback=gray!5,
-  colframe=gray!30,
-  boxrule=0.5pt,
-  sharp corners,       % Remove arredondamentos problemáticos
-  left=1mm,
-  right=1mm,
-  top=1mm,
-  bottom=1mm,
-  boxsep=1mm,
-  before skip=0pt,     % Espaço antes do box
-  after skip=3pt,      % Espaço após o box
-  breakable,
-  #1                   % Parâmetros opcionais
-}
-
-\newtcolorbox{notebox}{
-    colback=blue!5!white,
-    colframe=blue!75!black,
-    fonttitle=\bfseries,
-    title=Note,
-    arc=2pt,
-    boxrule=0.5pt,
-    left=2mm,
-    right=2mm
-}
-\newtcolorbox{theorembox}{
-    colback=green!5!white,
-    colframe=green!50!black,
-    fonttitle=\bfseries,
-    title=Theorem,
-    arc=2pt,
-    boxrule=0.5pt
-}
-
 
 \pagestyle{fancy}
 \fancyhead[L]{Universidade Federal de Pernambuco - SamuellH12}
@@ -165,14 +116,14 @@
 
 \begin{document}
 \begin{landscape}
-\begin{multicols*}{3}
+\begin{multicols*}{3}  % MUDE A QUANTIDADE DE COLUNAS AQUI
 \raggedcolumns 
 \interlinepenalty=10000
 
 \maketitle
 \vspace{-13ex}
 \tableofcontents
-\begin{center}\includegraphics[height=0.3\linewidth]{ascii-art.png}\centering\vspace{-3pt}\footnotesize\textit{}\end{center}
+% \begin{center}\includegraphics[height=0.3\linewidth]{ascii-art.png}\centering\vspace{-3pt}\footnotesize\textit{}\end{center}
 \pagestyle{fancy}
 
 \input contents.tex

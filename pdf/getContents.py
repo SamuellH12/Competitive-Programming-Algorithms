@@ -1,6 +1,7 @@
 import os
 
 code_dir = "../Library"
+extra_dir = "./extra"
 
 note = '''
 # Any line followed by a '#' character is ignored
@@ -22,3 +23,11 @@ for dir in os.listdir(code_dir):
         print(f"{dir}/{arquivo}\t{arquivo.split('.')[0]}")
                 
     print()
+
+print()
+print("#Extra content - tex files")
+print('[Extra]')
+
+for arquivo in os.listdir(extra_dir):
+    if(os.path.isfile(os.path.join(extra_dir, arquivo))):
+        print(f"{extra_dir}/{arquivo}\ttex")
