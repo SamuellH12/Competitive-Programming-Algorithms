@@ -8,3 +8,5 @@ notebook.*
 !notebook.pdf
 !notebook.tex
 .vscode
+texput.log
+texput.fls
