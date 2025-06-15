@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# python3 generate_pdf.py
+set -e
+
 g++ -std=c++17 -o genLatex generate_latex.cpp -O2 -lssl -lcrypto
 ./genLatex
 

@@ -5,7 +5,6 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{tcolorbox}
-\tcbuselibrary{listings}
 \usepackage{tocloft}
 \usepackage{pdflscape}
 \usepackage{multicol}
@@ -15,7 +14,16 @@
 \usepackage[utf8]{inputenc}
 \usepackage{titlesec}
 \usepackage{setspace}
+\usepackage{amsmath} 
+
+\usepackage{etoolbox}
+\usepackage{needspace}
+
+\tcbuselibrary{listings}
+\tcbuselibrary{breakable, skins} 
 \renewcommand{\arraystretch}{0.85}
+
+\graphicspath{{./images/}{./temp/}} % Pastas para buscar imagens
 
 \renewcommand*{\ttdefault}{pcr}
 \renewcommand\cftsecfont{\fontsize{10}{11}\bfseries}
@@ -76,17 +84,67 @@
   boxsep=2pt
 }
 \lstdefinestyle{description}{
-  backgroundcolor=\color{gray!10},
-  frame=single,
-  rulecolor=\color{gray!70},
-  frameround=tttt,
-  basicstyle=\fontsize{6}{6.5}\ttfamily,
+  % backgroundcolor=\color{gray!5},
+  % frame=single,
+  % rulecolor=\color{gray!30},
+  % frameround=tttt,
+  basicstyle=\fontsize{6}{7}\ttfamily,
   breaklines=true,
+  breakatwhitespace=true,
   showstringspaces=false,
-  xleftmargin=0.5em,
-  xrightmargin=0.5em,
-  aboveskip=0.5em,
-  belowskip=0.5em,
+  tabsize=2,
+}
+\newtcolorbox{descbox}{
+  enhanced,
+  colback=gray!5,
+  colframe=gray!30,
+  boxrule=0.5pt,
+  arc=1pt,
+  left=2pt,
+  right=2pt,
+  top=2pt,
+  bottom=2pt,
+  % oversize=0pt,
+  enforce breakable,
+  % before skip=2pt,
+  % after skip=2pt,
+  boxsep=2pt,
+}
+
+\newtcolorbox{descbox54}[1][]{
+  enhanced,
+  colback=gray!5,
+  colframe=gray!30,
+  boxrule=0.5pt,
+  sharp corners,       % Remove arredondamentos problemáticos
+  left=1mm,
+  right=1mm,
+  top=1mm,
+  bottom=1mm,
+  boxsep=1mm,
+  before skip=0pt,     % Espaço antes do box
+  after skip=3pt,      % Espaço após o box
+  breakable,
+  #1                   % Parâmetros opcionais
+}
+
+\newtcolorbox{notebox}{
+    colback=blue!5!white,
+    colframe=blue!75!black,
+    fonttitle=\bfseries,
+    title=Note,
+    arc=2pt,
+    boxrule=0.5pt,
+    left=2mm,
+    right=2mm
+}
+\newtcolorbox{theorembox}{
+    colback=green!5!white,
+    colframe=green!50!black,
+    fonttitle=\bfseries,
+    title=Theorem,
+    arc=2pt,
+    boxrule=0.5pt
 }
 
 
@@ -107,15 +165,18 @@
 
 \begin{document}
 \begin{landscape}
-\begin{multicols}{2}
+\begin{multicols*}{3}
+\raggedcolumns 
+\interlinepenalty=10000
 
 \maketitle
 \vspace{-13ex}
 \tableofcontents
+\begin{center}\includegraphics[height=0.3\linewidth]{ascii-art.png}\centering\vspace{-3pt}\footnotesize\textit{}\end{center}
 \pagestyle{fancy}
 
 \input contents.tex
 
-\end{multicols}
+\end{multicols*}
 \end{landscape}
 \end{document}

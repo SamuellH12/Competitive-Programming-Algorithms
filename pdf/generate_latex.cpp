@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 // #include <openssl/evp.h>
+#include <regex>
 using namespace std;
 
 const string code_dir = "../Library";
@@ -20,13 +21,13 @@ const vector<string> IGNORED_LINES = {
 
 const vector<string> IGNORED_SUBSTRINGS = {
     "std::", //pra lib de tfg
-    "/*LATEX_DESC_BEGIN*/",
-    "/*LATEX_DESC_END*/",
+    "/*LATEX_DESC_BEGIN",
+    "LATEX_DESC_END*/",
 };
 
 bool ADD_DESC = true;
-const string DESC_BGN = "/*LATEX_DESC_BEGIN*/";
-const string DESC_END = "/*LATEX_DESC_END*/";
+const string DESC_BGN = "/*LATEX_DESC_BEGIN";
+const string DESC_END = "LATEX_DESC_END*/";
 const string MY_DESC_BGN = "/********";
 const string MY_DESC_END = "********/";
 
@@ -78,6 +79,48 @@ void remove_invalid_char(string &line){ // Process UTF-8 characters
     }
 }
 
+string parse_markdown(const string& input){
+    string output = input;
+
+    // Negrito **texto**
+    output = regex_replace(output, regex(R"(\*\*((?:[^*]|\*[^*])+)\*\*)"), "@\\textbf{$1}@"); 
+    // Itálico _.texto_.
+    output = regex_replace(output, regex(R"(_\.((?:[^*]|\*[^*])+)_\.)"), "@\\emph{$1}@");
+    // Código inline (usando `texto`)
+    output = regex_replace(output, regex(R"(`([^`]+)`)"), "@\\texttt{$1}@");
+    
+    // Potências: x^k
+    output = regex_replace(output, regex(R"(([a-zA-Z])\^([a-zA-Z0-9]+))"), "@$ $1^{$2}$@");
+    // Subscritos: x._k
+    output = regex_replace(output, regex(R"(([a-zA-Z])\._([a-zA-Z0-9]+))"), "@$ $1_{$2}$@");
+
+    return output;
+}
+
+const string REMOVEENDL = ".\\";
+string convert_description(const string& description) {
+    string s = "", line;
+    stringstream ss(description);
+    bool lastSkip = false;
+
+    while(getline(ss, line)){
+        if(line.size() >= REMOVEENDL.size() && line.substr((int)line.size() - REMOVEENDL.size()) == REMOVEENDL){
+            for(auto _ : REMOVEENDL) line.pop_back();
+            while(!line.empty() && (line.back() == ' ' || line.back() == '\t')) line.pop_back();
+            line += " ";
+            lastSkip = true;
+        } else line += "\n", lastSkip = false;
+
+        if(lastSkip){
+            int skp = 0;
+            while(skp < line.size() && (line[skp] == ' ' || line[skp] == '\t')) skp++;
+            line = line.substr(skp);
+        }
+        s += line;
+    }
+
+    return parse_markdown(s);
+}
 
 bool is_comment(string line) {
 	while (line.size() and (line[0] == ' ' or line[0] == '\t'))
@@ -136,6 +179,7 @@ bool convert_files(const string& input_path, const string& output_path, string& 
 
     remove_invalid_char(description);
     remove_ignored_substrings(description);
+    description = convert_description(description);
 
     // if(PRINT_HASH) processed_content = get_file_hash(processed_content);
 
@@ -163,11 +207,6 @@ string get_style(const string& filename) {
     return "txt";
 }
 
-const string CODE_DESCRIPTION = 
-R"(Este cadigo foi extraido da biblioteca de competicao.
-Uso tipico: #include <arquivo.hpp>
-Complexidade: O(log n))";
-
 string get_tex(const vector<pair<string, vector<pair<string, string>>>>& sections, bool PRINT_HASH=false) {
     string tex, description;
     for(auto& [section_name, subsections] : sections) if(!subsections.empty()){
@@ -183,15 +222,18 @@ string get_tex(const vector<pair<string, vector<pair<string, string>>>>& section
 
             tex += "\\vspace{-1ex}\n";
             tex += "\\subsection{" + subsection_name + "}\n";
+            tex += "\\vspace{-4pt}\n";
             
-            if(!description.empty()){
-                tex += "\\vspace{-3pt}\n";
+            if (!description.empty()) {
+                tex += "\\begin{descbox}\n";
+                // tex += "\\vspace{-4pt}\n";
                 tex += "\\begin{lstlisting}[style=description]\n";
                 tex += description + "\n";
                 tex += "\\end{lstlisting}\n";
+                tex += "\\end{descbox}\n";
+                tex += "\\vspace{-4pt}\n";
             } 
             
-            tex += "\\vspace{-3pt}\n\n";
             tex += "\\raggedbottom\\lstinputlisting[style="+get_style(filename) + "]{" + full_path + "}\n";
             tex += "\\hrulefill\n\n";
         }
