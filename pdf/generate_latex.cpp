@@ -203,6 +203,7 @@ string get_style(const string& filename) {
     if (ext == "c" || ext == "cc" || ext == "cpp" || ext == "h") return "cpp";
     if (ext == "java") return "java";
     if (ext == "py") return "py";
+    if (ext == "tex") return "tex";
     return "txt";
 }
 
@@ -214,6 +215,10 @@ string get_tex(const vector<pair<string, vector<pair<string, string>>>>& section
         for(auto [filename, subsection_name] : subsections) {
             if(subsection_name == "tex"){
                 tex += "\\input " + filename + "\n";
+                continue;
+            }
+            if(get_style(filename) == "tex"){
+                tex += "\\input{" + code_dir + "/" + filename + "}\n";
                 continue;
             }
             
@@ -263,12 +268,12 @@ vector<pair<string, vector<pair<string, string>>>> get_sections() {
         
         if(line.empty()) continue;
         if(line.find('#') < line.size()) continue;
-        
+
         if(line[0] == '[') sections.emplace_back(line.substr(1, line.size() - 2), vector<pair<string, string>>());
         else {
             size_t tab_pos = line.find('\t');
             if (tab_pos >= line.size()) {
-                cerr << "Subsection parse error {" << line << "} " << line.size() << endl;
+                cerr << "\n\n\n\nSubsection parse error {" << line << "} " << line.size() << "\n\n\n\n\n";
                 for(auto c : line) cerr << int(c) << '|'; cerr << endl;
                 continue;
             }

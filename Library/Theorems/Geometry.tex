@@ -1,0 +1,41 @@
+\subsection{Geometria}
+
+\begin{small}
+\begin{itemize}
+    \item \textbf{Fórmula de Euler:} Em um grafo planar ou poliedro convexo, temos:
+    $ V - E + F = 2 $
+    onde $V$ é o número de vértices, $E$ o número de arestas e $F$ o número de faces.
+
+    \item \textbf{Teorema de Pick:} Para polígonos com vértices em coordenadas inteiras:
+    \[
+    \text{Área} = i + \frac{b}{2} - 1
+    \]
+    onde $i$ é o número de pontos interiores e $b$ o número de pontos sobre o perímetro.
+
+    \item \textbf{Teorema das Duas Orelhas (Two Ears Theorem):} Todo polígono simples com mais de três vértices possui pelo menos duas "orelhas" — vértices que podem ser removidos sem gerar interseções. A remoção repetida das orelhas resulta em uma triangulação do polígono.
+
+    \item \textbf{Incentro de um Triângulo:} É o ponto de interseção das bissetrizes internas e centro da circunferência inscrita. Se $a$, $b$ e $c$ são os comprimentos dos lados opostos aos vértices $A(X_a, Y_a)$, $B(X_b, Y_b)$ e $C(X_c, Y_c)$, então o incentro $(X, Y)$ é dado por:
+    \[
+    X = \frac{aX_a + bX_b + cX_c}{a + b + c}, \quad
+    Y = \frac{aY_a + bY_b + cY_c}{a + b + c}
+    \]
+
+    \item \textbf{Triangulação de Delaunay:} Uma triangulação de um conjunto de pontos no plano tal que nenhum ponto está dentro do círculo circunscrito de qualquer triângulo. Essa triangulação:
+    \begin{itemize}
+        \item Maximiza o menor ângulo entre todos os triângulos.
+        \item Contém a árvore geradora mínima (MST) euclidiana como subconjunto.
+    \end{itemize}
+
+    \item \textbf{Fórmula de Brahmagupta:} Para calcular a área de um quadrilátero cíclico (todos os vértices sobre uma circunferência), com lados $a$, $b$, $c$ e $d$:
+    \[
+    s = \frac{a + b + c + d}{2}, \quad
+    \text{Área} = \sqrt{(s - a)(s - b)(s - c)(s - d)}
+    \]
+    Se $d = 0$ (ou seja, um triângulo), ela se reduz à fórmula de Heron:
+    \[
+    \text{Área} = \sqrt{(s - a)(s - b)(s - c)s}
+    \]
+\end{itemize}
+\end{small}
+
+% credits: https://github.com/gabrielpessoa1/ICPC-Library/

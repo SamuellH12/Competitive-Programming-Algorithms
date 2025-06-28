@@ -1,0 +1,37 @@
+\subsection{DP}
+
+\begin{small}
+\begin{itemize}
+    \item \textbf{Divide and Conquer Optimization:} Utilizada em problemas do tipo:
+    \[
+    dp[i][j] = \min_{k < j} \{ dp[i - 1][k] + C[k][j] \}
+    \]
+    onde o objetivo é dividir o subsegmento até $j$ em $i$ segmentos com algum custo. A otimização é válida se:
+    \[
+    A[i][j] \leq A[i][j+1]
+    \]
+    onde $A[i][j]$ é o valor de $k$ que minimiza a transição.
+
+    \item \textbf{Knuth Optimization:} Aplicável quando:
+    \[
+    dp[i][j] = \min_{i < k < j} \{ dp[i][k] + dp[k][j] \} + C[i][j]
+    \]
+    e a condição de monotonicidade é satisfeita:
+    \[
+    A[i][j-1] \leq A[i][j] \leq A[i+1][j]
+    \]
+    com $A[i][j]$ sendo o índice $k$ que minimiza a transição.
+
+    \item \textbf{Slope Trick:} Técnica usada para lidar com funções lineares por partes e convexas. A função é representada por pontos onde a derivada muda, que podem ser manipulados com \texttt{multiset} ou \texttt{heap}. Útil para manter o mínimo de funções acumuladas em forma de envelopes convexos.
+
+    \item \textbf{Outras Técnicas e Truques Importantes:}
+    \begin{itemize}
+        \item \textbf{FFT (Fast Fourier Transform):} Convolução eficiente de vetores.
+        \item \textbf{CHT (Convex Hull Trick):} Otimização para DP com funções lineares e monotonicidade.
+        \item \textbf{Aliens Trick:} Técnica para binarizar o custo em problemas de otimização paramétrica (geralmente em problemas com limite no número de grupos/segmentos).
+        \item \textbf{Bitset:} Utilizado para otimizações de espaço e tempo em DP de subconjuntos ou somas parciais, especialmente em problemas de mochila.
+    \end{itemize}
+\end{itemize}
+\end{small}
+
+% credits: https://github.com/gabrielpessoa1/ICPC-Library/

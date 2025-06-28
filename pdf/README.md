@@ -12,7 +12,7 @@ Ou linux:
 .\generate_pdf.sh
 ```
 
-Necessário que haja suporte para C++ e Latex!
+Necessário que haja suporte para C++ e [latexmk](https://www.ctan.org/pkg/latexmk/)!
 
 ```shell
 g++

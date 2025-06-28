@@ -1,0 +1,91 @@
+\subsection{Grafos}
+
+\begin{small}
+\begin{itemize}
+    \item \textbf{Fórmula de Euler (para grafos planares):}
+    \[
+    V - E + F = 2
+    \]
+    onde $V$ é o número de vértices, $E$ o número de arestas e $F$ o número de faces.
+
+    \item \textbf{Handshaking Lemma:} O número de vértices com grau ímpar em um grafo é par.
+
+    \item \textbf{Teorema de Kirchhoff (contagem de árvores geradoras):} 
+    Monte a matriz $M$ tal que:
+    \[
+    M_{i,i} = \deg(i), \quad M_{i,j} = 
+    \begin{cases}
+    -1 & \text{se existe aresta } i-j \\
+    0  & \text{caso contrário}
+    \end{cases}
+    \]
+    O número de árvores geradoras (spanning trees) é o determinante de qualquer co-fator de $M$ (remova uma linha e uma coluna).
+
+    \item \textbf{Condições para Caminho Hamiltoniano:}
+    \begin{itemize}
+        \item \textbf{Teorema de Dirac:} Se todos os vértices têm grau $\geq n/2$, o grafo contém um caminho Hamiltoniano.
+        \item \textbf{Teorema de Ore:} Se para todo par de vértices não adjacentes $u$ e $v$, temos $\deg(u) + \deg(v) \geq n$, então o grafo possui caminho Hamiltoniano.
+    \end{itemize}
+
+    \item \textbf{Algoritmo de Borůvka:} Enquanto o grafo não estiver conexo, para cada componente conexa escolha a aresta de menor custo que sai dela. Essa técnica constrói a árvore geradora mínima (MST).
+
+    \item \textbf{Árvores:}
+    \begin{itemize}
+        \item Existem $C_n$ árvores binárias com $n$ vértices ($C_n$ é o $n$-ésimo número de Catalan).
+        \item Existem $C_{n-1}$ árvores enraizadas com $n$ vértices.
+        \item \textbf{Fórmula de Cayley:} Existem $n^{n-2}$ árvores com vértices rotulados de $1$ a $n$.
+        \item \textbf{Código de Prüfer:} Remova iterativamente a folha com menor rótulo e adicione o rótulo do vizinho ao código até restarem dois vértices.
+    \end{itemize}
+
+    \item \textbf{Fluxo em Redes:}
+    \begin{itemize}
+        \item \textbf{Corte Mínimo:} Após execução do algoritmo de fluxo máximo, um vértice $u$ está do lado da fonte se $\text{level}[u] \neq -1$.
+        
+        \item \textbf{Máximo de Caminhos Disjuntos:}
+        \begin{itemize}
+            \item \textbf{Arestas disjuntas:} Use fluxo máximo com capacidades iguais a 1 em todas as arestas.
+            \item \textbf{Vértices disjuntos:} Divida cada vértice $v$ em $v_{\text{in}}$ e $v_{\text{out}}$, conectados por aresta de capacidade 1. As arestas que entram vão para $v_{\text{in}}$ e as que saem saem de $v_{\text{out}}$.
+        \end{itemize}
+
+        \item \textbf{Teorema de König:} Em um grafo bipartido:
+        \[
+        \text{Cobertura mínima de vértices} = \text{Matching máximo}
+        \]
+        O complemento da cobertura mínima de vértices é o conjunto independente máximo.
+
+        \item \textbf{Coberturas:}
+        \begin{itemize}
+            \item \textbf{Vertex Cover mínimo:} Os vértices da partição $X$ que **não** estão do lado da fonte no corte mínimo, e os vértices da partição $Y$ que **estão** do lado da fonte.
+            \item \textbf{Independent Set máximo:} Complementar da cobertura mínima de vértices.
+            \item \textbf{Edge Cover mínimo:} É $N - \text{matching}$, pegando as arestas do matching e mais quaisquer arestas restantes para cobrir os vértices descobertos.
+        \end{itemize}
+
+        \item \textbf{Path Cover:}
+        \begin{itemize}
+            \item \textbf{Node-disjoint path cover mínimo:} Duplicar vértices em tipo $A$ e tipo $B$ e criar grafo bipartido com arestas de $A \to B$. O path cover é $N - \text{matching}$.
+            \item \textbf{General path cover mínimo:} Criar arestas de $A \to B$ sempre que houver caminho de $A$ para $B$ no grafo. O resultado também é $N - \text{matching}$.
+        \end{itemize}
+
+        \item \textbf{Teorema de Dilworth:} O path cover mínimo em um grafo dirigido acíclico é igual à **antichain máxima** (conjunto de vértices sem caminhos entre eles).
+
+        \item \textbf{Teorema do Casamento de Hall:} Um grafo bipartido possui um matching completo do lado $X$ se:
+        \[
+        \forall W \subseteq X, \quad |W| \leq |\text{vizinhos}(W)|
+        \]
+
+        \item \textbf{Fluxo Viável com Capacidades Inferiores e Superiores:} Para rede sem fonte e sumidouro:
+        \begin{itemize}
+            \item Substituir a capacidade de cada aresta por $c_{\text{upper}} - c_{\text{lower}}$
+            \item Criar nova fonte $S$ e sumidouro $T$
+            \item Para cada vértice $v$, compute:
+            \[
+            M[v] = \sum_{\text{arestas entrando}} c_{\text{lower}} - \sum_{\text{arestas saindo}} c_{\text{lower}}
+            \]
+            \item Se $M[v] > 0$, adicione aresta $(S, v)$ com capacidade $M[v]$; se $M[v] < 0$, adicione $(v, T)$ com capacidade $-M[v]$.
+            \item Se todas as arestas de $S$ estão saturadas no fluxo máximo, então um fluxo viável existe. O fluxo viável final é o fluxo computado mais os valores de $c_{\text{lower}}$.
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+\end{small}
+
+% credits: https://github.com/gabrielpessoa1/ICPC-Library/
