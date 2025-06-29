@@ -57,7 +57,8 @@ void kosaraju(int n){
 		for(auto v : grafo[u]) marc[comp[v]] = false;
 	}
 }
-/**************************************
+
+/*LATEX_DESC_BEGIN***************************
 Kosaraju - Strongly Connected Component
 Algoritmo de Kosaraju para encontrar Componentes Fortemente Conexas
 
@@ -74,4 +75,4 @@ greve	-> grafo reverso (que deve ser construido junto ao grafo normal) !!!
 
 NOTA: A ordem que o Kosaraju descobre as componentes é uma Ordenação Topológica do SCC
 em que o dag[0] não possui grau de entrada e o dag[C-1] não possui grau de saida
-**************************************/
+*****************************LATEX_DESC_END*/

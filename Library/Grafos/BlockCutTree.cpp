@@ -120,7 +120,7 @@ void addEdge(int u, int v){
 	edge.emplace_back(u, v);
 }
 
-/***********************
+/*LATEX_DESC_BEGIN***************************
 Block Cut Tree - BiConnected Component
 
 reset(n);
@@ -129,4 +129,4 @@ tarjan(Root);
 buildBCC(n);
 
 No fim o grafo da Block Cut Tree estara em _vector<int> tree []_
-***********************/
+*****************************LATEX_DESC_END*/

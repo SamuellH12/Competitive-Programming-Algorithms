@@ -68,11 +68,11 @@ vector<pair<int, int>> getAssignment(int m){
 	return ans;
 }
 
-/**************************************
-	Hungarian Algorithm - Assignment Problem
+/*LATEX_DESC_BEGIN***************************
+Hungarian Algorithm - Assignment Problem
 Algoritmo para o problema de atribuição mínima.
 
-Complexity: O(N^2 * M)
+**Complexity:** O(N^2 * M)
 
 hungarian(int n, int m);  ->  Retorna o valor do custo mínimo
 getAssignment(int m)      ->  Retorna a lista de pares <linha, Coluna> do Minimum Assignment
@@ -82,4 +82,4 @@ n -> Número de Linhas // m -> Número de Colunas
 IMPORTANTE! O algoritmo é 1-indexado
 IMPORTANTE! O tipo padrão está como int, para mudar para outro tipo altere | typedef <TIPO> TP; |
 Extra: Para o problema da atribuição máxima, apenas multiplique os elementos da matriz por -1
-***************************************/
+*****************************LATEX_DESC_END*/

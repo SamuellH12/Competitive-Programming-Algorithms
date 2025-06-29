@@ -64,13 +64,10 @@ private:
 	}
 };
 
-/************************************
-  2 SAT - Two Satisfiability Problem
+/*LATEX_DESC_BEGIN***************************
+2 SAT - Two Satisfiability Problem
 
 IMPORTANTE! o grafo deve estar 0-indexado!
-
+Retorna uma valoração verdadeira se possível ou um vetor vazio se impossível;
 inverso de u = ~u
-
-Retorna uma valoração verdadeira se possível
-Ou um vetor vazio se impossível;
-************************************/
+*****************************LATEX_DESC_END*/

@@ -69,14 +69,12 @@ private:
 	//query/update_subtree[tin[u]+EDGE, tin[u]+sz[u]-1];
 };
 
-/************************************
+/*LATEX_DESC_BEGIN***************************
 Heavy-Light Decomposition
 
-Complexity: #Query_path: O(LogN*qry) #Update_path: O(LogN*updt)
-Nodes: 0 <= u, v < N
+**Complexity:** O(LogN * (qry || updt)) 
 
-Change qry(l, r) and updt(l, r) to call a query and update 
-structure of your will
+Change qry(l, r) and updt(l, r) to call a query and update structure of your will
 
 HLD hld(n); //call init
 hld.add_edges(u, v); //add all edges
@@ -84,4 +82,5 @@ hld.build(); //Build everthing for HLD
 
 tin[u] -> Pos in the structure (Seg, Bit, ...)
 nxt[u] -> Head/Endpoint
-************************************/
+IMPORTANTE! o grafo deve estar 0-indexado!
+*****************************LATEX_DESC_END*/

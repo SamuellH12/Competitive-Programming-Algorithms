@@ -73,7 +73,7 @@ int kth(Node& Left, Node& Right, int l, int r, int k){
 }
 int kth(NodeId Left, NodeId Right, int k){ return kth(NODES[Left], NODES[Right], LSEG, RSEG, k); }
 
-/******************************************************
+/*LATEX_DESC_BEGIN***************************
 -> Segment Tree Persistente: (2x mais rápido que com ponteiro)
 Build(1, N) -> Cria uma Seg Tree completa de tamanho N;	RETORNA o NodeId da Raiz
 Update(Root, pos, v) -> Soma +V em POS; RETORNA o NodeId da nova Raíz;
@@ -85,4 +85,4 @@ Build:  O(N)  !!! Sempre chame o Build
 Query:  O(log N)
 Update: O(log N)
 Kth:	O(Log N)
-*******************************************************/
+*****************************LATEX_DESC_END*/

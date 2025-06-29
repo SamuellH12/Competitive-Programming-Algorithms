@@ -86,24 +86,21 @@ struct Dinic {
 		return ans;
 	}
 };
-/**************************************
+/*LATEX_DESC_BEGIN***************************
     Dinic - Max Flow Min Cut
-Algoritmo de Dinitz para encontrar o Fluxo Máximo
+Algoritmo de Dinitz para encontrar o Fluxo Máximo. 
+**Casos de Uso em [Theorems/Flow]**
 IMPORTANTE! O algoritmo está 0-indexado
 
-Complexity:
+**Complexity:**
 O( V^2 * E )      ->  caso geral
 O( sqrt(V) * E )  ->  grafos com cap = 1 para toda aresta // matching bipartido
 
 * Informações:
-	Crie o Dinic:
-		Dinic dinic(n, source, sink);
-	Adicione as Arestas:
-		dinic.addAresta(u, v, capacity);
-	Para calcular o Fluxo Máximo:
-		dinic.maxFlow()
-	Para saber se um vértice U está no Corte Mínimo:
-		dinic.inCut(u)
+	Crie o Dinic: Dinic dinic(n, source, sink);
+	Adicione as Arestas: dinic.addAresta(u, v, capacity);
+	Para calcular o Fluxo Máximo: dinic.maxFlow()
+	Para saber se um vértice U está no Corte Mínimo: dinic.inCut(u)
 
 * Sobre o Código:
 	vector<Aresta> arestas;  -> Guarda todas as arestas do grafo e do grafo residual
@@ -112,8 +109,8 @@ O( sqrt(V) * E )  ->  grafos com cap = 1 para toda aresta // matching bipartido
 	vector<int> level; -> Distância em vértices a partir do Source. Se igual a N o vértice não foi visitado.
 	A BFS retorna se Sink é alcançavel de Source. Se não é porque foi atingido o Fluxo Máximo
 	A DFS retorna um possível aumento do Fluxo
-***************************************/
-/**************************************
+*****************************LATEX_DESC_END*/
+/**************************************LATEX_IGNORED_BEGIN
 * Use Cases of Flow
 	   
 + Minimum cut: the minimum cut is equal to maximum flow.
@@ -156,4 +153,4 @@ O( sqrt(V) * E )  ->  grafos com cap = 1 para toda aresta // matching bipartido
   maximum sum. a closure is a set of nodes such that there is no edge from a node inside
   the set to a node outside. Is a general case of project selection. Original edges with cap INF.
   Add edges from Source to nodes with W > 0; and from nodes with W < 0 to Sink (cap |W|).
-***************************************/
+LATEX_IGNORED_END***************************************/

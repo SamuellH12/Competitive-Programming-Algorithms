@@ -16,17 +16,23 @@ const vector<string> IGNORED_LINES = {
     "/********",
     "********/",
     " \t \t \t \t ", //pra ocultar linhas sem chamar atenção no código
+    "LATEX_DESC_BEGIN",
+    "LATEX_DESC_END",
+    "\t//////////////////////",
 };
 
 const vector<string> IGNORED_SUBSTRINGS = {
     "std::", //pra lib de tfg
-    "/*LATEX_DESC_BEGIN",
-    "LATEX_DESC_END*/",
+    "LATEX_DESC_BEGIN",
+    "LATEX_DESC_END",
 };
 
+const string IGNORED_INTERVAL_BGN = "LATEX_IGNORED_BEGIN";
+const string IGNORED_INTERVAL_END = "LATEX_IGNORED_END";
+
 const bool ADD_DESC = true;
-const string DESC_BGN = "/*LATEX_DESC_BEGIN";
-const string DESC_END = "LATEX_DESC_END*/";
+const string DESC_BGN = "LATEX_DESC_BEGIN";
+const string DESC_END = "LATEX_DESC_END";
 // const string MY_DESC_BGN = "/********";
 // const string MY_DESC_END = "********/";
 
@@ -136,7 +142,7 @@ bool convert_files(const string& input_path, const string& output_path, string& 
     string content((istreambuf_iterator<char>(in)), istreambuf_iterator<char>());
     in.close();
 
-    bool can_begin = false, isInDesc = false;
+    bool can_begin = false, isInDesc = false, ignore_interval = false;
     string processed_content, line;
     description = "";
     size_t pos = 0;
@@ -153,6 +159,9 @@ bool convert_files(const string& input_path, const string& output_path, string& 
 
         // pra pegar a descrição
         if(line.find(DESC_BGN) != string::npos) isInDesc = true; //if(line.find(MY_DESC_BGN) != string::npos) isInDesc = true;
+        if(line.find(IGNORED_INTERVAL_BGN) != string::npos) ignore_interval = true;
+        if(ignore_interval) ignore = true;
+        if(line.find(IGNORED_INTERVAL_END) != string::npos) ignore_interval = false;
 
         if(!blank_line)
         for(const auto& pattern : IGNORED_LINES)
@@ -261,7 +270,7 @@ vector<pair<string, vector<pair<string, string>>>> get_sections() {
     if (bom[0] != (char)0xFF || bom[1] != (char)0xFE){ f.seekg(0); }
 
     string line;
-    while (getline(f, line)) 
+    while(getline(f, line)) 
     {
         line.erase(remove(line.begin(), line.end(), '\r'), line.end());
         line.erase(remove(line.begin(), line.end(), 0), line.end());
@@ -281,7 +290,7 @@ vector<pair<string, vector<pair<string, string>>>> get_sections() {
             string filename = line.substr(0, tab_pos);  
             string subsection_name = line.substr(tab_pos + 1);
             
-            if (sections.empty()) {
+            if(sections.empty()) {
                 cerr << "Subsection given without section {" << line << "} " << line.size() << endl;
                 continue;
             }

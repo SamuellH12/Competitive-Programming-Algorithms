@@ -3,7 +3,6 @@
 #define ld long double
 using namespace std;
 
-
 ll modinverse(ll a, ll b, ll s0 = 1, ll s1 = 0) { return b == 0 ? s0 : modinverse(b, a % b, s1, s0 - s1 * (a / b)); }
 ll mul(ll a, ll b, ll m) {
     ll q = (long double) a * (long double) b / (long double) m;
@@ -30,9 +29,6 @@ struct Equation {
     }
     Equation operator+(const Equation& b) const { return Equation(*this, b); }
 };
-
-/************* 
-Equation eq1(2, 3); // x = 2 mod 3
-Equation eq2(3, 5); // x = 3 mod 5
-Equation ans = eq1 + eq2;
-*************/
+// Equation eq1(2, 3); // x = 2 mod 3
+// Equation eq2(3, 5); // x = 3 mod 5
+// Equation ans = eq1 + eq2;

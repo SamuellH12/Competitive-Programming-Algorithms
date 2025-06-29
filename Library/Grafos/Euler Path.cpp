@@ -86,7 +86,9 @@ pair<vi, vi> EulerPath(int n, int src=0){
 
 	return {path, pathId};
 }
-/**************************************
+
+
+/*LATEX_DESC_BEGIN***************************
 Euler Path - Algoritmo de Hierholzer para caminho Euleriano
 
 Complexity: O(V + E)
@@ -107,4 +109,4 @@ Euler em Directed graph:
 	- Exatamente 1 tem |entrada|+1 == |saída| && exatamente 1 tem |entrada| == |saída|+1 (caminho);
 * Circuito -> U é o primeiro e último 
 * Caminho -> U é o primeiro e V o último
-**************************************/
+*****************************LATEX_DESC_END*/

@@ -55,7 +55,7 @@ int hshComp(StringHash& a, int la, int ra, StringHash& b, int lb, int rb){
 	return a.s[la+diff] < b.s[lb+diff] ? -1 : +1;
 }
 
-/******************************************************
+/*LATEX_DESC_BEGIN***************************
 String Hash - Double Hash
 precalc()    -> O(N)
 StringHash() -> O(|S|)
@@ -63,4 +63,4 @@ gethash()    -> O(1)
 
 StringHash hash(s);	-> Cria o Hash da string s
 hash.gethash(l, r); -> Hash [L,R] (0-Indexado)
-*************************/
+*****************************LATEX_DESC_END*/

@@ -55,7 +55,7 @@ int kth(Node *Left, Node *Right, int l, int r, int k){
 	return kth(Left->R, Right->R, m+1, r, k - sum);
 }
 
-/******************************************************
+/*LATEX_DESC_BEGIN***************************
 -> Segment Tree Persistente
 Build(1, N) -> Cria uma Seg Tree completa de tamanho N;	RETORNA um *Ponteiro pra Raíz
 Update(Root, 1, N, pos, v) 	-> Soma +V na posição POS; RETORNA um *Ponteiro pra Raíz da nova versão;
@@ -73,7 +73,7 @@ Comportamento do K-th(SegL, SegR, 1, N, K):
 	-> Retorna índice da primeira posição i cuja soma de prefixos [1, i] é >= k 
 	na Seg resultante da subtração dos valores da (Seg R) - (Seg L).
 	-> Pode ser utilizada para consultar o K-ésimo menor valor no intervalo [L, R] de um array. 
-	Para isso a Seg deve ser utilizada como um array de frequências. Comece com a Seg zerada (Build). 
+	A Seg deve ser utilizada como um array de frequências. Comece com a Seg zerada (Build). 
 	Para cada valor V do Array chame um update(roots.back(), 1, N, V, 1) e guarde o ponteiro da seg.
-	Para consultar o K-ésimo menor valor de [L, R] chame kth(roots[L-1], roots[R], 1, N, K);
-*******************************************************/
+	Consultar o K-ésimo menor valor de [L, R]: chame kth(roots[L-1], roots[R], 1, N, K);
+*****************************LATEX_DESC_END*/

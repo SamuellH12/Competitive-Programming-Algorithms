@@ -35,19 +35,14 @@ string RecoverLCS(int i, int j){
 
 	return RecoverLCS(i, j+1);
 }
-/****************************
+/*LATEX_DESC_BEGIN***************************
 LCS - Longest Common Subsequence
 
-Complexity: O(N^2)
+**Complexity:** O(N^2)
 
-* Recursive:
-memset(memo, -1, sizeof memo);
-LCS(0, 0);
+* Recursive: memset(memo, -1, sizeof memo); LCS(0, 0);
+* Iterative: LCS_It();
 
-* Iterative:
-LCS_It();
-
-* RecoverLCS
-  Complexity: O(N)
-  Recover one of all the possible LCS
-*****************************/
+* RecoverLCS O(N)
+  Recover just one of all the possible LCS
+*****************************LATEX_DESC_END*/

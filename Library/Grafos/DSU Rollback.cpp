@@ -32,9 +32,9 @@ struct DSUr {
 		savept.pop_back();
 	}
 };
-/*************************************************
-Disjoint Set Union with Rollback - O(Log n)
+/*LATEX_DESC_BEGIN***************************
+Disjoint Set Union with **Rollback** - O(Log n)
 checkpoint() -> salva o estado atual
 rollback() -> restaura no último checkpoint
 save another var? +save in join & +line in pop 
-*************************************************/
+*****************************LATEX_DESC_END*/

@@ -4,10 +4,11 @@ using namespace std;
 const int MAXN = 1e5 + 5;
 const int MAXLG = 31 - __builtin_clz(MAXN) + 1;
 
-int value[MAXN], table[MAXLG][MAXN];
+int table[MAXLG][MAXN];
 
-void build(int N){
-	for(int i=0; i<N; i++) table[0][i] = value[i];
+void build(vector<int> &v){
+	int N = v.size();
+	for(int i=0; i<N; i++) table[0][i] = v[i];
 
 	for(int p=1; p < MAXLG; p++)
 		for(int i=0; i + (1 << p) <= N; i++)
@@ -20,7 +21,7 @@ int query(int l, int r){
 }
 /*************************************************
 Sparse Table for Range Minimum Query [L, R] [0, N)
-build:  O(N log N)
+build:  O(N log N)	
 Query:  O(1)
 Value -> Original Array
 *************************************************/

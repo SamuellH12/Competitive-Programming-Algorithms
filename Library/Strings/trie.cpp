@@ -40,10 +40,10 @@ void init(){
 	memset(trie[0], -1, sizeof trie[0]);
 	z = 1;
 }
-/******************
+/*LATEX_DESC_BEGIN***************************
 Trie - Arvore de Prefixos
 insert(P) - O(|P|)
 count(P)  - O(|P|)
 MAXS  - Soma do tamanho de todas as Strings
 sigma - Tamanho do alfabeto
-******************/
+*****************************LATEX_DESC_END*/

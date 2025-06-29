@@ -14,8 +14,8 @@ void calcPS2d(){
 }
 int queryPS2d(int xi, int yi, int xf, int yf){ return ps[xf][yf] - ps[xf][yi-1] - ps[xi-1][yf] + ps[xi-1][yi-1]; }
 
-/**************
+/*LATEX_IGNORED_BEGIN************************
 Complexidade:
 -> Calcular:  O(N^2)
 -> Queries:	  O(1)
-***************/
+***************************LATEX_IGNORED_END*/

@@ -22,9 +22,9 @@ int kruskal(){
 		}
 	return resp;
 }
-/*************************************************************
+/*LATEX_IGNORED_BEGIN************************
 	Kruskal - Minimum Spanning Tree
 Algoritmo para encontrar a Arvore Geradora Minima (MST)
 -> Complexity: O(E log E) 
 E : Numero de Arestas
-***************************************************************/
+***************************LATEX_IGNORED_END*/

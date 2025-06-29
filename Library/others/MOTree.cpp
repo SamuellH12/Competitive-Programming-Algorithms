@@ -73,8 +73,8 @@ vector<int> MO(vector<Query> &queries){
 
 	return ans;
 }
-/**************************************
+/*LATEX_DESC_BEGIN***************************
 Algoritmo de MO para query de caminho em árvore
-Complexity: O((N + Q) * SQRT(N) * F) | F é a complexidade do Add e Remove
+**Complexity:** O((N + Q) * SQRT(N) * F) | F é a complexidade do Add e Remove
 IMPORTANTE! 0-indexado!
-***************************************/
+*****************************LATEX_DESC_END*/

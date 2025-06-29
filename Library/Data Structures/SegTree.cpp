@@ -36,7 +36,7 @@ void build(int no, int l, int r, vector<int> &lista){
 	seg[no] = seg[e] + seg[d];
 }
 
-/******************************************************
+/*LATEX_IGNORED_BEGIN************************
 -> Segment Tree com:
 	- Query em Range
 	- Update em Ponto
@@ -54,4 +54,4 @@ update(1, 1, n, i, x);
 Build:  O(N)
 Query:  O(log N)
 Update: O(log N)
-*******************************************************/
+***************************LATEX_IGNORED_END*/

@@ -19,8 +19,9 @@ struct DSU {
 		sz[u] += sz[v];
 	}
 };
-/*************************************************
+
+/*LATEX_IGNORED_BEGIN************************
 Disjoint Set Union - Union Find
 Find: O( α(n) ) -> Inverse Ackermann function 
 Join: O( α(n) ) -> α(1e6) <= 5
-*************************************************/
+***************************LATEX_IGNORED_END*/

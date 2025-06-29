@@ -56,16 +56,16 @@ struct BIT2D {
 	}
 };
 
-/************************************
+/*LATEX_DESC_BEGIN***************************
 Sparse Binary Indexed Tree 2D
 
-Recebe o conjunto de pontos que serão usados para fazer os updates e
-as queries e cria uma BIT 2D esparsa que independe do "tamanho do grid".
+Recebe o conjunto de pontos que serão usados para fazer os updates e as queries e cria uma BIT 2D esparsa que independe do "tamanho do grid".
 
-Build: O(N Log N) (N -> Quantidade de Pontos)
-Query/Update: O(Log N) 
+**Build:** O(N Log N) (N -> Quantidade de Pontos)
+**Query/Update:** O(Log N) 
+IMPORTANTE! **Offline!**
 
 BIT2D(pts);   // pts -> vecotor<pii> com todos os pontos em que serão feitas queries ou updates
 
 Credits: TFG (TFG50 on Git: https://github.com/tfg50/Competitive-Programming/blob/master/Biblioteca/Data%20Structures/Bit2D.cpp)
-************************************/
+	*****************************LATEX_DESC_END*/
