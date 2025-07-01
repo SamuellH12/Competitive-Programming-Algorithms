@@ -37,7 +37,28 @@ Você pode criar e adicionar também trechos em latex colocando o arquivo ```.te
 
 Ele irá aparecer no arquivo contents e você também pode controlar o que será ou não adicionado.
 
-## 🛠 Personalizações 
+Você também pode adicionar seu arquivo tex diretamente na pasta de códigos. Nesse caso recomendo utilizar ```\subsection{NAME_OF_SUBSECTION}``` no início do arquivo.
+
+## 🎈 Personalizações 
+
+**Se você for gerar sua própria Lib**, provavelmente vai querer alterar essas partes dos códigos:
+
+- [generate_latex.cpp](generate_latex.cpp): ```const string code_dir = "../Library";``` coloque o path (relativo) para a pasta com os seus códigos. (Obs: a ```string title``` não é usada para nada, apenas para um cout ao iniciar o código).
+
+- [getContents.py](getContents.py): assim como no anterior, altere ```code_dir = "../Library"``` para o path dos seus códigos.
+
+- [notebook.tex](notebook.tex): Se quiser mudar a quantidade de colunas, altere ```\begin{multicols*}{3}``` na linha ```119```. Mude também essas opções de títulos do seu PDF.
+```tex
+\fancyhead[L]{Universidade Federal de Pernambuco - SamuellH12} %line 103
+\fancyhead[L]{Universidade Federal de Pernambuco - SamuellH12} %line 108
+\title{\vspace{-4ex}\Large{SamuellH12 - ICPC Library}} %line 113
+```
+
+- Opcional [generate_pdf.sh](generate_pdf.sh): O pdf gerado está sendo renomeado e movido para a pasta parent da atual. ```mv notebook.pdf ../SH12-Notebook.pdf``` (obs: só não renomeio para notebook.pdf)
+
+### 🛠 Outras personalizações
+
+Em [notebook.tex](notebook.tex) você pode personalizar configuraçãos do Latex como cor dos códigos, tamanho das fontes, orientação e tamanho da folha... e tudo mais que possa ser personalizado no Latex.
 
 Edite o arquivo [generate_latex.cpp](generate_latex.cpp) para alterar opções como:
 
