@@ -280,7 +280,7 @@ vector<pair<string, vector<pair<string, string>>>> get_sections() {
             size_t div_pos = line.find(div_char);
             if (div_pos >= line.size()) {
                 cerr << "\n\n\n\nSubsection parse error {" << line << "} " << line.size() << "\n";
-                cerr << "Is the DIVISOR character correct? It should be '" << div_char << "'\n";
+                cerr << "Is the DIVISOR character correct? It should be '" << div_char << "'\n\n\n\n";
                 continue;
             }
             
