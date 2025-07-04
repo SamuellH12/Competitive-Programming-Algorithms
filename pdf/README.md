@@ -48,7 +48,7 @@ Você também pode adicionar seu arquivo tex diretamente na pasta de códigos. N
 \title{\vspace{-4ex}\Large{SamuellH12 - ICPC Library}} %line 113
 ```
 
-- Opcional [generate_pdf.sh](generate_pdf.sh): O pdf gerado está sendo renomeado e movido para a pasta parent da atual. ```mv notebook.pdf ../SH12-Notebook.pdf``` (obs: só não renomeie para notebook.pdf)
+- Opcional [generate_pdf.sh](generate_pdf.sh): O pdf gerado está sendo renomeado e movido para a pasta parent da atual. ```mv notebook.pdf ../SH12-Notebook.pdf``` (obs: só não mantenha como notebook.pdf)
 
 ### :wrench: Outras personalizações
 
