@@ -39,7 +39,7 @@ Você também pode adicionar seu arquivo tex diretamente na pasta de códigos. N
 
 - [generate_latex.cpp](generate_latex.cpp): Tem muitas opções de personalização que você pode ou não querer, veja os detalhes em *"🔧 Outras personalizações"*.
 
-- [getContents.py](getContents.py): Assim como no anterior, altere ```code_dir = "../Library"``` para o path dos seus códigos. **Lembre de rodar o getContents antes para ter a lista com os seus códigos!** <small>Confira também o arquivo para ver se todos os códigos que você quer estão lá e para remover coisas que você não quer que entrem.</small>
+- [getContents.py](getContents.py): Altere ```code_dir = "../Library"``` para o path relativo dos seus códigos. **Lembre de rodar o getContents antes para ter a lista com os seus códigos!** <small>Confira também o arquivo para ver se todos os códigos que você quer estão lá e para remover coisas que você não quer que entrem.</small>
 
 - [notebook.tex](notebook.tex): Se quiser mudar a quantidade de colunas, altere ```\begin{multicols*}{3}``` na linha ```119```. Mude também essas opções de títulos do seu PDF.
 ```tex
