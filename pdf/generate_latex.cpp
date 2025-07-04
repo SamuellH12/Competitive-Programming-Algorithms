@@ -2,8 +2,6 @@
 #include <regex>
 using namespace std;
 
-const string code_dir = "../Library";
-const string title = "SamuellH12 - ICPC Library";
 
 const vector<string> IGNORED_LINES = {
     "#include <bits/stdc++.h>",
@@ -31,6 +29,7 @@ const string IGNORED_INTERVAL_BGN = "LATEX_IGNORED_BEGIN";
 const string IGNORED_INTERVAL_END = "LATEX_IGNORED_END";
 
 const bool ADD_DESC = true;
+const bool USE_MARKDOWN_IN_DESC = true;
 const string DESC_BGN = "LATEX_DESC_BEGIN";
 const string DESC_END = "LATEX_DESC_END";
 // const string MY_DESC_BGN = "/********";
@@ -53,6 +52,8 @@ map<char32_t, char> char_changes = {
     {U'ñ', 'n'}, {U'ç', 'c'}, {U'ý', 'y'}, {U'ÿ', 'y'},
     {U'\x2019', '\''}, {U'\x3b1', 'a'}, {U'\x2013', '-'},
 };
+
+//// Code Start Here ////
 
 void remove_ignored_substrings(string& s) {
     size_t pos = 0;
@@ -124,7 +125,7 @@ string convert_description(const string& description) {
         s += line;
     }
 
-    return parse_markdown(s);
+    return USE_MARKDOWN_IN_DESC ? parse_markdown(s) : s;
 }
 
 bool is_comment(string line) {
@@ -221,20 +222,13 @@ string get_tex(const vector<pair<string, vector<pair<string, string>>>>& section
     for(auto& [section_name, subsections] : sections) if(!subsections.empty()){
         tex += "\\section{" + section_name + "}\n";
         
-        for(auto [filename, subsection_name] : subsections) {
-            if(subsection_name == "tex"){
-                tex += "\\input " + filename + "\n";
-                continue;
-            }
-            if(get_style(filename) == "tex"){
-                tex += "\\input{" + code_dir + "/" + filename + "}\n";
-                continue;
-            }
+        for(auto [filename, subsection_name] : subsections){
+            cout << get_style(filename) + "\t| " << filename << endl;
+            if(get_style(filename) == "tex"){ tex += "\\input{" + filename + "}\n"; continue; }
             
-            string full_path = code_dir + "/" + filename;
-            cout << full_path << endl;
+            string newpath = "./temp/" + filename, full_path = filename;;
+            newpath = regex_replace(newpath, regex(R"(\.\./)"), ""); // remove qualquer ../ de newpath
 
-            string newpath = "./temp/" + filename;
             if(convert_files(full_path, newpath, description, PRINT_HASH)) 
                 full_path = newpath;
 
@@ -270,6 +264,9 @@ vector<pair<string, vector<pair<string, string>>>> get_sections() {
     if (bom[0] != (char)0xFF || bom[1] != (char)0xFE){ f.seekg(0); }
 
     string line;
+    char div_char; // Default divisor character
+    f >> div_char;
+
     while(getline(f, line)) 
     {
         line.erase(remove(line.begin(), line.end(), '\r'), line.end());
@@ -280,16 +277,19 @@ vector<pair<string, vector<pair<string, string>>>> get_sections() {
 
         if(line[0] == '[') sections.emplace_back(line.substr(1, line.size() - 2), vector<pair<string, string>>());
         else {
-            size_t tab_pos = line.find('\t');
-            if (tab_pos >= line.size()) {
-                cerr << "\n\n\n\nSubsection parse error {" << line << "} " << line.size() << "\n\n\n\n\n";
-                for(auto c : line) cerr << int(c) << '|'; cerr << endl;
+            size_t div_pos = line.find(div_char);
+            if (div_pos >= line.size()) {
+                cerr << "\n\n\n\nSubsection parse error {" << line << "} " << line.size() << "\n";
+                cerr << "Is the DIVISOR character correct? It should be '" << div_char << "'\n";
                 continue;
             }
             
-            string filename = line.substr(0, tab_pos);  
-            string subsection_name = line.substr(tab_pos + 1);
-            
+            string filename = line.substr(0, div_pos);   
+            while(!filename.empty() && (filename.back() == ' ' || filename.back() == '\t')) filename.pop_back();
+            string subsection_name = line.substr(div_pos + 1);
+            while(!subsection_name.empty() && (subsection_name.back()  == ' ' || subsection_name.back()  == '\t')) subsection_name.pop_back();
+            while(!subsection_name.empty() && (subsection_name.front() == ' ' || subsection_name.front() == '\t')) subsection_name.erase(0, 1);
+
             if(sections.empty()) {
                 cerr << "Subsection given without section {" << line << "} " << line.size() << endl;
                 continue;
@@ -303,9 +303,7 @@ vector<pair<string, vector<pair<string, string>>>> get_sections() {
 }
 
 
-int main(){
-    cout << title << endl;
-    
+int main(){    
     auto sections = get_sections();
     string tex = get_tex(sections, USE_HASH);
     

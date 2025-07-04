@@ -1,14 +1,19 @@
 import os
 
 code_dir = "../Library"
-extra_dir = "./extra"
+extra_dir = "./extra" # const
+div_char = '$'
 
-note = '''
+print(div_char)
+print("# First line is the divisor character used to separate the file name from it's title!!!\n# Don't change the first line!!!")
+
+
+note = f'''
 # Any line followed by a '#' character is ignored
 # Section headings must be in square brackets
 # Subsections within a section should follow the format:
-#   [filename within code directory][tab character\t][subsection title]
-# tab character:	
+# (filename within code directory)(divisor character:{div_char})(subsection title)
+# div character:{div_char}
 '''
 print(note)
 
@@ -18,16 +23,18 @@ for dir in os.listdir(code_dir):
     if(len(files) == 0): continue
     
     print(f'[{dir}]')
+    longestPath = max([len(arquivo) if '.exe' not in arquivo else 0 for arquivo in files])
     for arquivo in files:
         if('.exe' in arquivo): continue
-        print(f"{dir}/{arquivo}\t{arquivo.split('.')[0]}")
+        print(f"{code_dir}/{dir}/{arquivo} {' '*(longestPath-len(arquivo))} {div_char} {arquivo.split('.')[0]}")
                 
     print()
 
 print()
-print("#Extra content - tex files")
+print("## Extra content - tex files ##")
 print('[Extra]')
 
 for arquivo in os.listdir(extra_dir):
+    longestName = max([len(arquivo) if '.exe' not in arquivo else 0 for arquivo in files])
     if(os.path.isfile(os.path.join(extra_dir, arquivo))):
-        print(f"{extra_dir}/{arquivo}\ttex")
+        print(f"{extra_dir}/{arquivo} {' '*(longestPath-len(arquivo))} {div_char}tex")
