@@ -3,8 +3,10 @@
 \usepackage{hyperref}
 \usepackage{fancyhdr}
 \usepackage{listings}
-\usepackage{xcolor}
+\usepackage[table]{xcolor}
 \usepackage{tcolorbox}
+\usepackage{adjustbox}
+\usepackage{mdframed}
 \usepackage{tocloft}
 \usepackage{pdflscape}
 \usepackage{multicol}
@@ -17,6 +19,10 @@
 \usepackage{amsmath} 
 \usepackage{etoolbox}
 \usepackage{needspace}
+
+% Colors of description boxes
+\definecolor{descboxbg}{RGB}{253,253,255}
+\definecolor{blockdescbg}{RGB}{250,250,220}
 
 \tcbuselibrary{listings}
 \tcbuselibrary{breakable, skins} 
@@ -67,12 +73,13 @@
 \lstdefinestyle{txt}{
   style=shared,
 }
+% LATEX DESC
 \lstdefinestyle{description}{
   frame=single,
   xleftmargin=0pt,
   basicstyle=\fontsize{7}{8}\ttfamily,
   rulesepcolor=\color{gray},
-  rulecolor=\color{gray!30},
+  rulecolor=\color{descboxbg},
   frameround=tttt,
   breaklines=true,
   breakatwhitespace=true,
@@ -97,6 +104,34 @@
   top=3pt,
   bottom=3pt,
   boxsep=2pt
+}
+
+% BLOCK_DESC
+\newmdenv[
+  backgroundcolor=blockdescbg,
+  linecolor=gray!30,
+  linewidth=0.4pt,
+  roundcorner=4pt,
+  leftmargin=0pt,
+  rightmargin=0pt,
+  innerleftmargin=4pt,
+  innerrightmargin=4pt,
+  innertopmargin=2pt,
+  innerbottommargin=2pt,
+  skipabove=0pt,
+  skipbelow=1pt,
+  font=\fontsize{6}{7}\ttfamily,
+]{blockdescenv}
+
+\newcommand{\blockdesc}[1]{%
+  \par\vspace{-5pt}
+  \noindent
+  \begin{adjustbox}{minipage=\dimexpr\linewidth-2\fboxsep-2\fboxrule}
+    \begin{blockdescenv}
+      #1
+    \end{blockdescenv}
+  \end{adjustbox}
+  \vspace{1pt}
 }
 
 \pagestyle{fancy}

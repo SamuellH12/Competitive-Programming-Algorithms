@@ -5,7 +5,7 @@ set -e
 g++ -std=c++17 -o genLatex generate_latex.cpp -O2 -lssl -lcrypto
 ./genLatex
 
-pdflatex -quiet -halt-on-error -file-line-error notebook.tex
+pdflatex -halt-on-error -file-line-error notebook.tex
 latexmk -pdf -f -silent notebook.tex
 mv notebook.pdf ../SH12-Notebook.pdf
 rm contents.tex

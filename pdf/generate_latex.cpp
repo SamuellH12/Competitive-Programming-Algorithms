@@ -29,11 +29,14 @@ const string IGNORED_INTERVAL_BGN = "LATEX_IGNORED_BEGIN";
 const string IGNORED_INTERVAL_END = "LATEX_IGNORED_END";
 
 const bool ADD_DESC = true;
-const bool USE_MARKDOWN_IN_DESC = true;
 const string DESC_BGN = "LATEX_DESC_BEGIN";
 const string DESC_END = "LATEX_DESC_END";
-// const string MY_DESC_BGN = "/********";
-// const string MY_DESC_END = "********/";
+
+const bool BLOCK_DESC = true;
+const string BLOCK_DESC_BGN = "BLOCK_DESC_BEGIN";
+const string BLOCK_DESC_END = "BLOCK_DESC_END";
+
+const bool USE_MARKDOWN_IN_DESC = true;
 
 // hash incompleto - não usar
 const bool USE_HASH = false;
@@ -54,6 +57,20 @@ map<char32_t, char> char_changes = {
 };
 
 //// Code Start Here ////
+const string COMMENT_BLOCK_DESC_BGN = R"(/\*+\s*)" + BLOCK_DESC_BGN;
+const string COMMENT_BLOCK_DESC_END = BLOCK_DESC_END + R"(\s*\*+/)";
+
+void remove_whitespace(string& s){
+    while(!s.empty() && (s.back() == '\n' || s.back() == '\t' || s.back() == '\r' || s.back() == ' '))
+        s.pop_back();
+}
+
+void remove_front_whitespace(string& s){
+    int skp = 0;
+    while(skp < s.size() && (s.front() == '\n' || s.front() == '\t' || s.front() == '\r' || s.front() == ' '))
+        skp++;
+    s.erase(0, skp);
+}
 
 void remove_ignored_substrings(string& s) {
     size_t pos = 0;
@@ -85,26 +102,26 @@ void remove_invalid_char(string &line){ // Process UTF-8 characters
     }
 }
 
-string parse_markdown(const string& input){
-    string output = input;
+string parse_markdown(const string& input, bool isBlockDesc = false){
+    string output = input; bool ibd = isBlockDesc;
 
     // Negrito **texto**
-    output = regex_replace(output, regex(R"(\*\*((?:[^*]|\*[^*])+)\*\*)"), "@\\textbf{$1}@"); 
+    output = regex_replace(output, regex(R"(\*\*([^\n\r\t*]+)\*\*)"),  ibd ? "\\textbf{$1}" : "@\\textbf{$1}@"); 
     // Itálico _.texto_.
-    output = regex_replace(output, regex(R"(_\.((?:[^*]|\*[^*])+)_\.)"), "@\\emph{$1}@");
-    // Código inline (usando `texto`)
-    output = regex_replace(output, regex(R"(`([^`]+)`)"), "@\\texttt{$1}@");
+    output = regex_replace(output, regex(R"(_\.([^\n\r\t_]+)_\.)"), ibd ? "\\emph{$1}" : "@\\emph{$1}@");
+    // Código inline (usando `texto`) // não tem boa formatação no pdf
+    // output = regex_replace(output, regex(R"(`([^\n\r\t`]+)`)"), ibd ? "\\mintinline{cpp}{$1}" : "@\\texttt{$1}@"); 
     
     // Potências: x^k
-    output = regex_replace(output, regex(R"(([a-zA-Z])\^([a-zA-Z0-9]+))"), "@$ $1^{$2}$@");
+    output = regex_replace(output, regex(R"(([a-zA-Z])\^([a-zA-Z0-9]+))"), ibd ? "$ $1^{$2}$" : "@$ $1^{$2}$@");
     // Subscritos: x._k
-    output = regex_replace(output, regex(R"(([a-zA-Z])\._([a-zA-Z0-9]+))"), "@$ $1_{$2}$@");
+    output = regex_replace(output, regex(R"(([a-zA-Z])\._([a-zA-Z0-9]+))"), ibd ? "$ $1_{$2}$" : "@$ $1_{$2}$@");
 
     return output;
 }
 
 const string REMOVEENDL = ".\\";
-string convert_description(const string& description) {
+string convert_description(const string& description, bool isBlockDesc = false) {
     string s = "", line;
     stringstream ss(description);
     bool lastSkip = false;
@@ -125,7 +142,7 @@ string convert_description(const string& description) {
         s += line;
     }
 
-    return USE_MARKDOWN_IN_DESC ? parse_markdown(s) : s;
+    return USE_MARKDOWN_IN_DESC ? parse_markdown(s, isBlockDesc) : s;
 }
 
 bool is_comment(string line) {
@@ -143,8 +160,8 @@ bool convert_files(const string& input_path, const string& output_path, string& 
     string content((istreambuf_iterator<char>(in)), istreambuf_iterator<char>());
     in.close();
 
-    bool can_begin = false, isInDesc = false, ignore_interval = false;
-    string processed_content, line;
+    bool can_begin = false, isInDesc = false, ignore_interval = false, isInBlckDesc = false;
+    string processed_content, line, block_desc="";
     description = "";
     size_t pos = 0;
 
@@ -155,8 +172,7 @@ bool convert_files(const string& input_path, const string& output_path, string& 
         pos = (end == string::npos) ? content.size() : end + 1;
 
         bool ignore = false;
-        while(!line.empty() && (line.back() == '\t' || line.back() == '\r')) line.pop_back();
-        bool blank_line = line.empty();
+        remove_whitespace(line);
 
         // pra pegar a descrição
         if(line.find(DESC_BGN) != string::npos) isInDesc = true; //if(line.find(MY_DESC_BGN) != string::npos) isInDesc = true;
@@ -164,6 +180,55 @@ bool convert_files(const string& input_path, const string& output_path, string& 
         if(ignore_interval) ignore = true;
         if(line.find(IGNORED_INTERVAL_END) != string::npos) ignore_interval = false;
 
+        {
+            size_t bgn = line.find(BLOCK_DESC_BGN);
+            size_t end = line.find(BLOCK_DESC_END);
+
+            if(isInBlckDesc && bgn != string::npos){ 
+                cerr << "\n\n\n\n\nError: BLOCK_DESC_BGN found inside another BLOCK_DESC_BGN at" << input_path << "\n\n\n\n\n\n" << endl;
+                return false; 
+            }
+
+            if(bgn != string::npos) line = regex_replace(line, regex(COMMENT_BLOCK_DESC_BGN), BLOCK_DESC_BGN), bgn = line.find(BLOCK_DESC_BGN);
+            if(end != string::npos) line = regex_replace(line, regex(COMMENT_BLOCK_DESC_END), BLOCK_DESC_END), end = line.find(BLOCK_DESC_END);
+            
+            if(bgn != string::npos && end != string::npos){
+                block_desc = line.substr(bgn + BLOCK_DESC_BGN.size(), end - bgn - BLOCK_DESC_BGN.size());
+                line.erase(bgn, end - bgn + BLOCK_DESC_END.size());
+            } 
+            else 
+            if(bgn != string::npos && end == string::npos){
+                isInBlckDesc = true;
+                block_desc = line.substr(bgn + BLOCK_DESC_BGN.size());
+                line.erase(bgn);
+            } 
+            else
+            if(bgn == string::npos && end != string::npos){
+                isInBlckDesc = false;
+                block_desc += (block_desc.empty() ? "" : "\\\\") + line.substr(0, end);
+                line.erase(0, end + BLOCK_DESC_END.size());
+            } 
+            else if(isInBlckDesc){
+                block_desc += line;
+                line.clear();
+            }
+
+            if(end != string::npos){
+                block_desc = convert_description(block_desc, true);
+                remove_whitespace(block_desc);
+                remove_front_whitespace(block_desc);
+                remove_whitespace(processed_content);
+                block_desc = block_desc.empty() ? "\n" : "\n@\\blockdesc{" + block_desc + "}@\n";
+                if(BLOCK_DESC) processed_content += block_desc;
+                else description += block_desc + "\n";
+                can_begin = false;
+                isInBlckDesc = false;
+                block_desc.clear();
+                remove_front_whitespace(line);
+            }
+        }
+
+        bool blank_line = line.empty();
         if(!blank_line)
         for(const auto& pattern : IGNORED_LINES)
             if(line.find(pattern) != string::npos){
@@ -183,8 +248,7 @@ bool convert_files(const string& input_path, const string& output_path, string& 
         processed_content += line + "\n";
     }
 
-    while(!processed_content.empty() && (processed_content.back() == '\n' || processed_content.back() == '\t' || processed_content.back() == ' '))
-        processed_content.pop_back();
+    remove_whitespace(processed_content);
 
     remove_invalid_char(description);
     remove_ignored_substrings(description);

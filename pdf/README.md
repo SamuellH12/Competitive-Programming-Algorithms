@@ -64,10 +64,10 @@ Edite o arquivo [generate_latex.cpp](generate_latex.cpp) para alterar opções c
 
 - **Caracteres alterados**: caracteres latinos como à, ã, é, ç, etc... são alterados para a, e, c e etc, para evitar conflitos com o LaTex e caracteres .
 
-- **Descrição**: O código interpreta trechos do arquivo do código como descrição e adiciona essa descrição no pdf em uma caixa logo antes do código. Mais especificamente trechos entre comentários específicos: ```/*LATEX_DESC_BEGIN  Isso é uma descrição!  LATEX_DESC_END*/```. Para permitir ou não, altere ```bool ADD_DESC = true;```. (cuidado com o IGNORED_LINES, está configurado para ignorar essas linhas). Algumas formatações suportadas (pode ser desabilitado em ```const bool USE_MARKDOWN_IN_DESC = true;```):
+- **Descrição**: O código interpreta trechos do arquivo do código como descrição e adiciona essa descrição no pdf em uma caixa logo *antes* do código. Mais especificamente trechos entre comentários específicos: ```/*LATEX_DESC_BEGIN \n Isso é uma descrição! \n LATEX_DESC_END*/```. Para permitir ou não, altere ```bool ADD_DESC = true;```. (cuidado com o IGNORED_LINES, está configurado para ignorar essas linhas). Algumas formatações suportadas (pode ser desabilitado em ```const bool USE_MARKDOWN_IN_DESC = true;```):
   - **bold** com `**bold**`
   - *Itálico* com `_.Italico_.`
-  - `código inline` com ``` `codigo inline` ```
+  <!-- - `código inline` com ``` `codigo inline` ``` -->
   - Potência `N^2` e subscrito `x._k`
   - Escape char `@` para usar LaTex na descrição. Exemplo:
 ```cpp
@@ -79,6 +79,13 @@ Edite o arquivo [generate_latex.cpp](generate_latex.cpp) para alterar opções c
     \end{center}@
 LATEX_DESC_END*/
 ```
+
+- **Descrição em bloco**: Diferente da descrição normal, a descrição em bloco NÃO é movida para o início, mas permanece na mesma posição relativa, como uma caixinha. ```/*BLOCK_DESC_BEGIN Essa é uma descrição de Bloco! BLOCK_DESC_END*/```. Diferente da descrição, a BLOCK_DESC pode ser definida em uma única linha. Aceita formatação "markdown" como a descrição e trechos em LaTex, *mas SEM o uso do Escape char!!!* A cor pode ser alterada em *notebook.tex*.
+
+<p align="center">
+  <img src="images/block_desc_img.jpg" width="45%" style="margin-right: 10px;"/>
+  <img src="images/latex_desc_img.jpg" width="45%"/>
+</p>
 
 ### ~~Hash~~
 
