@@ -116,7 +116,7 @@ int main(){
 	vector<string> st(100);
 	while(getline(cin, l)){
 		t = l; 
-    for(auto c : l)
+		for(auto c : l)
 			if(c == '{') st.push_back(""); else 
 			if(c == '}') t = st.back() + l, st.pop_back();
 		cout << getHash(t) + " " + l + "\n";
