@@ -56,6 +56,8 @@ Em [notebook.tex](notebook.tex) você pode personalizar configuraçãos do Latex
 
 Edite o arquivo [generate_latex.cpp](generate_latex.cpp) para alterar opções como:
 
+- **Hash**: altere ```bool USE_HASH = true;``` para adicionar ou omitir o hash dos arquivos. Veja mais detalhes na seção Hash.
+
 - **IGNORED_LINES**: ignora **linhas inteiras** com determinados valores de substring (ex: ```#include <bits/stdc++.h>"```, ```"using namespace std;```, ```#define pii pair<int, int>```).Cuidado para não remover algo que você não gostaria que fosse removido.
   
 - **IGNORED_SUBSTRINGS**: ignora substrings específicas no código (ex: ```std::```).
@@ -87,9 +89,43 @@ LATEX_DESC_END*/
   <img src="images/latex_desc_img.jpg" width="45%"/>
 </p>
 
-### ~~Hash~~
+### 💿 Hash
 
-Não consegui terminar os códigos para adicionar o hash das linhas de código na lib. Mas sinta-se a vontade para contribuir.
+Gera um código hash hexadecimal de cada linha do código (3 caracteres por padrão). 
+
+Pode ser usado para conferir se o código foi copiado igual ao que está lib. O hash **ignora comentários, espaçamento e identação**. 
+Além disso em cada linha que possui um ```}``` terá o hash não somente dessa linha, mas **o hash de todo o contexto** referente, desde a linha do ```{``` que abriu esse contexto. Isto é, de tudo que está entre ```{...}```. Assim você pode conferir funções inteiras mais rapidamente. *Útil para códigos complexos e longos*.
+
+Para conferir o hash na hora da prova, copie este código (já adicionado na lib por padrão se USE_HASH) e em seguida execute 
+
+```shell
+g++ hash.cpp -o hash
+hash < codigo.cpp
+```
+
+```cpp
+string getHash(string s, int dig=3){
+  ofstream ip("temp.cpp"); ip << s; ip.close();
+  system("g++ -E -P -dD -fpreprocessed .\\temp.cpp | tr -d '[:space:]' | md5sum > hsh.temp");
+  ifstream f("hsh.temp"); f >> s; f.close();
+  return s.substr(0, dig);
+}
+
+int main(){ 
+	string l, t;
+	vector<string> st(100);
+	while(getline(cin, l)){
+		t = l; 
+    for(auto c : l)
+			if(c == '{') st.push_back(""); else 
+			if(c == '}') t = st.back() + l, st.pop_back();
+		cout << getHash(t) + " " + l + "\n";
+		st.back() += t + "\n";
+	}
+}
+```
+
+<small> * Inspirado e compatível com o Hash utilizado na Lib [brunomaletta/Biblioteca](https://github.com/brunomaletta/Biblioteca/)  </small>
 
 <hr>
 

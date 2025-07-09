@@ -1,7 +1,10 @@
 #include <bits/stdc++.h>
 #include <regex>
+#define t_section tuple<string, string, bool>
 using namespace std;
 
+const bool USE_HASH = true;
+const int HASH_LEN = 3;
 
 const vector<string> IGNORED_LINES = {
     "#include <bits/stdc++.h>",
@@ -38,9 +41,7 @@ const string BLOCK_DESC_END = "BLOCK_DESC_END";
 
 const bool USE_MARKDOWN_IN_DESC = true;
 
-// hash incompleto - não usar
-const bool USE_HASH = false;
-const int HASH_LEN = 3;
+const bool IGNORE_EMPTY_LINES = false;
 
 map<char32_t, char> char_changes = {
     {0x00E7, 'c'}/*ç*/, {0x00E3, 'a'}/*ã*/, {0x00E1, 'a'}/*á*/,
@@ -56,21 +57,28 @@ map<char32_t, char> char_changes = {
     {U'\x2019', '\''}, {U'\x3b1', 'a'}, {U'\x2013', '-'},
 };
 
-//// Code Start Here ////
+//// Code Start Here ///
+#include "hash/md5hsh.cpp"    // Include another hash function if you want to use other
+const string HASH_CODE = "./hash/md5hsh.cpp";  // Path to the hash code that will be used (To put on lib)
+string _get_code_hash_(string code){
+    return getCodeHash(code, HASH_LEN);
+}
+
 const string COMMENT_BLOCK_DESC_BGN = R"(/\*+\s*)" + BLOCK_DESC_BGN;
 const string COMMENT_BLOCK_DESC_END = BLOCK_DESC_END + R"(\s*\*+/)";
 
 void remove_whitespace(string& s){
-    while(!s.empty() && (s.back() == '\n' || s.back() == '\t' || s.back() == '\r' || s.back() == ' '))
+    while(!s.empty() && isspace(s.back()))
         s.pop_back();
 }
 
 void remove_front_whitespace(string& s){
     int skp = 0;
-    while(skp < s.size() && (s.front() == '\n' || s.front() == '\t' || s.front() == '\r' || s.front() == ' '))
+    while(skp < s.size() && isspace(s[skp]))
         skp++;
     s.erase(0, skp);
 }
+
 
 void remove_ignored_substrings(string& s) {
     size_t pos = 0;
@@ -153,7 +161,8 @@ bool is_comment(string line) {
 	if (line.size() >= 2 and line.substr(0, 2) == "/*") comment = true;
 	return comment;
 }
- 
+
+const string BLOCK_DESC_MARK = "BLOCK_DESC_MARK\n";
 bool convert_files(const string& input_path, const string& output_path, string& description, bool PRINT_HASH = false){
     ifstream in(input_path, ios::binary);
     if(!in){ cerr << "Error opening input file: " << input_path << endl; return false; }
@@ -161,6 +170,7 @@ bool convert_files(const string& input_path, const string& output_path, string& 
     in.close();
 
     bool can_begin = false, isInDesc = false, ignore_interval = false, isInBlckDesc = false;
+    vector<string> block_descs, block_desc_desc;
     string processed_content, line, block_desc="";
     description = "";
     size_t pos = 0;
@@ -219,8 +229,14 @@ bool convert_files(const string& input_path, const string& output_path, string& 
                 remove_front_whitespace(block_desc);
                 remove_whitespace(processed_content);
                 block_desc = block_desc.empty() ? "\n" : "\n@\\blockdesc{" + block_desc + "}@\n";
-                if(BLOCK_DESC) processed_content += block_desc;
-                else description += block_desc + "\n";
+                if(isInDesc){
+                    block_desc_desc.emplace_back(block_desc),
+                    description += BLOCK_DESC_MARK;
+                }
+                else {
+                    block_descs.emplace_back(block_desc);
+                    processed_content += "\n" + BLOCK_DESC_MARK;
+                }
                 can_begin = false;
                 isInBlckDesc = false;
                 block_desc.clear();
@@ -238,6 +254,7 @@ bool convert_files(const string& input_path, const string& output_path, string& 
 
         if(ADD_DESC && isInDesc && !ignore){ description += line + "\n"; continue; }
         if(line.find(DESC_END) != string::npos) isInDesc = false; //if(line.find(MY_DESC_END) != string::npos) isInDesc = false;
+        if(IGNORE_EMPTY_LINES && blank_line) continue;
 
         if(!ignore && !blank_line) can_begin = true;
         if(!can_begin || ignore) continue;
@@ -254,7 +271,21 @@ bool convert_files(const string& input_path, const string& output_path, string& 
     remove_ignored_substrings(description);
     description = convert_description(description);
 
-    // if(PRINT_HASH) processed_content = get_file_hash(processed_content);
+    if(PRINT_HASH) processed_content = _get_code_hash_(processed_content);
+    
+    for(auto blck : block_descs){
+        auto bgn = processed_content.find(BLOCK_DESC_MARK);
+        int sz = BLOCK_DESC_MARK.size();
+        while(bgn > 0 && processed_content[bgn] != '\n') bgn--, sz++;
+        processed_content.replace(bgn, sz, blck);
+    }
+
+    for(auto blck : block_desc_desc){
+        auto bgn = description.find(BLOCK_DESC_MARK);
+        int sz = BLOCK_DESC_MARK.size();
+        while(bgn > 0 && description[bgn] != '\n') bgn--, sz++;
+        description.replace(bgn, sz, blck);
+    }
 
     // Ensure output directory exists
     filesystem::path out_path(output_path);
@@ -281,19 +312,19 @@ string get_style(const string& filename) {
     return "txt";
 }
 
-string get_tex(const vector<pair<string, vector<pair<string, string>>>>& sections, bool PRINT_HASH=false) {
+string get_tex(const vector<pair<string, vector<t_section>>>& sections) {
     string tex, description;
     for(auto& [section_name, subsections] : sections) if(!subsections.empty()){
         tex += "\\section{" + section_name + "}\n";
         
-        for(auto [filename, subsection_name] : subsections){
+        for(auto [filename, subsection_name, file_hash] : subsections){
             cout << get_style(filename) + "\t| " << filename << endl;
             if(get_style(filename) == "tex"){ tex += "\\input{" + filename + "}\n"; continue; }
             
             string newpath = "./temp/" + filename, full_path = filename;;
-            newpath = regex_replace(newpath, regex(R"(\.\./)"), ""); // remove qualquer ../ de newpath
+            newpath = regex_replace(newpath, regex(R"(\.\./|\./)"), ""); // remove qualquer ../ ou ./ de newpath
 
-            if(convert_files(full_path, newpath, description, PRINT_HASH)) 
+            if(convert_files(full_path, newpath, description, USE_HASH&&file_hash&&get_style(filename)=="cpp"))
                 full_path = newpath;
 
             tex += "\\vspace{-2pt}\n";
@@ -315,8 +346,8 @@ string get_tex(const vector<pair<string, vector<pair<string, string>>>>& section
     return tex;
 }
 
-vector<pair<string, vector<pair<string, string>>>> get_sections() {
-    vector<pair<string, vector<pair<string, string>>>> sections;
+vector<pair<string, vector<t_section>>> get_sections() {
+    vector<pair<string, vector<t_section>>> sections;
     
     ifstream f("contents.txt", ios::binary); // For UTF-16 handling on Windows
 
@@ -339,7 +370,7 @@ vector<pair<string, vector<pair<string, string>>>> get_sections() {
         if(line.empty()) continue;
         if(line.find('#') < line.size()) continue;
 
-        if(line[0] == '[') sections.emplace_back(line.substr(1, line.size() - 2), vector<pair<string, string>>());
+        if(line[0] == '[') sections.emplace_back(line.substr(1, line.size() - 2), vector<t_section>());
         else {
             size_t div_pos = line.find(div_char);
             if (div_pos >= line.size()) {
@@ -348,18 +379,21 @@ vector<pair<string, vector<pair<string, string>>>> get_sections() {
                 continue;
             }
             
+            bool file_hash = true;
+            if(line.find('@') < line.size()) file_hash = false, line[line.find('@')] = ' ';
+
             string filename = line.substr(0, div_pos);   
-            while(!filename.empty() && (filename.back() == ' ' || filename.back() == '\t')) filename.pop_back();
+            while(!filename.empty() && isspace(filename.back())) filename.pop_back();
             string subsection_name = line.substr(div_pos + 1);
-            while(!subsection_name.empty() && (subsection_name.back()  == ' ' || subsection_name.back()  == '\t')) subsection_name.pop_back();
-            while(!subsection_name.empty() && (subsection_name.front() == ' ' || subsection_name.front() == '\t')) subsection_name.erase(0, 1);
+            remove_whitespace(subsection_name);
+            remove_front_whitespace(subsection_name);
 
             if(sections.empty()) {
                 cerr << "Subsection given without section {" << line << "} " << line.size() << endl;
                 continue;
             }
             
-            sections.back().second.emplace_back(filename, subsection_name);
+            sections.back().second.push_back(t_section({filename, subsection_name, file_hash}));
         }
     }
     
@@ -369,7 +403,19 @@ vector<pair<string, vector<pair<string, string>>>> get_sections() {
 
 int main(){    
     auto sections = get_sections();
-    string tex = get_tex(sections, USE_HASH);
+
+    if(USE_HASH)
+    {
+        bool added_hash = false;
+        for(auto& [section_name, subsections] : sections)
+            if(section_name == "Extra")
+                subsections.push_back(t_section({HASH_CODE, "Hash Function", true})),
+                added_hash = true;
+        if(!added_hash) 
+            sections.emplace_back("Extra", vector<t_section>({t_section({HASH_CODE, "Hash Function", true})}));
+    }
+
+    string tex = get_tex(sections);
     
     ofstream out("contents.tex");
     if(out.is_open()) out << tex;
@@ -380,65 +426,3 @@ int main(){
     
     return 0;
 }
-
-
-
-/*
-// #include <openssl/evp.h>
-// compute MD5 hash of a string
-string compute_md5_hash(const string& content, int size) {
-    unsigned char digest[EVP_MAX_MD_SIZE];
-    unsigned int digest_len;
-
-    EVP_MD_CTX* mdctx = EVP_MD_CTX_new();
-    EVP_DigestInit_ex(mdctx, EVP_md5(), nullptr);
-    EVP_DigestUpdate(mdctx, content.c_str(), content.size());
-    EVP_DigestFinal_ex(mdctx, digest, &digest_len);
-    EVP_MD_CTX_free(mdctx);
-
-    char mdString[33];
-    for (unsigned int i = 0; i < 16; i++)
-        sprintf(&mdString[i*2], "%02x", (unsigned int)digest[i]);
-
-    mdString[32] = '\0';
-    return string(mdString).substr(0, size);
-}
-
-string get_hash_arquivo(string &s, int size, int l = 0, int r = 1e9) {
-    stringstream ss(s);
-    string content = "", line;
-    
-    // Lê apenas o intervalo especificado
-    for (int i = 0; i <= r; i++){
-        if (!getline(ss, line)) break;
-        if (i >= l) content += line + "\n";
-    }
-    return compute_md5_hash(content, size);
-}
-
-
-// Process content and add hashes
-string get_file_hash(string& content){
-    stringstream ss(content);
-    string line, output = "";
-	int depth = 0;
-	stack<int> st;
-
-	for(int line_idx = 0; getline(ss, line); line_idx++){
-		int start_line = line_idx;
-
-        for (char c : line)
-			if (c == '{') depth++, st.push(line_idx); else
-			if (c == '}') depth--, start_line = st.top(), st.pop();
-
-        string hash = "";
-        if(!is_comment(line)) hash = get_hash_arquivo(content, HASH_LEN, start_line, line_idx);
-        else if(depth != 0) hash = string(HASH_LEN + 1, ' ');
-        
-        output += hash + " " + line + "\n";
-    }
-
-    return output;
-}
-
-*/

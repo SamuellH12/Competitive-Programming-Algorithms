@@ -13,6 +13,8 @@ mv notebook.tex _notebook.tex
 rm notebook.*
 mv _notebook.tex notebook.tex
 rm genLatex.exe
+mv hsh.temp ./temp/h
+mv temp.cpp ./temp/h
 rm ./temp -r
 
 echo "
