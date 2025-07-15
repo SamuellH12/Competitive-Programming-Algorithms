@@ -3,10 +3,10 @@
 using namespace std;
 
 string getHash(string s, int dig=3){
-    ofstream ip("temp.cpp"); 
-    ip.sync_with_stdio(false); // LATEX_IGNORED_LINE
-    ip << s; ip.close();
-	system("g++ -E -P -dD -fpreprocessed .\\temp.cpp | tr -d '[:space:]' | md5sum > hsh.temp");
+	ofstream ip("temp.cpp"); 
+	ip.sync_with_stdio(false); // LATEX_IGNORED_LINE
+	ip << s; ip.close();
+	system("g++ -E -P -dD -fpreprocessed ./temp.cpp | tr -d '[:space:]' | md5sum > hsh.temp");
 	ifstream f("hsh.temp"); f >> s; f.close();
 	for(auto&c:s)if('a'<=c)c^=32; //optional
 	return s.substr(0, dig);
