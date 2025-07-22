@@ -22,11 +22,15 @@ To generate a new PDF see [PFD](./pdf/README.md).
 - [SegTreePersistente2x](./Library/Data%20Structures/SegTreePersistente2x.cpp)
 - [SparseTable](./Library/Data%20Structures/SparseTable.cpp)
 
-### Geometry
+### Strings
 
-- [ConvexHull](./Library/Geometry/ConvexHull.cpp)
-- [Geometry - General](./Library/Geometry/Geometry%20-%20General.cpp)
-- [LineContainer](./Library/Geometry/LineContainer.cpp)
+- [KMP](./Library/Strings/KMP.cpp)
+- [Manacher](./Library/Strings/Manacher.cpp)
+- [Z-Function](./Library/Strings/Z-Function.cpp)
+- [ahoCorasick](./Library/Strings/ahoCorasick.cpp)
+- [hash](./Library/Strings/hash.cpp)
+- [hash2](./Library/Strings/hash2.cpp)
+- [trie](./Library/Strings/trie.cpp)
 
 ### Grafos
 
@@ -46,18 +50,11 @@ To generate a new PDF see [PFD](./pdf/README.md).
 - [SCC - Kosaraju](./Library/Grafos/SCC%20-%20Kosaraju.cpp)
 - [Tarjan](./Library/Grafos/Tarjan.cpp)
 
-### Math
+### Geometry
 
-- [fexp](./Library/Math/fexp.cpp)
-
-### Strings
-
-- [KMP](./Library/Strings/KMP.cpp)
-- [Manacher](./Library/Strings/Manacher.cpp)
-- [Z-Function](./Library/Strings/Z-Function.cpp)
-- [hash](./Library/Strings/hash.cpp)
-- [hash2](./Library/Strings/hash2.cpp)
-- [trie](./Library/Strings/trie.cpp)
+- [ConvexHull](./Library/Geometry/ConvexHull.cpp)
+- [Geometry - General](./Library/Geometry/Geometry%20-%20General.cpp)
+- [LineContainer](./Library/Geometry/LineContainer.cpp)
 
 ### dp
 
@@ -65,6 +62,11 @@ To generate a new PDF see [PFD](./pdf/README.md).
 - [LCS](./Library/dp/LCS.cpp)
 - [LIS](./Library/dp/LIS.cpp)
 - [SOS DP](./Library/dp/SOS%20DP.cpp)
+
+### Math
+
+- [CRT](./Library/Math/CRT.cpp)
+- [fexp](./Library/Math/fexp.cpp)
 
 ### others
 
