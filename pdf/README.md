@@ -104,16 +104,16 @@ hash < codigo.cpp
 ```
 
 ```cpp
-string getHash(string s, int dig=3){
+string getHash(string s){
   ofstream ip("temp.cpp"); ip << s; ip.close();
-  system("g++ -E -P -dD -fpreprocessed .\\temp.cpp | tr -d '[:space:]' | md5sum > hsh.temp");
+  system("g++ -E -P -dD -fpreprocessed ./temp.cpp | tr -d '[:space:]' | md5sum > hsh.temp");
   ifstream f("hsh.temp"); f >> s; f.close();
-  return s.substr(0, dig);
+  return s.substr(0, 3);
 }
 
 int main(){ 
 	string l, t;
-	vector<string> st(100);
+	vector<string> st(10);
 	while(getline(cin, l)){
 		t = l; 
 		for(auto c : l)
