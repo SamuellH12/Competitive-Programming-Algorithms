@@ -27,7 +27,7 @@ int main(){
 #endif //LATEX_IGNORED_LINE
 /*LATEX_DESC_BEGIN
 Call
-BLOCK_DESC_BEGIN g++ hash.cpp -o hash \\ hash < code.cpp BLOCK_DESC_END to get the hash of the code.
+BLOCK_DESC_BEGIN g++ hash.cpp -o hash \\ ./hash < code.cpp BLOCK_DESC_END to get the hash of the code.
 
 The hash ignores comments and whitespaces.
 The hash of a line whith } is the hash of all the code since the { that opens it. (is the hash of that context) 
