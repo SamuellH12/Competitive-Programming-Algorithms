@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 #define ll long long
 using namespace std;
+#ifdef MAINFILE //LATEX_IGNORED_LINE
 
 string getHash(string s){
 	ofstream ip("temp.cpp"); ip << s; ip.close();
@@ -9,7 +10,7 @@ string getHash(string s){
 	return s.substr(0, 3);
 }
 
-int main_(){ 
+int main(){ 
 	string l, t;
 	vector<string> st(10);
 	while(getline(cin, l)){
@@ -23,6 +24,7 @@ int main_(){
     return 0; //LATEX_IGNORED_LINE
 }
 
+#endif //LATEX_IGNORED_LINE
 /*LATEX_DESC_BEGIN
 Call
 BLOCK_DESC_BEGIN g++ hash.cpp -o hash \\ hash < code.cpp BLOCK_DESC_END to get the hash of the code.

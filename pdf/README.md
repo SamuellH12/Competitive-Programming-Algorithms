@@ -3,7 +3,7 @@
 Para gerar o pdf execute o script shell.
 
 ```shell
-sh .\generate_pdf.sh
+sh ./generate_pdf.sh
 ```
 
 Necessário que haja suporte para C++ e [latexmk](https://www.ctan.org/pkg/latexmk/)!
@@ -22,7 +22,7 @@ Para remover algum dos códigos do PDF, remova ou comente a linha dele com ```#`
 
 Para gerar novamente a lista com todos os códigos e extras, rode:
 ```shell
-python3 .\getContents.py > .\contents.txt
+python3 ./getContents.py > ./contents.txt
 ```
 
 ## 📚 Extras
@@ -41,14 +41,14 @@ Você também pode adicionar seu arquivo tex diretamente na pasta de códigos. N
 
 - [getContents.py](getContents.py): Altere ```code_dir = "../Library"``` para o path relativo dos seus códigos. **Lembre de rodar o getContents antes para ter a lista com os seus códigos!** <sup><sub>Confira também o arquivo para ver se todos os códigos que você quer estão lá e para remover coisas que você não quer que entrem.</sub></sup>
 
-- [notebook.tex](notebook.tex): Se quiser mudar a quantidade de colunas, altere ```\begin{multicols*}{3}``` na linha ```119```. Mude também essas opções de títulos do seu PDF.
+- [notebook.tex](notebook.tex): Se quiser mudar a quantidade de colunas, altere ```\begin{multicols*}{3}``` na linha ```119```. Mude também essas opções de títulos do seu PDF e coloque o símbolo da sua universidade.
 ```tex
 \fancyhead[L]{Universidade Federal de Pernambuco - SamuellH12} %line 103
 \fancyhead[L]{Universidade Federal de Pernambuco - SamuellH12} %line 108
 \title{\vspace{-4ex}\Large{SamuellH12 - ICPC Library}} %line 113
 ```
 
-- Opcional [generate_pdf.sh](generate_pdf.sh): O pdf gerado está sendo renomeado e movido para a pasta parent da atual. ```mv notebook.pdf ../SH12-Notebook.pdf``` (obs: só não mantenha como notebook.pdf)
+- Opcional [generate_pdf.sh](generate_pdf.sh): O pdf gerado está sendo renomeado e movido para a pasta parent da atual. ```mv notebook.pdf ../Notebook.pdf``` (obs: só não mantenha como notebook.pdf)
 
 ### :wrench: Outras personalizações
 
@@ -104,16 +104,16 @@ hash < codigo.cpp
 ```
 
 ```cpp
-string getHash(string s, int dig=3){
+string getHash(string s){
   ofstream ip("temp.cpp"); ip << s; ip.close();
-  system("g++ -E -P -dD -fpreprocessed .\\temp.cpp | tr -d '[:space:]' | md5sum > hsh.temp");
-  ifstream f("hsh.temp"); f >> s; f.close();
-  return s.substr(0, dig);
+  system("g++ -E -P -dD -fpreprocessed ./temp.cpp | tr -d '[:space:]' | md5sum > hsh.temp");
+  ifstream fo("hsh.temp"); fo >> s; fo.close();
+  return s.substr(0, 3);
 }
 
 int main(){ 
 	string l, t;
-	vector<string> st(100);
+	vector<string> st(10);
 	while(getline(cin, l)){
 		t = l; 
 		for(auto c : l)

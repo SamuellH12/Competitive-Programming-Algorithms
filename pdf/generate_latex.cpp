@@ -215,7 +215,7 @@ bool convert_files(const string& input_path, const string& output_path, string& 
             else
             if(bgn == string::npos && end != string::npos){
                 isInBlckDesc = false;
-                block_desc += (block_desc.empty() ? "" : "\\\\") + line.substr(0, end);
+                block_desc += (block_desc.empty() ? "" : "\\\\\n") + line.substr(0, end);
                 line.erase(0, end + BLOCK_DESC_END.size());
             } 
             else if(isInBlckDesc){
