@@ -5,7 +5,7 @@ using namespace std;
 
 ll modinverse(ll a, ll b, ll s0 = 1, ll s1 = 0) { return b == 0 ? s0 : modinverse(b, a % b, s1, s0 - s1 * (a / b)); }
 ll mul(ll a, ll b, ll m) {
-    ll q = (long double) a * (long double) b / (long double) m;
+    ll q = (ld) a * (ld) b / (ld) m;
     ll r = a * b - q * m;
     return (r + m) % m;
 }

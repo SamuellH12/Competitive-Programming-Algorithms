@@ -67,6 +67,14 @@ private:
 	}
 	bool inSubtree(int u, int v){ return tin[u] <= tin[v] && tin[v] < tin[u] + sz[u]; } 
 	//query/update_subtree[tin[u]+EDGE, tin[u]+sz[u]-1];
+	vector<pair<int, int>> pathToAncestor(int u, int a){
+        vector<pair<int, int>> ans;
+        while(nxt[u] != nxt[a])
+            ans.emplace_back(tin[nxt[u]], tin[u]),
+            u = parent[nxt[u]];
+        ans.emplace_back(tin[a], tin[u]);
+        return ans;
+    }
 };
 
 /*LATEX_DESC_BEGIN***************************
