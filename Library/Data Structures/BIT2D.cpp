@@ -20,16 +20,8 @@ struct BIT2D {
 		return sum;
 	}
 
-	void updateArea(int xi, int yi, int xf, int yf, int val){
-		update(xi,   yi,    val); 
-		update(xf+1, yi,   -val); 
-		update(xi,   yf+1, -val);
-		update(xf+1, yf+1,  val);
-	}
-
-	int queryArea(int xi, int yi, int xf, int yf){
-		return query(xf, yf) - query(xf, yi-1) - query(xi-1, yf) + query(xi-1, yi-1);
-	}
+	void updateArea(int xi, int yi, int xf, int yf, int val); //Same of BIT2DSparse
+	int queryArea(int xi, int yi, int xf, int yf); //Same of BIT2DSparse
 };
 
 /*LATEX_DESC_BEGIN***************************

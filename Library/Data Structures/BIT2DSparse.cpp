@@ -18,9 +18,7 @@ struct BIT2D {
 		bit.resize(ord.size() + 1);
 		coord.resize(ord.size() + 1);
 
-		sort(begin(pts), end(pts), [&](pii &a, pii &b){
-			return a.second < b.second;
-		});
+		sort(begin(pts), end(pts), [&](pii &a, pii &b){ return a.second < b.second; });
 
 		for(auto [x, y] : pts)
 			for(int i=upper(ord, x); i < bit.size(); i += i&-i)
@@ -68,4 +66,4 @@ IMPORTANTE! **Offline!**
 BIT2D(pts);   // pts -> vecotor<pii> com todos os pontos em que serão feitas queries ou updates
 
 Credits: TFG (TFG50 on Git: https://github.com/tfg50/Competitive-Programming/blob/master/Biblioteca/Data%20Structures/Bit2D.cpp)
-	*****************************LATEX_DESC_END*/
+*****************************LATEX_DESC_END*/
