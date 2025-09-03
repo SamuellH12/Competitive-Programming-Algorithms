@@ -66,8 +66,13 @@ private:
 
 /*LATEX_DESC_BEGIN***************************
 2 SAT - Two Satisfiability Problem
-
-IMPORTANTE! o grafo deve estar 0-indexado!
 Retorna uma valoração verdadeira se possível ou um vetor vazio se impossível;
 inverso de u = ~u
+@\vspace{-16pt}\begin{center}\begin{tabular}{|| c c || c | c | c | c | c | c | c ||}
+A & B & OR & AND & NOR & NAND & XOR & XNOR & IMPLY \\
+0 & 0 &  0 &  0  &  1  &  1   &  0  &  1   &   1   \\
+0 & 1 &  1 &  0  &  0  &  1   &  1  &  0   &   1   \\
+1 & 0 &  1 &  0  &  0  &  1   &  1  &  0   &   0   \\
+1 & 1 &  1 &  1  &  0  &  0   &  0  &  1   &   1   \\
+\end{tabular}\end{center}@
 *****************************LATEX_DESC_END*/
