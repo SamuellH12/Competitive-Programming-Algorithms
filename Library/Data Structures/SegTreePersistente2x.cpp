@@ -85,4 +85,11 @@ Build:  O(N)  !!! Sempre chame o Build
 Query:  O(log N)
 Update: O(log N)
 Kth:	O(Log N)
+
+Comportamento do K-th(SegL, SegR, 1, N, K):
+	-> Retorna índice da primeira posição i cuja soma de prefixos [1, i] é >= k na Seg resultante da subtração dos valores da (Seg R) - (Seg L).
+	-> Pode ser utilizada para consultar o K-ésimo menor valor no intervalo [L, R] de um array. 
+	A Seg deve ser utilizada como um array de frequências. Comece com a Seg zerada (Build). 
+	Para cada valor V do Array chame um update(roots.back(), 1, N, V, 1) e guarde o ponteiro da seg.
+	Consultar o K-ésimo menor valor de [L, R]: chame kth(roots[L-1], roots[R]);
 *****************************LATEX_DESC_END*/

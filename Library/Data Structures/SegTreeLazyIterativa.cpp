@@ -3,6 +3,7 @@ using namespace std;
 
 template<typename T> struct SegTree {
 	int n, h;
+	T NEUTRO = 0;
 	vector<T> seg, lzy;
 	vector<int> sz;
 	T join(T&l, T&r){ return l + r; }
@@ -11,7 +12,7 @@ template<typename T> struct SegTree {
 		n = _n;
 		h = 32 - __builtin_clz(n);
 		seg.resize(2*n);
-		lzy.resize(n);
+		lzy.assign(n, NEUTRO);
 		sz.resize(2*n, 1);
 		for(int i=n-1; i; i--) sz[i] = sz[i*2] + sz[i*2+1];
 		// for(int i=0; i<n; i++) seg[i+n] = base[i];
@@ -19,7 +20,7 @@ template<typename T> struct SegTree {
 	}
 
 	void apply(int p, T v){
-		seg[p] += v * sz[p];
+		seg[p] += v * sz[p]; // cumulative?
 		if(p < n) lzy[p] += v;
 	}
 	void push(int p){
@@ -27,7 +28,7 @@ template<typename T> struct SegTree {
 			if(lzy[i] != 0) { 
 				apply(i*2,   lzy[i]);
 				apply(i*2+1, lzy[i]);
-				lzy[i] = 0; //NEUTRO
+				lzy[i] = NEUTRO; //NEUTRO
 			}
 	}
 	void build(int p) {
@@ -40,11 +41,11 @@ template<typename T> struct SegTree {
 	T query(int l, int r){ //[L, R] & [0, n-1]
 		l+=n, r+=n+1; 
 		push(l); push(r-1);
-		
-		T ans = 0; //NEUTRO
+	
+		T lp = NEUTRO, rp = NEUTRO; //NEUTRO
 		for(; l<r; l/=2, r/=2){
-			if(l&1) ans = join(seg[l++], ans);
-			if(r&1) ans = join(ans, seg[--r]);
+			if(l&1) lp = join(lp, seg[l++]);
+			if(r&1) rp = join(seg[--r], rp);
 		}
 		return ans;
 	}

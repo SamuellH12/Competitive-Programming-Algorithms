@@ -1,12 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-#define pii pair<int, int>
+#define ll long long
+#define pii pair<ll, ll>
 #define upper(v, x) (upper_bound(begin(v), end(v), x) - begin(v)) 
 
 struct BIT2D {
-	vector<int> ord;
-	vector<vector<int>> bit, coord;
+	vector<ll> ord;
+	vector<vector<ll>> bit, coord;
 
 	BIT2D(vector<pii> pts){
 		sort(begin(pts), end(pts));
@@ -28,29 +28,29 @@ struct BIT2D {
 		for(int i=0; i<bit.size(); i++) bit[i].assign(coord[i].size()+1, 0);
 	}
 
-	void update(int X, int Y, int v){
+	void update(ll X, ll Y, ll v){
 		for(int i = upper(ord, X); i<bit.size(); i += i&-i)
 			for(int j = upper(coord[i], Y); j < bit[i].size(); j += j&-j)
 				bit[i][j] += v;
 	}
 
-	int query(int X, int Y){
-		int sum = 0;
+	ll query(ll X, ll Y){
+		ll sum = 0;
 		for(int i = upper(ord, X); i > 0; i -= i&-i)
 			for(int j = upper(coord[i], Y); j > 0; j -= j&-j)
 				sum += bit[i][j];
 		return sum;
 	}
 
-	void updateArea(int xi, int yi, int xf, int yf, int val){
-		update(xi,   yi,    val); 
-		update(xf+1, yi,   -val); 
-		update(xi,   yf+1, -val);
-		update(xf+1, yf+1,  val);
+	ll queryArea(ll xi, ll yi, ll xf, ll yf){
+		return query(xf, yf) - query(xf, yi-1) - query(xi-1, yf) + query(xi-1, yi-1);
 	}
 
-	int queryArea(int xi, int yi, int xf, int yf){
-		return query(xf, yf) - query(xf, yi-1) - query(xi-1, yf) + query(xi-1, yi-1);
+	void updateArea(ll xi, ll yi, ll xf, ll yf, ll val){ // OPTIONAL
+		update(xi,   yi,    val);  // DOESN'T UPDATE AN AREA!!!
+		update(xf+1, yi,   -val);  // It is like: bit1d.update(l-1, -v), bit1d.update(r, +v)
+		update(xi,   yf+1, -val);  // so you can do like bit1d.query(i) to see the value "at" i
+		update(xf+1, yf+1,  val);  // in this case, call bit2d.query(X, Y)
 	}
 };
 
@@ -64,6 +64,5 @@ Recebe o conjunto de pontos que serão usados para fazer os updates e as queries
 IMPORTANTE! **Offline!**
 
 BIT2D(pts);   // pts -> vecotor<pii> com todos os pontos em que serão feitas queries ou updates
-
 Credits: TFG (TFG50 on Git: https://github.com/tfg50/Competitive-Programming/blob/master/Biblioteca/Data%20Structures/Bit2D.cpp)
 *****************************LATEX_DESC_END*/
