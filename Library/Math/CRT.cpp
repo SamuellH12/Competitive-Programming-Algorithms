@@ -3,10 +3,10 @@
 #define ld long double
 using namespace std;
 
-ll modinverse(ll a, ll b, ll s0 = 1, ll s1 = 0) { return b == 0 ? s0 : modinverse(b, a % b, s1, s0 - s1 * (a / b)); }
-ll mul(ll a, ll b, ll m) {
-    ll q = (ld) a * (ld) b / (ld) m;
-    ll r = a * b - q * m;
+ll modinv(ll a, ll b, ll s0=1, ll s1=0){ return b == 0 ? s0 : modinv(b, a%b, s1, s0 - s1 * (a/b)); }
+ll mul(ll a, ll b, ll m){
+    ll q = (ld)a*(ld)b / (ld)m;
+    ll r = a*b - q*m;
     return (r + m) % m;
 }
 
@@ -23,7 +23,7 @@ struct Equation {
         valid = true;
         mod = a.mod * (b.mod / g);
         ans = a.ans;
-        ans += mul( mul(a.mod,  modinverse(a.mod, b.mod), mod),   (b.ans - a.ans) / g, mod);    
+        ans += mul( mul(a.mod,  modinv(a.mod, b.mod), mod),   (b.ans - a.ans) / g, mod);    
         
         ans = (ans % mod + mod) % mod;
     }
