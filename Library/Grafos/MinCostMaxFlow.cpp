@@ -2,22 +2,22 @@
 using namespace std;
 #define ll long long
 
-struct Aresta {
+struct Edge {
 	int u, v; ll cap, cost;
-	Aresta(int u, int v, ll cap, ll cost) : u(u), v(v), cap(cap), cost(cost) {}
+	Edge(int u, int v, ll cap, ll cost) : u(u), v(v), cap(cap), cost(cost) {}
 };
 
 struct MCMF {
 	const ll INF = numeric_limits<ll>::max();
-	int n, source, sink;
+	int n, src, snk;
 	vector<vector<int>> adj;
-	vector<Aresta> edges;
+	vector<Edge> edges;
 	vector<ll> dist, pot;
 	vector<int> from;
 
-	MCMF(int n, int source, int sink) : n(n), source(source), sink(sink) { adj.resize(n); pot.resize(n); }
+	MCMF(int n, int src, int snk) : n(n), src(src), snk(snk) { adj.resize(n); pot.resize(n); }
 
-	void addAresta(int u, int v, ll cap, ll cost){
+	void addEdge(int u, int v, ll cap, ll cost){
 		adj[u].push_back(edges.size());
 		edges.emplace_back(u, v, cap, cost);
 
@@ -32,8 +32,8 @@ struct MCMF {
 		from.assign(n, -1);
 		vis.assign(n, false);
 
-		q.push(source);
-		dist[source] = 0;
+		q.push(src);
+		dist[src] = 0;
 
 		while(!q.empty()){
 			int u = q.front();
@@ -58,17 +58,17 @@ struct MCMF {
 			if(dist[u] < INF) 
 				pot[u] += dist[u];
 
-		return dist[sink] < INF;
+		return dist[snk] < INF;
 	}
 
 	pair<ll, ll> augment(){
-		ll flow = edges[from[sink]].cap, cost = 0; //fixed flow: flow = min(flow, remainder)
+		ll flow = edges[from[snk]].cap, cost = 0; //fixed flow: flow = min(flow, remainder)
 
-		for(int v=sink; v != source; v = edges[from[v]].u)
+		for(int v=snk; v != src; v = edges[from[v]].u)
 			flow = min(flow, edges[from[v]].cap), 
 			cost += edges[from[v]].cost;
 		
-		for(int v=sink; v != source; v = edges[from[v]].u)
+		for(int v=snk; v != src; v = edges[from[v]].u)
 			edges[from[v]].cap   -= flow,
 			edges[from[v]^1].cap += flow;
 
