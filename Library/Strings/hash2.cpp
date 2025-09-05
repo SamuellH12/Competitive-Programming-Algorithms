@@ -37,8 +37,7 @@ struct StringHash{
     }
 };
 
-int firstDiff(StringHash& a, int la, int ra, StringHash& b, int lb, int rb)
-{
+int firstDiff(StringHash& a, int la, int ra, StringHash& b, int lb, int rb){
 	int l=0, r=min(ra-la, rb-lb), diff=r+1;	
 	while(l <= r){	
 		int m = (l+r)/2;
