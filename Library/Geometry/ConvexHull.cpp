@@ -1,7 +1,17 @@
 #include "Point.cpp" //LATEX_IGNORED_LINE
+#include "Segment.cpp" //LATEX_IGNORED_LINE
 using namespace std;
 
-// Colinear? Mude >= 0 para > 0 nos while
+/*LATEX_DESC_BEGIN***************************
+@\begin{minipage}{0.4\textwidth}
+Given a vector of points, return the convex hull in CCW order. \\
+A convex hull is the smallest convex polygon that contains all the points.
+\end{minipage}\hfill \begin{minipage}{0.05\textwidth} \includegraphics[height=4\baselineskip]{geometry/ConvexHull} \end{minipage} @ 
+
+If you want colinear points in border, change the >=0 to >0 in the while's. 
+**WARNING:**if collinear and all input PT are collinear, may have duplicated points (the round trip)
+*****************************LATEX_DESC_END*/
+
 vector<PT> ConvexHull(vector<PT> pts, bool sorted=false){
 	if(!sorted) sort(begin(pts), end(pts));
 	pts.resize(unique(begin(pts), end(pts)) - begin(pts));
@@ -21,10 +31,26 @@ vector<PT> ConvexHull(vector<PT> pts, bool sorted=false){
 	h.resize(s-1);
 	return h;
 } //PT operators needed: {- % == <}
-/*BLOCK_DESC_BEGIN **WARNING:** if collinear and all input PT are collinear, may have duplicated points (the round trip) BLOCK_DESC_END*/
 
-/*BLOCK_DESC_BEGIN Check if a point is inside convex hull BLOCK_DESC_END*/
-bool isInside(const std::vector<PT> &h, PT p) {
+/*BLOCK_DESC_BEGIN Check **if a point is inside convex hull** (CCW, no collinear). 
+If strict == true, then pt on boundary return false
+O(log N)
+BLOCK_DESC_END*/
+bool isInside(const vector<PT>& h, PT p, bool strict = true){
+	int a = 1, b = h.size() - 1, r = !strict;
+	if(h.size() < 3) return r && onSegment(h[0], h.back(), p);
+	if(h[0].cross(h[a], h[b]) > 0) swap(a, b);
+	if(h[0].cross(h[a], p) >= r || h[0].cross(h[b], p) <= -r) return false;
+	while(abs(a-b) > 1){
+		int c = (a + b) / 2;
+		if(h[0].cross(h[c], p) > 0) b = c;
+		else a = c;
+	}
+	return h[a].cross(h[b], p) < r;
+}
+
+/*BLOCK_DESC_BEGIN Check **if a point is inside convex hull** \\ O(log N) BLOCK_DESC_END*/
+bool isInside(const vector<PT> &h, PT p){
 	if(h[0].cross(p, h[1]) > 0 || h[0].cross(p, h.back()) < 0) return false;
     int n = h.size(), l=1, r = n-1;
     while(l != r){
@@ -33,10 +59,11 @@ bool isInside(const std::vector<PT> &h, PT p) {
         else r = mid - 1;
     }
     return h[l].cross(h[(l+1)%n], p) >= 0;
-} //PT operators needed: {% .cross}
+} 
+
 
 /*BLOCK_DESC_BEGIN 
-Given a convex hull h and a point p, returns the indice of h where the scalar/dot product is maximized.
+Given a convex hull h and a point p, returns the indice of h **where the dot product is maximized**.
 This code assumes that there are NO 3 colinear points!
 BLOCK_DESC_END*/
 int maximizeScalarProduct(const std::vector<PT> &h, PT v) {
@@ -64,4 +91,4 @@ int maximizeScalarProduct(const std::vector<PT> &h, PT v) {
 	}
 	if(v*h[ans] < v*h[1] ) ans = 1;
 	return ans;
-} //PT operators needed: {*}
+}

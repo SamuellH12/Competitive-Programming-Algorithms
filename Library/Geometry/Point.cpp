@@ -7,10 +7,10 @@ struct PT {
 	ll x, y;
 	PT(ll x=0, ll y=0) : x(x), y(y) {}
 
-	PT operator+ (const PT&a) const{ return PT(x+a.x, y+a.y); }
-	PT operator- (const PT&a) const{ return PT(x-a.x, y-a.y); }
-	ll operator* (const PT&a) const{ return  (x*a.x + y*a.y); }	// DOT | inner product | norm | lenght^2
-	ll operator% (const PT&a) const{ return  (x*a.y - y*a.x); }	// Cross | Vector product | Determinant
+	PT operator+ (const PT&a)const{ return PT(x+a.x, y+a.y);}
+	PT operator- (const PT&a)const{ return PT(x-a.x, y-a.y);}
+	ll operator* (const PT&a)const{ return  (x*a.x + y*a.y);} //DOT
+	ll operator% (const PT&a)const{ return  (x*a.y - y*a.x);} //Cross
 	PT operator* (ll c) const{ return PT(x*c, y*c); }
 	PT operator/ (ll c) const{ return PT(x/c, y/c); }
 	bool operator==(const PT&a) const{ return x == a.x && y == a.y; }
@@ -23,17 +23,41 @@ struct PT {
 	bool ccw(PT q, PT r){ return (q-*this) % (r-q) > 0;}
 };
 
-ld dist(PT p, PT q){ return sqrtl((p-q)*(p-q)); } // Distance
-ld proj(PT a, PT b){ return a*b / b.len(); }      //Projection size from A to B
+ld dist(PT p, PT q){ return sqrtl((p-q)*(p-q)); }
+ld proj(PT p, PT q){ return p*q / q.len(); }      
+//Projection size from A to B
 
 const ld PI = acos(-1.0L);
-ld angle(PT p, PT q){ return atan2(p%q, p*q);  }      // Angle between vectors p and q | acos(a*b/a.len()/b.len()))
-ld polarAngle(PT p){ ld a = atan2(p.y, p.x); return a<0 ? a+PI*2 : a; } // Angle from X axis
+ld angle(PT p, PT q){ return atan2(p%q, p*q); } // Angle between vectors p and q [-pi, pi] | acos(a*b/a.len()/b.len()))
+ld polarAngle(PT p){  return atan2(p.y, p.x); } // Angle to x-axis [-pi, pi]
 bool cmp_ang(PT p, PT q){ return p.quad() != q.quad() ? p.quad()<q.quad() : q.ccw(PT(0,0), p); }
 
-PT rotateCCW90(PT p){ return PT(-p.y, p.x); }
+PT rotateCCW90(PT p){ return PT(-p.y, p.x); } // perp
 PT rotateCW90(PT p){ return PT(p.y, -p.x); }
 PT rotateCCW(PT p, ld t){
 	ld c = cos(t), s = sin(t);
 	return PT(p.x*c - p.y*s, p.x*s + p.y*c); 
 }
+
+
+/*LATEX_DESC_BEGIN***************************
+**Dot product** p*q @$= p \cdot q$@ | inner product | norm | lenght^2
+@\[ u \cdot v = x_1x_2 + y_1y_2 = \|u\|\,\|v\|\cos\theta .\]@
+@$u \cdot v > 0$ $\Rightarrow$ angle $\theta<90^\circ$ (acute); @
+@$u \cdot v = 0$ $\Rightarrow$ angle $\theta=90^\circ$ (perpendicular); @
+@$u \cdot v < 0$ $\Rightarrow$ angle $\theta>90^\circ$ (obtuse); @
+
+**Cross product** p % q @$= p \times q$:@ | Vector product | Determinant
+@\[ u \times v = x_1y_2 - y_1x_2 = \|u\|\,\|v\| \sin\theta . \]        @
+@It equals the signed area of the parallelogram spanned by $u$ and $v$.@
+@$u \times v > 0$ $\Rightarrow$ $v$ is to the \emph{left} of $u$       @
+@$u \times v = 0$ $\Rightarrow$ $u$ and $v$ are collinear.             @
+@$u \times v < 0$ $\Rightarrow$ $v$ is to the \emph{right} of $u$      @
+
++ p.cross(a, b) @$= (a-p) \times (b-p)$   @
+ - @$>0$: CCW (left); $\curvearrowleft$   @
+ - @$=0$: collinear;  $\Rightarrow$       @
+ - @$<0$: CW (right); $\curvearrowright$  @
+*****************************LATEX_DESC_END*/
+// CCW -> Counter-ClockWise turn $\Circlearrowleft$ //LATEX_IGNORED_LINE
+// CW  -> ClockWise turn $\Circlearrowright$ //LATEX_IGNORED_LINE
