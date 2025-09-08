@@ -20,15 +20,17 @@ ld segmentDist(PT& s, PT& e, PT& p){
 
 /*BLOCK_DESC_BEGIN 
 **Segment intersection** \\
-Unique   -> \{p\}    \\
-No inter -> \{ \}    \\
+Unique   -> \{p\}        \\
+No inter -> \{ \}        \\
 Infinity -> \{a, b\}, the endpoints of the common segment.
 May be rounded if inter isn't integer; Watch out for overflow if long long. BLOCK_DESC_END*/
 
+int sgn(ll x){ return (x>0) - (x<0); }
 vector<PT> segInter(PT a, PT b, PT c, PT d){
-	auto oa = c.cross(d, a), ob = c.cross(d, b),
-	     oc = a.cross(b, c), od = a.cross(b, d);
-	if((oa^ob)<0 && (oc^od)<0) return {(a*ob - b*oa) / (ob-oa)}; // using ^ instead * to avoid overflow
+	auto oa = c.cross(d, a), ob = c.cross(d, b);
+	auto oc = a.cross(b, c), od = a.cross(b, d);
+	if(sgn(oa)*sgn(ob) < 0 && sgn(oc)*sgn(od) < 0) 
+		return {(a*ob - b*oa) / (ob-oa)};
 	set<PT> s;
 	if(onSegment(c, d, a)) s.insert(a);
 	if(onSegment(c, d, b)) s.insert(b);

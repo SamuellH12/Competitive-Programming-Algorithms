@@ -14,14 +14,24 @@ ld lineDist(PT& a, PT& b, PT& p){ return (b-a) % (p-a) / (b-a).len(); }
 
 /*BLOCK_DESC_BEGIN 
 **Intersection between two lines**   \\
-Unique   -> \{+1, pt\}           \\
-No inter -> \{ 0, pt\}           \\
+Unique   -> \{+1, pt\}               \\
+No inter -> \{ 0, pt\}               \\
 Infinity -> \{-1, pt\}           
-May be rounded if inter isn't integer; Watch out for overflow if long long. BLOCK_DESC_END*/
+May be rounded if inter isn't integer; Watch out for overflow if long long. 
+BLOCK_DESC_END*/
 
 pair<int, PT> lineInter(PT a, PT b, PT e, PT f){
 	auto d = (b-a) % (f-e);
 	if(d == 0) return {-(a.cross(b, e) == 0), PT()}; //parallel
 	auto p = e.cross(b, f), q = e.cross(f, a);
 	return {1, (a * p + b * q) / d};
+}
+
+/*BLOCK_DESC_BEGIN
+**Projects point p onto line ab**. Set refl=true to get reflection of point p across line ab instead.
+BLOCK_DESC_END*/
+
+PT lineProj(PT a, PT b, PT p, bool refl=false) {
+	PT v = b-a;
+	return p - rotateCCW90(v) * (1+refl) * (v%(p-a)) / (v*v);
 }

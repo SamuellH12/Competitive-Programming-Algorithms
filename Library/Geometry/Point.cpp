@@ -7,17 +7,17 @@ struct PT {
 	ll x, y;
 	PT(ll x=0, ll y=0) : x(x), y(y) {}
 
-	PT operator+ (const PT&a)const{ return PT(x+a.x, y+a.y);}
-	PT operator- (const PT&a)const{ return PT(x-a.x, y-a.y);}
-	ll operator* (const PT&a)const{ return  (x*a.x + y*a.y);} //DOT
-	ll operator% (const PT&a)const{ return  (x*a.y - y*a.x);} //Cross
-	PT operator* (ll c) const{ return PT(x*c, y*c); }
-	PT operator/ (ll c) const{ return PT(x/c, y/c); }
+	PT operator+(const PT&a)const{return PT(x+a.x, y+a.y);}
+	PT operator-(const PT&a)const{return PT(x-a.x, y-a.y);}
+	ll operator*(const PT&a)const{return  (x*a.x + y*a.y);} //DOT
+	ll operator%(const PT&a)const{return  (x*a.y - y*a.x);} //Cross
+	PT operator*(ll c) const{ return PT(x*c, y*c); }
+	PT operator/(ll c) const{ return PT(x/c, y/c); }
 	bool operator==(const PT&a) const{ return x == a.x && y == a.y; }
 	bool operator< (const PT&a) const{ return x != a.x ? x < a.x : y < a.y; }
 	
 	// utils
-	ld len() const { return hypot(x,y); }
+	ld len() const { return hypot(x,y); } // sqrt(p*p)
 	ll cross(const PT&a, const PT&b) const{ return (a-*this) % (b-*this); } // (a-p) % (b-p)
 	int quad() { return (x<0)^3*(y<0); } //cartesian plane quadrant |0++|1-+|2--|3+-|
 	bool ccw(PT q, PT r){ return (q-*this) % (r-q) > 0;}
@@ -49,10 +49,10 @@ PT rotateCCW(PT p, ld t){
 
 **Cross product** p % q @$= p \times q$:@ | Vector product | Determinant
 @\[ u \times v = x_1y_2 - y_1x_2 = \|u\|\,\|v\| \sin\theta . \]        @
-@It equals the signed area of the parallelogram spanned by $u$ and $v$.@
 @$u \times v > 0$ $\Rightarrow$ $v$ is to the \emph{left} of $u$       @
 @$u \times v = 0$ $\Rightarrow$ $u$ and $v$ are collinear.             @
 @$u \times v < 0$ $\Rightarrow$ $v$ is to the \emph{right} of $u$      @
+@It equals the signed area of the parallelogram spanned by $u$ and $v$.@
 
 + p.cross(a, b) @$= (a-p) \times (b-p)$   @
  - @$>0$: CCW (left); $\curvearrowleft$   @
