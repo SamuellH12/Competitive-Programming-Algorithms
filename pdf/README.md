@@ -70,7 +70,7 @@ Edite o arquivo [generate_latex.cpp](generate_latex.cpp) para alterar opções c
   - **bold** com `**bold**`
   - *Itálico* com `_.Italico_.`
   <!-- - `código inline` com ``` `codigo inline` ``` -->
-  - Potência `N^2` e subscrito `x._k`
+  <!-- - Potência `N^2` e subscrito `x._k` removido por enquanto... -->
   - Escape char `@` para usar LaTex na descrição. Exemplo:
 ```cpp
 /*LATEX_DESC_BEGIN 

@@ -23,7 +23,7 @@ int getAnswer();
 vector<int> MO(vector<Query> &queries){
 	vector<int> ans(queries.size());
 
-	sort(queries.begin(), queries.end());
+	sort(queries.begin(), queries.end()); // to use hilbert curves, call sortQueries instead
 
 	int L = 0, R = 0;
 	add(0);
@@ -40,11 +40,14 @@ vector<int> MO(vector<Query> &queries){
 	return ans;
 }
 
-/* IF you want to use hilbert curves on MO
-vector<ll> h(ans.size());
-for (int i = 0; i < ans.size(); i++) h[i] = hilbert(queries[i].l, queries[i].r);
-sort(queries.begin(), queries.end(), [&](Query&a, Query&b) { return h[a.idx] < h[b.idx]; });   */
-inline ll hilbert(int x, int y){
+//OPTIONAL
+void sortQueries(vector<Query> &qr){ 
+	vector<ll> h(qr.size());
+	for(int i=0; i<qr.size(); i++) h[i] = hilbert(qr[i].l, qr[i].r);
+	sort(qr.begin(), qr.end(), [&](Query&a, Query&b) { return h[a.idx] < h[b.idx]; });
+}
+
+inline ll hilbert(int x, int y){ //OPTIONAL
 	static int N = 1 << (__builtin_clz(0) - __builtin_clz(MAXN));
 	int rx, ry, s; ll d = 0;
 	for(s = N/2; s > 0; s /= 2){

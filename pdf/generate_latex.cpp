@@ -3,7 +3,7 @@
 #define t_section tuple<string, string, bool>
 using namespace std;
 
-const bool USE_HASH = false;
+const bool USE_HASH = true;
 const int HASH_LEN = 3;
 
 const vector<string> IGNORED_LINES = {
@@ -121,9 +121,9 @@ string parse_markdown(const string& input, bool isBlockDesc = false){
     // output = regex_replace(output, regex(R"(`([^\n\r\t`]+)`)"), ibd ? "\\mintinline{cpp}{$1}" : "@\\texttt{$1}@"); 
     
     // Potências: x^k
-    output = regex_replace(output, regex(R"(([a-zA-Z])\^([a-zA-Z0-9]+))"), ibd ? "$ $1^{$2}$" : "@$ $1^{$2}$@");
+    // output = regex_replace(output, regex(R"(([a-zA-Z])\^([a-zA-Z0-9]+))"), ibd ? "$ $1^{$2}$" : "@$ $1^{$2}$@");
     // Subscritos: x._k
-    output = regex_replace(output, regex(R"(([a-zA-Z])\._([a-zA-Z0-9]+))"), ibd ? "$ $1_{$2}$" : "@$ $1_{$2}$@");
+    // output = regex_replace(output, regex(R"(([a-zA-Z])\._([a-zA-Z0-9]+))"), ibd ? "$ $1_{$2}$" : "@$ $1_{$2}$@");
 
     return output;
 }
