@@ -69,16 +69,22 @@
     \]
 
     \item \textbf{Propriedades de Coeficientes Binomiais:}
-    \begin{align*}
-        \binom{N}{K} = \binom{N}{N - K} &= \frac{N}{K} \binom{N - 1}{K - 1} \\
-        \sum_{k=0}^{m} (-1)^k \binom{n}{k} &= (-1)^m \binom{n - 1}{m} \\
-        \sum_{m=0}^{n} \binom{m}{k} &= \binom{n+1}{k+1} \\
-        \sum_{k=0}^{m} \binom{n + k}{k} &= \binom{n + m + 1}{m} \\
-        \sum_{k=0}^{n} \binom{n}{k}^2 &= \binom{2n}{n} \\
-        \sum_{k=0}^{n} \binom{n}{k} &= 2^n \\
-        \sum_{k=0}^{n} k \binom{n}{k} &= n \cdot 2^{n - 1} \\
-        \sum_{k=0}^{n} \binom{n-k}{k} &= F_{n+1}
-    \end{align*}
+    % \begin{align*}
+    % \end{align*}
+    % \vspace{-2pt}
+    \begin{alignat*}{2}
+        \binom{N}{N - K} &= \frac{N}{K} \binom{N - 1}{K - 1} = \binom{N}{K}   &\\
+        \sum_{k=0}^{m} (-1)^k & \binom{n}{k} = (-1)^m  \binom{n - 1}{m}       &\\
+        \sum_{k=0}^{n} \binom{n}{k} &= 2^n     ,                              &
+        \sum_{k=0}^{n} k \binom{n}{k} = n \cdot 2^{n - 1}                      \\
+        \sum_{m=0}^{n} \binom{m}{k} &= \binom{n+1}{k+1}  ,                    &
+        \sum_{k=0}^{n} \binom{n-k}{k} = F_{n+1}                                \\
+        \sum_{k=0}^{m} \binom{n + k}{k} &= \binom{n + m + 1}{m}  ,            &
+        \sum_{k=0}^{n} \binom{n}{k}^2 = \binom{2n}{n}
+    \end{alignat*}
+
+    \item \textbf{Triângulo de Pascal} \\[0.5ex]
+    \includegraphics[width=\linewidth]{math/pascal}
 
     \item \textbf{Identidades Clássicas:}
     \begin{itemize}
