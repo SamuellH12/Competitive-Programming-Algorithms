@@ -2,7 +2,7 @@
 
 set -e
 
-g++ -std=c++17 -o genLatex generate_latex.cpp -O2 -lssl -lcrypto
+g++ -std=c++17 -o genLatex generate_latex.cpp -O2
 ./genLatex
 
 pdflatex -halt-on-error -file-line-error notebook.tex
