@@ -1,6 +1,6 @@
 This repository contains my personal solutions and code library for competitive programming.
 
-To generate a new PDF see [PFD](./pdf/README.md).
+To generate a new PDF see [PDF](./pdf/README.md).
 
 
 <hr>
@@ -21,11 +21,13 @@ To generate a new PDF see [PFD](./pdf/README.md).
 - [SegTreePersistente](./Library/Data%20Structures/SegTreePersistente.cpp)
 - [SegTreePersistente2x](./Library/Data%20Structures/SegTreePersistente2x.cpp)
 - [SparseTable](./Library/Data%20Structures/SparseTable.cpp)
+- [orderedSet](./Library/Data%20Structures/orderedSet.cpp)
 
 ### Strings
 
 - [KMP](./Library/Strings/KMP.cpp)
 - [Manacher](./Library/Strings/Manacher.cpp)
+- [SuffixArray](./Library/Strings/SuffixArray.cpp)
 - [Z-Function](./Library/Strings/Z-Function.cpp)
 - [ahoCorasick](./Library/Strings/ahoCorasick.cpp)
 - [hash](./Library/Strings/hash.cpp)
@@ -50,11 +52,17 @@ To generate a new PDF see [PFD](./pdf/README.md).
 - [SCC - Kosaraju](./Library/Grafos/SCC%20-%20Kosaraju.cpp)
 - [Tarjan](./Library/Grafos/Tarjan.cpp)
 
+
 ### Geometry
 
+- [Circles](./Library/Geometry/Circles.cpp)
 - [ConvexHull](./Library/Geometry/ConvexHull.cpp)
-- [Geometry - General](./Library/Geometry/Geometry%20-%20General.cpp)
+- [Line](./Library/Geometry/Line.cpp)
 - [LineContainer](./Library/Geometry/LineContainer.cpp)
+- [Minkowski](./Library/Geometry/Minkowski.cpp)
+- [Point](./Library/Geometry/Point.cpp)
+- [Poligons](./Library/Geometry/Poligons.cpp)
+- [Segment](./Library/Geometry/Segment.cpp)
 
 ### dp
 
@@ -66,10 +74,21 @@ To generate a new PDF see [PFD](./pdf/README.md).
 ### Math
 
 - [CRT](./Library/Math/CRT.cpp)
+- [Combinatorics](./Library/Math/Combinatorics.cpp)
+- [FFT](./Library/Math/FFT.cpp)
+- [FFTmod](./Library/Math/FFTmod.cpp)
+- [FWHT](./Library/Math/FWHT.cpp)
+- [NTT](./Library/Math/NTT.cpp)
+- [Sieve](./Library/Math/Sieve.cpp)
 - [fexp](./Library/Math/fexp.cpp)
+- [mint](./Library/Math/mint.cpp)
+- [random](./Library/Math/random.cpp)
+- [template](./Library/Math/template.cpp)
+
 
 ### others
 
+- [Date](./Library/others/Date.cpp)
 - [Hungarian](./Library/others/Hungarian.cpp)
 - [MO](./Library/others/MO.cpp)
 - [MOTree](./Library/others/MOTree.cpp)
