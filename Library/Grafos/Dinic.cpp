@@ -109,48 +109,38 @@ O( sqrt(V) * E )  ->  grafos com cap = 1 para toda Edge // matching bipartido
 	vector<int> lvl; -> Distância em vértices a partir do Source. Se igual a N o vértice não foi visitado.
 	A BFS retorna se Sink é alcançavel de Source. Se não é porque foi atingido o Fluxo Máximo
 	A DFS retorna um possível aumento do Fluxo
+
+
+** Use Cases of Flow **
+	   
++ **Minimum cut**: the minimum cut is equal to maximum flow.
+  i.e. to split the graph in two parts, one on the src side and another on sink side. The capacity of each edge is it weight.
+
++ **Edge-disjoint paths**: maximum number of edge-disjoint paths equals maximum flow of the graph, assuming that the capacity of each edge is one. (paths can be found greedily)
+
++ **Node-disjoint paths**: can be reduced to maximum flow. each node should appear in at most one path, so limit the flow through a node dividing each node in two. One with incoming edges, other with outgoing edges and a new edge from the first to the second with capacity 1.
+
++ **Maximum matching** (bipartite): maximum matching is equal to maximum flow. Add a src and a sink, edges from the src to every node at one partition and from each node of the other partition to the sink.
+
++ **Minimum node cover** (bipartite): minimum set of nodes such each edge has at least one endpoint. The size of minimum node cover is equal to maximum matching (Konig’s theorem).
+
++ **Maximum independent set** (bipartite): largest set of nodes such that no two nodes are connected with an edge. Contain the nodes that aren't in "Min node cover" (N - MAXFLOW).
+
++ **Minimum path cover** (DAG): set of paths such that each node belongs to at least one path. 
+  - Node-disjoint: construc a matching where each node is represented by two nodes, a left and a right at the matching and add the edges (from l to r). Each edge in the matching corresponds to an edge in the path cover. The number of paths in the cover is (N - MAXFLOW).
+  - General: almost like a minimum node-disjoint. Just add edges to the matching whenever there is an path from U to V in the graph (possibly through several edges).
+  - Antichain: a set of nodes such that there is no path from any node to another. In a DAG, the size of min general path cover equals the size of maximum antichain (Dilworth’s theorem).
+
++ **Project selection**: Given N projects, each w profit pi, and M machines, each w cost ci. 
+  A project requires a set of machines (can be shared). 
+  Choose a set that maximizes value of the profit(projects) - the cost(machines). Add an edge (cap pi) from Source to project.
+  An edge (cap ci) from machine to Sink. An edge (cap INF) from a project to each machine it requires. 
+  ans = SUM(pi) - MAXFLOW. If the edge of a machine is saturated, buy it.
+
++ **Closure Problem** (directed graph): Each node has a weight w (+ or -). choose a closure with maximum sum. 
+  A closure is a set of nodes such that there is no edge from a node inside the set to a node outside. 
+  Is a general case of project selection. Original edges with cap INF. Add edges from Source to nodes with W > 0; and from nodes with W < 0 to Sink (cap |W|).
+
 *****************************LATEX_DESC_END*/
 /**************************************LATEX_IGNORED_BEGIN
-* Use Cases of Flow
-	   
-+ Minimum cut: the minimum cut is equal to maximum flow.
-  i.e. to split the graph in two parts, one on the src side and another on sink side.
-  The capacity of each edge is it weight.
-
-+ Edge-disjoint paths: maximum number of edge-disjoint paths equals maximum flow of the
-  graph, assuming that the capacity of each edge is one. (paths can be found greedily)
-
-+ Node-disjoint paths: can be reduced to maximum flow. each node should appear in at most one 
-  path, so limit the flow through a node dividing each node in two. One with incoming edges,
-  other with outgoing edges and a new edge from the first to the second with capacity 1.
-
-+ Maximum matching (bipartite): maximum matching is equal to maximum flow. Add a src and
-  a sink, edges from the src to every node at one partition and from each node of the 
-  other partition to the sink.
-
-+ Minimum node cover (bipartite): minimum set of nodes such each edge has at least one 
-  endpoint. The size of minimum node cover is equal to maximum matching (Konig’s theorem).
-
-+ Maximum independent set (bipartite): largest set of nodes such that no two nodes are 
-  connected with an edge. Contain the nodes that aren't in "Min node cover" (N - MAXFLOW).
-
-+ Minimum path cover (DAG): set of paths such that each node belongs to at least one path. 
-  - Node-disjoint: construc a matching where each node is represented by two nodes, a left and 
-    a right at the matching and add the edges (from l to r). Each edge in the matching
-    corresponds to an edge in the path cover. The number of paths in the cover is (N - MAXFLOW).
-  - General: almost like a minimum node-disjoint. Just add edges to the matching whenever there 
-    is an path from U to V in the graph (possibly through several edges).
-  - Antichain: a set of nodes such that there is no path from any node to another. In a DAG, the 
-    size of min general path cover equals the size of maximum antichain (Dilworth’s theorem).
-
-+ Project selection: Given N projects, each w profit pi, and M machines, each w cost ci. 
-  A project requires a set of machines (can be shared). Choose a set that maximizes value 
-  of the profit(projects) - the cost(machines). Add an edge (cap pi) from Source to project.
-  An edge (cap ci) from machine to Sink. An edge (cap INF) from a project to each machine it 
-  requires. ans = SUM(pi) - MAXFLOW. If the edge of a machine is saturated, buy it.
-
-+ Closure Problem (directed graph): Each node has a weight w (+ or -). choose a closure with 
-  maximum sum. a closure is a set of nodes such that there is no edge from a node inside
-  the set to a node outside. Is a general case of project selection. Original edges with cap INF.
-  Add edges from Source to nodes with W > 0; and from nodes with W < 0 to Sink (cap |W|).
 LATEX_IGNORED_END***************************************/
