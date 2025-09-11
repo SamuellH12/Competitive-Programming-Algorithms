@@ -3,34 +3,27 @@ using namespace std;
 
 const int MAXN = 1e6 + 5;
 int pre[MAXN], low[MAXN], clk=0;
-vector<int> grafo [MAXN];
+vector<int> g[MAXN];
 
 vector<pair<int, int>> pontes;
 vector<int> cut;
 
-#warning "lembrar do memset(pre, -1, sizeof pre);"
 void tarjan(int u, int p = -1){
+	if(p == -1) memset(pre, -1, sizeof pre); //só chama na root
 	pre[u] = low[u] = clk++;
-	
-	bool any = false;
-	int chd = 0;
+	int any = false, chd = 0;
 
-	for(auto v : grafo[u]){
-		if(v == p) continue;
-
-		if(pre[v] == -1)
-		{
+	for(auto v : g[u]) if(v != p){
+		if(pre[v] == -1){
 			tarjan(v, u);
 
 			low[u] = min(low[v], low[u]);
 
 			if(low[v] >  pre[u]) pontes.emplace_back(u, v); 	
 			if(low[v] >= pre[u]) any = true;
-
 			chd++;
 		}
-		else
-			low[u] = min(low[u], pre[v]);
+		else low[u] = min(low[u], pre[v]);
 	}
 
 	if(p == -1 && chd >= 2) cut.push_back(u);

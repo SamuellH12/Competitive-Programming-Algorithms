@@ -3,15 +3,12 @@ using namespace std;
 
 int LIS(vector<int>& nums){
 	vector<int> lis;
-
-	for(auto x : nums)
-	{
+	
+	for(auto x : nums){
 		auto it = lower_bound(lis.begin(), lis.end(), x);
-
 		if(it == lis.end()) lis.push_back(x);
 		else *it = x;
 	}
-
 	return (int) lis.size();
 }
 /*LATEX_DESC_BEGIN***************************

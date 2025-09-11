@@ -12,6 +12,5 @@ vector<int> Zfunction(string &s){ // O(N)
 
 		if(r < i+z[i]-1) l = i, r = i+z[i]-1;
 	}
-
 	return z;
 }

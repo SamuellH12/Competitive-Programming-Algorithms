@@ -7,9 +7,7 @@ const int BLOCK_SZ = 700;
 
 struct Query{
 	int l, r, idx;
-
 	Query(int l, int r, int idx) : l(l), r(r), idx(idx) {}
-	
 	bool operator < (Query q) const {
 		if(l / BLOCK_SZ != q.l / BLOCK_SZ) return l < q.l;
 		return (l / BLOCK_SZ &1) ? ( r < q.r ) : (r > q.r );

@@ -5,7 +5,6 @@ const int MAXN = 1e6 + 5;
 
 const ll MOD = 1e9 + 7; //WA? Muda o MOD e a base
 const ll base = 153;
-
 ll expb[MAXN];
 
 void precalc(){

@@ -14,7 +14,7 @@ struct PT {
 	PT operator*(ll c) const{ return PT(x*c, y*c); }
 	PT operator/(ll c) const{ return PT(x/c, y/c); }
 	bool operator==(const PT&a) const{ return x == a.x && y == a.y; }
-	bool operator< (const PT&a) const{ return x != a.x ? x < a.x : y < a.y; }
+	bool operator< (const PT&a) const{ return tie(x, y) < tie(a.x, a.y); }
 	
 	// utils
 	ld len() const { return hypot(x,y); } // sqrt(p*p)

@@ -15,8 +15,7 @@ TP hungarian(int n, int m){
 	memset(col, 0, sizeof col);
 	memset(match, 0, sizeof match);
 
-	for(int i=1; i<=n; i++)
-	{
+	for(int i=1; i<=n; i++){
 		match[0] = i;
 		int j0 = 0, j1, i0;
 		TP delta;
@@ -42,12 +41,11 @@ TP hungarian(int n, int m){
 				if(used[j]){
 					row[match[j]] += delta,
 					col[j] -= delta;
-				}else 
-					minv[j] -= delta;
+				} 
+				else minv[j] -= delta;
 
 			j0 = j1;
 		} while(match[j0]);
-		
 
 		do {
 			j1 = way[j0];
@@ -61,10 +59,8 @@ TP hungarian(int n, int m){
 
 vector<pair<int, int>> getAssignment(int m){
 	vector<pair<int, int>> ans;
-
 	for(int i=1; i<=m; i++)
 		ans.push_back(make_pair(match[i], i));
-
 	return ans;
 }
 

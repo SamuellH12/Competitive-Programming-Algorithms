@@ -1,20 +1,18 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int MAXN = 1e4 + 5;
-const int MAXLG = 16;
+const int MAXN = 5e5 + 5;
+const int MAXLG = 20;
 
-vector<int> grafo[MAXN];
-
+vector<int> g[MAXN];
 int bl[MAXLG][MAXN], lvl[MAXN];
 
 void dfs(int u, int p, int l=0){
 	lvl[u] = l;
 	bl[0][u] = p;
 
-	for(auto v : grafo[u])
-		if(v != p)
-			dfs(v, u, l+1);
+	for(auto v : g[u]) if(v != p)
+		dfs(v, u, l+1);
 }
 
 void buildBL(int N){

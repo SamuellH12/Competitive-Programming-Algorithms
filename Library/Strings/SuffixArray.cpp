@@ -2,7 +2,7 @@
 using namespace std;
 
 vector<int> suffixArray(string s){ 
-    int n = (s += "$").size(); //if s is vector, push_back(-INF);
+    int n = (s += "!").size();//if vector, s.push_back(-INF);
     vector<int> sf(n), ord(n), aux(n), cnt(n);
     iota(begin(sf), end(sf), 0);
     sort(begin(sf), end(sf), [&](int i, int j){ return s[i] < s[j]; });
