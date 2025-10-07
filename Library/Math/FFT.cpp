@@ -56,11 +56,20 @@ Fast Fourier Transform for polynomials multiplication
 
 @\texttt{conv(a, b) = c}, where $c[x] = \sum a[i]b[x-i]$.@
 
-@fft(a) computes $\hat f(k) = \sum_x a[x] \exp(2\pi i \cdot k x / N)$ for all $k$. N must be a power of 2.@
+@fft(a) computes $\hat f(k) = \sum_x a[x] \exp(2\pi i \cdot k x / N)$@ for all k. N must be a power of 2.
 
-@Rounding is safe if $(\sum a_i^2 + \sum b_i^2)\log_2{N} < 9\cdot10^{14}$
-(in practice $10^{16}$; higher for random inputs).@
+@Rounding is safe if $(\sum a_i^2 + \sum b_i^2)\log_2{N} < 9\cdot10^{14}$@
+@(in practice $10^{16}$; higher for random inputs).@
  
 O(N log N) // N=|A|+|B| (1s N <= 2^22)
+
+||      +++ Four Sum i<j<k<l +++        ||     +++ Tree Sum i<j<k +++       ||
+|| iiii = vx4;                          || iii = vx3; // vx3[i*3] = v[i]    ||
+|| iiij = conv(vx3, conv(v, v));        || iij = conv(vx2, v);              ||
+|| iijj = conv(vx2, vx2);               || ijk = conv(conv(v, v), v);       ||
+|| iijk = conv(vx2, conv(v, v));        || ans = (ijk - 3*iij + 2*iii) / 6; ||
+|| ijkl = conv(conv(v, v), conv(v, v)); || 
+|| ans = (ijkl -6*iijk +3*iijj +8*iiij -6*iiii) / 24;
+* similar pra FWHT, mas vx3 vira V^V^V ou V|V|V e etc...
 *****************************LATEX_DESC_END*/
 //Credits: https://github.com/kth-competitive-programming/kactl/blob/main/content/numerical/FastFourierTransform.h
