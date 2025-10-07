@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 #define ll long long
 using namespace std;
-const int mod = 1e9+7;
 
 template<const char op> 
 vector<ll> FWHT(vector<ll> a, const bool inv = false){
@@ -10,20 +9,12 @@ vector<ll> FWHT(vector<ll> a, const bool inv = false){
         for(int i=0; i<n; i += 2*len)
             for(int j=0; j<len; j++){
                 ll u = a[i+j], v = a[i+j+len];   
-                if(op == '^'){
-                    a[i+j] = (u+v) % mod;
-                    a[i+j+len] = (u - v+mod) % mod;
-                } else if(op == '|'){
-                    if(!inv) a[i+j+len] = (u+v) % mod;
-                    else a[i+j+len] = (v - u+mod) % mod;
-                } else if(op == '&'){
-                    if(!inv) a[i+j] = (u+v) % mod;
-                    else a[i+j] = (u - v+mod) % mod;
-                }
+                if(op == '^') a[i+j]  = u+v, a[i+j+len] = u-v;
+                if(op == '|') a[i+j+len] = v + (inv ? -u : +u);
+                if(op == '&') a[i+j]     = u + (inv ? -v : +v);
             }
-    if(op=='^'&&inv){ ll rev = fexp(n, mod-2);
-        for(auto &x : a) x = x*rev % mod;
-    }
+    
+    if(op=='^'&&inv) for(auto &x : a) x /= n;
     return a;
 }
  
@@ -39,6 +30,7 @@ vector<ll> multiply(vector<ll> a, vector<ll> b){
   return ans;
 }
  
+
 const int mxlog = 17;
 vector<ll> subset_multiply(vector<ll> a, vector<ll> b){ //OPTIONAL
     int n = 1; while(n < max(a.size(), b.size())) n <<= 1;
@@ -48,13 +40,14 @@ vector<ll> subset_multiply(vector<ll> a, vector<ll> b){ //OPTIONAL
     for(int i=0; i<=mxlog; i++) A[i] = FWHT<'|'>(A[i]), B[i] = FWHT<'|'>(B[i]);
     for(int i=0; i<=mxlog; i++){
         vector<ll> C(n);
-        for (int x=0; x<=i; x++)
+        for(int x=0; x<=i; x++) 
             for(int j=0; j<n; j++) 
-                C[j] = (C[j] + A[x][j] * B[i-x][j] % mod) % mod;
+                C[j] += A[x][j] * B[i-x][j];
+        
         C = FWHT<'|'>(C, true);
         for(int j=0; j < n; j++)
             if(__builtin_popcount(j) == i)
-                ans[j] = (ans[j] + C[j]) % mod;
+                ans[j] += C[j];
     }
     return ans;
 }
