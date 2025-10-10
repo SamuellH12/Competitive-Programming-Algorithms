@@ -4,13 +4,13 @@ using namespace std;
 template<typename T> struct SegTree {
 	vector<T> seg;
 	int N;
-	T NEUTRO = 0;
-	SegTree(int n) : N(n) { seg.assign(4*n, NEUTRO); }
-	SegTree(vector<T> &lista) : N(lista.size()) { seg.assign(4*N); build(1, 0, N-1, lista); }
+	T IDENTITY = T();
+	SegTree(int n) : N(n) { seg.assign(4*n, IDENTITY); }
+	SegTree(vector<T> &lista) : N(lista.size()) { seg.assign(4*N, IDENTITY); build(1, 0, N-1, lista); }
 	T join(T lv, T rv){ return lv + rv; }
 		
 	T query(int no, int l, int r, int a, int b){
-		if(b <  l || r <  a) return NEUTRO;
+		if(b <  l || r <  a) return IDENTITY;
 		if(a <= l && r <= b) return seg[no];
 		int m=(l+r)/2, e=no*2, d=e+1;
 		
@@ -48,5 +48,5 @@ template<typename T> struct SegTree {
 Build:  O(N)
 Query:  O(log N) | seg.query(l, r);
 Update: O(log N) | seg.update(i, v);
-**Update Join, NEUTRO and Update if needed**
+**Update Join, IDENTITY and Update if needed**
 ***************************LATEX_IGNORED_END*/
