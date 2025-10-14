@@ -5,7 +5,7 @@ template<typename T> struct Gauss {
 	int n, m = 0;
 	vector<vector<T>> mat;
 	Gauss(int n) : n(n){}
-
+	
 	void addLine(vector<T> l = vector<T>()){
 		l.resize(n, T(0));
 		mat.push_back(l); m++;
@@ -38,6 +38,7 @@ template<typename T> struct Gauss {
 		}
         return pivos == n-1 ? +1 : -1; // 1 - Solucao unica // 0 - Sem solucao // -1 - Infinitas solucoes
     }
+	void print(){ for(auto v : mat){ for(auto x:v) cout<<x<<"\t"; cout<<"\n"; } }
 	void printSolution(){ // OPTIONAL / FOR DEBUG
 		for(int i=0, c; i<m; i++){
 			for(c=0; c<n-2; c++) if(mat[i][c] != T(0)) break;
@@ -48,7 +49,6 @@ template<typename T> struct Gauss {
 			cout << mat[i][n-1] << endl;
 		}
 	}
-	void print(){ for(auto v : mat){ for(auto x:v) cout<<x<<"\t"; cout<<"\n"; } }
 };
 
 
@@ -74,24 +74,15 @@ Entrada       || Saida        || interpretacao
 // LATEX_IGNORED_BEGIN 
 int main(){
 	ios::sync_with_stdio(false); cin.tie(NULL);
-	int n, m;
-	cin >> n >> m;
-
+	int n, m; cin >> n >> m;
 	Gauss<double> g(n);
-
 	for(int i=0; i<m; i++){
 		g.addLine();
 		for(auto &x : g.mat.back()) cin >> x;
 	}
-
-	g.print();
-	cout << endl;
-
+	g.print(); cout << endl;
 	g.solve();
-
-	g.print();
-
-	cout << endl;
+	g.print(); cout << endl;
 	g.printSolution();
 }
 // LATEX_IGNORED_END
