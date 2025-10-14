@@ -2,7 +2,7 @@
 using namespace std;
 
 template<typename T> struct Gauss {
-	int n, m;
+	int n, m = 0;
 	vector<vector<T>> mat;
 	Gauss(int n) : n(n){}
 
@@ -25,6 +25,19 @@ template<typename T> struct Gauss {
 			}
 		}
 	}
+	int isValid(){
+        int pivos = 0;
+        for(int i=0, c; i<m; i++){
+			for(c=0; c<n-2; c++) if(mat[i][c] != T(0)) break;
+            if(mat[i][c] != T(0)){ pivos++;
+                for(int j=c+1; j<n-1; j++) 
+                    if(mat[i][j] != T(0))
+                        pivos = -2*n;
+            }
+			else if(mat[i][n-1] != T(0)) return 0; // 0 = 1
+		}
+        return pivos == n-1 ? +1 : -1; // 1 - Solucao unica // 0 - Sem solucao // -1 - Infinitas solucoes
+    }
 	void printSolution(){ // OPTIONAL / FOR DEBUG
 		for(int i=0, c; i<m; i++){
 			for(c=0; c<n-2; c++) if(mat[i][c] != T(0)) break;
