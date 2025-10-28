@@ -3,7 +3,7 @@
 using namespace std;
 
 /*LATEX_DESC_BEGIN***************************
-@\begin{minipage}{0.4\textwidth}
+@\begin{minipage}{0.35\textwidth}
 Given a vector of points, return the convex hull in CCW order. \\
 A convex hull is the smallest convex polygon that contains all the points.
 \end{minipage}\hfill \begin{minipage}{0.05\textwidth} \includegraphics[height=4\baselineskip]{geometry/ConvexHull} \end{minipage} @ 

@@ -42,17 +42,17 @@ PT rotateCCW(PT p, ld t){
 
 /*LATEX_DESC_BEGIN***************************
 **Dot product** p*q @$= p \cdot q$@ | inner product | norm | lenght^2
-@\[ u \cdot v = x_1x_2 + y_1y_2 = \|u\|\,\|v\|\cos\theta .\]@
+@$u \cdot v = x_1x_2 + y_1y_2 = \|u\|\,\|v\|\cos\theta$@
 @$u \cdot v > 0$ $\Rightarrow$ angle $\theta<90^\circ$ (acute); @
 @$u \cdot v = 0$ $\Rightarrow$ angle $\theta=90^\circ$ (perpendicular); @
 @$u \cdot v < 0$ $\Rightarrow$ angle $\theta>90^\circ$ (obtuse); @
 
 **Cross product** p % q @$= p \times q$:@ | Vector product | Determinant
-@\[ u \times v = x_1y_2 - y_1x_2 = \|u\|\,\|v\| \sin\theta . \]        @
+@$u \times v = x_1y_2 - y_1x_2 = \|u\|\,\|v\| \sin\theta $.        @
 @$u \times v > 0$ $\Rightarrow$ $v$ is to the \emph{left} of $u$       @
 @$u \times v = 0$ $\Rightarrow$ $u$ and $v$ are collinear.             @
 @$u \times v < 0$ $\Rightarrow$ $v$ is to the \emph{right} of $u$      @
-@It equals the signed area of the parallelogram spanned by $u$ and $v$.@
+It equals the signed area of the parallelogram spanned by @$u$@ and @$v$@.
 
 + p.cross(a, b) @$= (a-p) \times (b-p)$   @
  - @$>0$: CCW (left); $\curvearrowleft$   @
