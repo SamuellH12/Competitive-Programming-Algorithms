@@ -4,7 +4,7 @@ using namespace std;
 template<typename T> struct SegTree {
 	vector<T> seg;
 	int N;
-	T NEUTRO = 0;
+	T NEUTRO = T(0);
 	SegTree(int n) : N(n) { seg.assign(4*n, NEUTRO); }
 	SegTree(vector<T> &lista) : N(lista.size()) { seg.assign(4*N); build(1, 0, N-1, lista); }
 	T join(T lv, T rv){ return lv + rv; }
@@ -29,10 +29,8 @@ template<typename T> struct SegTree {
 	void build(int no, int l, int r, vector<T> &lista){
 		if(l == r){ seg[no] = lista[l]; return; }
 		int m=(l+r)/2, e=no*2, d=e+1;
-		
 		build(e, l,   m, lista);
 		build(d, m+1, r, lista);
-		
 		seg[no] = join(seg[e], seg[d]);
 	}
 

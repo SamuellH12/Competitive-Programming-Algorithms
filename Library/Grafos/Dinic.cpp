@@ -8,7 +8,6 @@ struct Edge {
 };
 
 struct Dinic {
-
 	int n, src, sink;
 	vector<vector<int>> adj;
 	vector<Edge> edges;
@@ -16,8 +15,7 @@ struct Dinic {
 
 	Dinic(int n, int src, int sink) : n(n), src(src), sink(sink) { adj.resize(n); }
 
-	void addEdge(int u, int v, ll cap)
-	{
+	void addEdge(int u, int v, ll cap){
 		adj[u].push_back(edges.size());
 		edges.emplace_back(u, v, cap);
 
@@ -29,15 +27,13 @@ struct Dinic {
 		if(flow == 0) return 0;
 		if(u == sink) return flow;
 
-		for(int &i = ptr[u];  i < adj[u].size();  i++)
-		{
+		for(int &i = ptr[u];  i < adj[u].size();  i++){
 			int at = adj[u][i];
 			int v = edges[at].v;
 
 			if(lvl[u] + 1 != lvl[v]) continue;
 
-			if(ll got = dfs(v, min(flow, edges[at].cap)) )
-			{
+			if(ll got = dfs(v, min(flow, edges[at].cap)) ){
 				edges[at].cap -= got;
 				edges[at^1].cap += got;
 				return got;
@@ -54,8 +50,7 @@ struct Dinic {
 		queue<int> q;
 		q.push(src);
 
-		while(!q.empty())
-		{
+		while(!q.empty()){
 			int u = q.front();
 			q.pop();
 
@@ -68,7 +63,6 @@ struct Dinic {
 				q.push(v);
 			}
 		}
-
 		return lvl[sink] < n;
 	}
 
@@ -76,13 +70,10 @@ struct Dinic {
 
 	ll maxFlow(){
 		ll ans = 0;
-
 		while( bfs() ){
 			ptr = vector<int> (n+1, 0);
-
 			while(ll got = dfs(src)) ans += got;
 		}
-
 		return ans;
 	}
 };
