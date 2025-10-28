@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-
+//
 /*BLOCK_DESC_BEGIN converts Gregorian date to integer (Julian day number) BLOCK_DESC_END*/
 int dateToInt (int m, int d, int y){ return 
     + 1461 * (y + 4800 + (m - 14) / 12) / 4 

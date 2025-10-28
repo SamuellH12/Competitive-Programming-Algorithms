@@ -54,13 +54,11 @@ pair<vi, vi> EulerPath(int n, int src=0){
 	stack<pii> st; // {Vertex, EdgeId}
 	st.push({s, -1});
 
-	while(!st.empty())
-	{
+	while(!st.empty()){
 		auto [u, edg] = st.top();
 		while(idx[u] < g[u].size() && used[g[u][idx[u]].second]) idx[u]++;
 
-		if(idx[u] < g[u].size())
-		{
+		if(idx[u] < g[u].size()){
 			auto [v, id] = g[u][idx[u]];
 			used[id] = true;
 			st.push({v, id});
@@ -88,10 +86,7 @@ pair<vi, vi> EulerPath(int n, int src=0){
 
 
 /*LATEX_DESC_BEGIN***************************
-Euler Path - Algoritmo de Hierholzer para caminho Euleriano
-
-Complexity: O(V + E)
-
+Euler Path - Algoritmo de Hierholzer para caminho Euleriano - O(V + E)
 IMPORTANTE! O algoritmo está 0-indexado
 
 * Informações
@@ -107,5 +102,5 @@ Euler em Directed graph:
 	- Cada vértice tem quantidade de arestas |entrada| == |saída| (circuito); OU
 	- Exatamente 1 tem |entrada|+1 == |saída| && exatamente 1 tem |entrada| == |saída|+1 (caminho);
 * Circuito -> U é o primeiro e último 
-* Caminho -> U é o primeiro e V o último
+* Caminho  -> U é o primeiro e V o último
 *****************************LATEX_DESC_END*/

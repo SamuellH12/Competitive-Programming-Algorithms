@@ -3,36 +3,32 @@ using namespace std;
 #define ll long long
 const int MAXN = 1e6 + 5;
 
-const ll MOD1 = 131'807'699;
-const ll MOD2 = 1e9 + 9;
+const array<ll, 2> mod = {131'807'699, 1e9 + 9};
 const ll base = 157;
  
-ll expb1[MAXN], expb2[MAXN];
- 
+array<ll, 2> expb[MAXN];
+
 #warning "Call precalc() before use StringHash"
 void precalc(){ 
-    expb1[0] = expb2[0] = 1;
+    expb[0][0] = expb[0][1] = 1;
     
-	for(int i=1;i<MAXN;i++)
-        expb1[i] = expb1[i-1]*base % MOD1,
-        expb2[i] = expb2[i-1]*base % MOD2;
+	for(int i=1, j;i<MAXN;i++) for(j=1; ~j; j--)
+        expb[i][j] = expb[i-1][j]*base % mod[j];
 }
 
 struct StringHash{
-    vector<pair<ll,ll>> hsh;
+    vector<array<ll,2>> hsh;
     string s; // comment S if you dont need it
 
     StringHash(string& s) : s(s){ 
         hsh.assign(s.size()+1, {0,0});
 
-        for (int i=0;i<s.size();i++)
-            hsh[i+1].first  = ( hsh[i].first *base % MOD1 + s[i] ) % MOD1,
-            hsh[i+1].second = ( hsh[i].second*base % MOD2 + s[i] ) % MOD2;
+        for(int i=0, j;i<s.size();i++) for(j=1; ~j; j--)
+            hsh[i+1][j] = ( hsh[i][j]*base + s[i] ) % mod[j];
     }
- 
     ll gethash(int a,int b){
-        ll h1 = (MOD1+ hsh[b+1].first  - hsh[a].first *expb1[b-a+1] % MOD1) % MOD1;
-        ll h2 = (MOD2+ hsh[b+1].second - hsh[a].second*expb2[b-a+1] % MOD2) % MOD2;
+        ll h1 = (mod[0]+ hsh[b+1][0] - hsh[a][0]*expb[b-a+1][0] % mod[0]) % mod[0];
+        ll h2 = (mod[1]+ hsh[b+1][1] - hsh[a][1]*expb[b-a+1][1] % mod[1]) % mod[1];
         return (h1<<32) | h2;
     }
 };

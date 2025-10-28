@@ -63,7 +63,6 @@ struct Dinic {
 				q.push(v);
 			}
 		}
-
 		return lvl[sink] < n;
 	}
 
@@ -71,7 +70,6 @@ struct Dinic {
 
 	ll maxFlow(){
 		ll ans = 0;
-
 		while( bfs() ){
 			ptr = vector<int> (n+1, 0);
 			while(ll got = dfs(src)) ans += got;

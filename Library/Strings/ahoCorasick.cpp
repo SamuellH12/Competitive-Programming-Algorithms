@@ -7,8 +7,7 @@ struct Node {
     Node* ol = NULL;
     array<Node*, ALPHA> nxt;
     
-    char c;
-    int idw = -1;
+    int idw = -1, i; char c;
 
     Node(){ nxt.fill(NULL); }
     Node(Node* p, char c) : p(p), c(c) { nxt.fill(NULL); }
@@ -17,7 +16,8 @@ typedef Node* trie;
 struct Aho {
     trie root;
     int nwords = 0;
-    Aho(){ root = new Node(); }
+    vector<trie> nodes;
+    Aho(){ root = new_Node(NULL, 0); }
 
     void add(string &s){
         trie t = root;
@@ -28,7 +28,6 @@ struct Aho {
         }
         t->idw = nwords++; //cuidado com strings iguais! use vector
     }
-
     void buildSufixLink(){
         deque<trie> q(1, root);
 
@@ -47,7 +46,6 @@ struct Aho {
                     q.push_back(t->nxt[c]);
         }
     }
-
     vector<bool> findPattern(string &s){
         vector<bool> ans(nwords, 0);
         trie w = root;
@@ -60,6 +58,11 @@ struct Aho {
                     ans[z->idw] = true;
         }
         return ans;
+    }
+    trie new_Node(trie p, char c){
+        nodes.push_back(new Node(p, c));
+        nodes.back()->i = nodes.size()-1;
+        return nodes.back();
     }
 };
 

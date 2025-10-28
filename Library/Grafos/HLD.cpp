@@ -1,16 +1,18 @@
 #include <bits/stdc++.h>
+#include "../Data Structures/SegTreeLazy.cpp" //LATEX_IGNORED_LINE
 #define ll long long
 using namespace std;
 
 const bool EDGE = false;
 struct HLD {
 public:
-	vector<vector<int>> g; //grafo
+	vector<vector<int>> g;
 	vector<int> sz, parent, tin, nxt;
-	HLD(){}
-	HLD(int n){ init(n); }
+	SegTree<int> seg;
+	HLD() : seg(1) {}
+	HLD(int n) : seg(n) { init(n); }
 	void init(int n){
-		t = 0;
+		t = 0; seg = SegTree<int>(n);
 		g.resize(n); tin.resize(n);
 		sz.resize(n);nxt.resize(n);
 		parent.resize(n);
@@ -24,13 +26,11 @@ public:
 		dfs(root, root);
 		hld(root, root);
 	}
-
 	ll query_path(int u, int v){
 		if(tin[u] < tin[v]) swap(u, v);
 		if(nxt[u] == nxt[v]) return qry(tin[v]+EDGE, tin[u]);
 		return qry(tin[nxt[u]], tin[u]) + query_path(parent[nxt[u]], v);
 	}
-
 	void update_path(int u, int v, ll x){
 		if(tin[u] < tin[v]) swap(u, v);
 		if(nxt[u] == nxt[v]) return updt(tin[v]+EDGE, tin[u], x);
@@ -38,8 +38,8 @@ public:
 	}
 
 private:
-	ll qry(int l, int r){ if(EDGE && l>r) return 0;/*NEUTRO*/ } //call Seg, BIT, etc
-	void updt(int l, int r, ll x){ if(EDGE && l>r) return; }    //call Seg, BIT, etc
+	ll qry(int l, int r){ if(EDGE && l>r) return seg.NEUTRO; return seg.query(l, r); }
+	void updt(int l, int r, ll x){ if(EDGE && l>r) return; seg.update(l, r, x); }
 
 	void dfs(int u, int p){
 		sz[u] = 1, parent[u] = p;
