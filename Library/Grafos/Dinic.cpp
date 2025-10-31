@@ -80,10 +80,9 @@ struct Dinic {
 /*LATEX_DESC_BEGIN***************************
     Dinic - Max Flow Min Cut
 Algoritmo de Dinitz para encontrar o Fluxo Máximo. 
-**Casos de Uso em [Theorems/Flow]**
 IMPORTANTE! O algoritmo está 0-indexado
 
-**Complexity:**
+Complexity:
 O( V^2 * E )      ->  caso geral
 O( sqrt(V) * E )  ->  grafos com cap = 1 para toda Edge // matching bipartido
 
@@ -102,20 +101,20 @@ O( sqrt(V) * E )  ->  grafos com cap = 1 para toda Edge // matching bipartido
 	A DFS retorna um possível aumento do Fluxo
 
 
-** Use Cases of Flow **
+ Use Cases of Flow 
 	   
 + **Minimum cut**: the minimum cut is equal to maximum flow.
   i.e. to split the graph in two parts, one on the src side and another on sink side. The capacity of each edge is it weight.
 
-+ **Edge-disjoint paths**: maximum number of edge-disjoint paths equals maximum flow of the graph, assuming that the capacity of each edge is one. (paths can be found greedily)
++ **Edge-disjoint-paths**: maximum number of edge-disjoint paths equals maximum flow of the graph, assuming that the capacity of each edge is one. (paths can be found greedily)
 
-+ **Node-disjoint paths**: can be reduced to maximum flow. each node should appear in at most one path, so limit the flow through a node dividing each node in two. One with incoming edges, other with outgoing edges and a new edge from the first to the second with capacity 1.
++ **Node-disjoint-paths**: can be reduced to maximum flow. each node should appear in at most one path, so limit the flow through a node dividing each node in two. One with incoming edges, other with outgoing edges and a new edge from the first to the second with capacity 1.
 
 + **Maximum matching** (bipartite): maximum matching is equal to maximum flow. Add a src and a sink, edges from the src to every node at one partition and from each node of the other partition to the sink.
 
 + **Minimum node cover** (bipartite): minimum set of nodes such each edge has at least one endpoint. The size of minimum node cover is equal to maximum matching (Konig’s theorem).
 
-+ **Maximum independent set** (bipartite): largest set of nodes such that no two nodes are connected with an edge. Contain the nodes that aren't in "Min node cover" (N - MAXFLOW).
++ **Maximum-independent-set** (bipartite): largest set of nodes such that no two nodes are connected with an edge. Contain the nodes that aren't in "Min node cover" (N - MAXFLOW).
 
 + **Minimum path cover** (DAG): set of paths such that each node belongs to at least one path. 
   - Node-disjoint: construc a matching where each node is represented by two nodes, a left and a right at the matching and add the edges (from l to r). Each edge in the matching corresponds to an edge in the path cover. The number of paths in the cover is (N - MAXFLOW).

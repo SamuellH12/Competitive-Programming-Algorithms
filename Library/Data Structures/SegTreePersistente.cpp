@@ -37,7 +37,7 @@ Node* update(Node *node, int l, int r, int pos, int v){
 }
 
 int query(Node *node, int l, int r, int a, int b){
-	if(b <  l || r <  a) return 0;
+	if(b <  l || r <  a || node == NULL) return 0;
 	if(a <= l && r <= b) return node->val;
 
 	int m = (l+r)/2;

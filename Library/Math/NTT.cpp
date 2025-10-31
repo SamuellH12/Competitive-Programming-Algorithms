@@ -46,6 +46,25 @@ vector<ll> conv(const vector<ll> &a, const vector<ll> &b) {
 const ll mod2 = 918552577, root2 = 63; // 9e8 < mod2 < 1e9 //also valid mods
 const ll mod3 = 7340033,   root3 = 25; // 7e6 < mod3 < 1e7 
 
+/*BLOCK_DESC_BEGIN  Computes the first LIM terms of P(x)^K in O(n*limit) BLOCK_DESC_END*/
+vector<ll> power(vector<ll> &p, int k, int limit=-1){ //O(n*limit)
+    while(p.back() == 0) p.pop_back();
+    if(p.empty() || limit == 0) return {};
+    if(limit == -1) limit = (p.size()-1) * k;
+
+    vector<ll> ans(limit+1, 0);
+    ans[0] = fexp(p[0], k);
+
+    for(int i=1; i<=limit; i++){
+        for(int j=1; j <= i && j < p.size(); j++){
+            ans[i] += p[j] * ans[i-j] % mod * (k*j - (i-j)) % mod;
+            ans[i] %= mod;
+        }
+        ans[i] = ans[i] * fexp(i * p[0] % mod, mod-2) % mod;
+    }
+    return ans;
+}
+
 /*LATEX_DESC_BEGIN***************************
 Number Theoretic Transform for polynomials multiplication MOD
 

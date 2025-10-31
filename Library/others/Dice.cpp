@@ -26,8 +26,8 @@ struct Dice {
 };
 
 /*LATEX_DESC_BEGIN***************************
-   Dadinho de 6 faces     |   |4|       ^ norte
-24 estados possiveis      | |2|6|5| O < + > leste
+   Dadinho de 6 lados     |   |4|       ^ norte
+24 estados possiveis      | |2|6|5| w < + > leste
 Assume que a soma de lados|   |3|       v 
 opostos é 7.              |   |1|      sul
 Se precisar de labels diferentes, crie um
