@@ -20,9 +20,11 @@
 \usepackage{amssymb} 
 \usepackage{etoolbox}
 \usepackage{needspace}
+\usepackage{booktabs}
 
 % Colors of description boxes
-\definecolor{descboxbg}{RGB}{253,253,255}
+\definecolor{descboxbg}{RGB}{210,220,244}
+\definecolor{descboxfrm}{RGB}{24,79,102}
 \definecolor{blockdescbg}{RGB}{250,250,220}
 
 \tcbuselibrary{listings}
@@ -36,8 +38,11 @@
 \renewcommand\cftsecpagefont{\fontsize{10}{11}\mdseries}
 \renewcommand\cftsubsecfont{\fontsize{8}{9}\mdseries}
 \renewcommand\cftsubsecpagefont{\fontsize{8}{9}\mdseries}
+\renewcommand\cftsubsubsecfont{\fontsize{6}{7}\mdseries}
+\renewcommand\cftsubsubsecpagefont{\fontsize{6}{7}\mdseries}
 \renewcommand\cftsecafterpnum{\vspace{-1ex}}
 \renewcommand\cftsubsecafterpnum{\vspace{-1ex}}
+\renewcommand\cftsubsubsecafterpnum{\vspace{-1.2ex}}
 
 
 \lstdefinestyle{shared}{
@@ -61,7 +66,7 @@
   keywordstyle=\bfseries\color{green!40!black},
   commentstyle=\itshape\color{purple!40!black},
   identifierstyle=\color{blue},
-  stringstyle=\color{orange},
+  stringstyle=\color{purple!40!black},
 }
 \lstdefinestyle{py}{
   style=shared,
@@ -69,7 +74,7 @@
   keywordstyle=\bfseries\color{green!40!black},
   commentstyle=\itshape\color{purple!40!black},
   identifierstyle=\color{blue},
-  stringstyle=\color{orange},
+  stringstyle=\color{purple!40!black},
 }
 \lstdefinestyle{sh}{
   style=shared,
@@ -77,27 +82,10 @@
   keywordstyle=\bfseries\color{green!40!black},
   commentstyle=\itshape\color{purple!40!black},
   identifierstyle=\color{blue},
-  stringstyle=\color{orange},
+  stringstyle=\color{purple!40!black},
 }
 \lstdefinestyle{txt}{
   style=shared,
-}
-% LATEX DESC
-\lstdefinestyle{description}{
-  frame=single,
-  xleftmargin=0pt,
-  basicstyle=\fontsize{7}{8}\ttfamily,
-  rulesepcolor=\color{gray},
-  rulecolor=\color{descboxbg},
-  frameround=tttt,
-  breaklines=true,
-  breakatwhitespace=true,
-  showstringspaces=false,
-  tabsize=2,
-  keepspaces=true,                 
-  numbersep=5pt,                  
-  showspaces=false,                
-  showtabs=false,           
 }
 \lstset{
   escapechar=@,
@@ -114,8 +102,48 @@
   bottom=3pt,
   boxsep=2pt
 }
+% LATEX DESC
 
-% BLOCK_DESC
+% define a pleasant default listings style (customize as you like)
+\lstdefinestyle{myListingStyle}{
+  basicstyle=\fontsize{7}{8}\ttfamily,
+  keywordstyle=\bfseries,
+  commentstyle=\itshape\color{gray},
+  stringstyle=\color{olive!60!black},
+  breaklines=true,
+  breakatwhitespace=true,
+  showstringspaces=false,
+  xleftmargin=0pt,
+  frame=none,
+  belowcaptionskip=0.05\baselineskip,
+  tabsize=2,
+  keepspaces=true,
+  showspaces=false,                
+  showtabs=false,   
+}
+
+\newtcblisting{listingframe}[2][]{%
+  enhanced,
+  breakable,
+  listing only,
+  listing engine=listings,
+  colback=descboxbg,
+  colframe=descboxfrm,
+  coltitle=black,
+  fonttitle=\sffamily\bfseries,
+  title={#1},            % optional title
+  attach title to upper,
+  top=-1mm, bottom=-1mm, left=2mm, right=2mm,
+  boxrule=0.6pt,
+  arc=2mm,
+  outer arc=2mm,
+  borderline={0.5pt}{0pt}{descboxfrm},
+  shadow={0pt}{-1.5pt}{3pt}{black!12},
+  listing options={style=myListingStyle,#2}
+}
+
+
+%%% BLOCK_DESC BEGIN %%%
 \newmdenv[
   backgroundcolor=blockdescbg,
   linecolor=gray!30,
@@ -142,6 +170,7 @@
   \end{adjustbox}
   \vspace{1pt}
 }
+%%% BLOCK_DESC END %%%
 
 \pagestyle{fancy}
 \fancyhead[L]{Universidade Federal de Pernambuco - SamuellH12}
@@ -164,7 +193,7 @@
 
 \begin{document}
 \begin{landscape}
-\begin{multicols*}{3}  % MUDE A QUANTIDADE DE COLUNAS AQUI
+\begin{multicols*}{2}  % MUDE A QUANTIDADE DE COLUNAS AQUI
 \raggedcolumns 
 \interlinepenalty=10000
 

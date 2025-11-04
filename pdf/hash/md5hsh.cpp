@@ -73,7 +73,7 @@ string getCodeHash(const string& code, int dig=3){
         hs = getHash_Fast(t, dig);
         trimed = t;
         while(!trimed.empty() && isspace(trimed.back())) trimed.pop_back(); // remove trailing spaces
-        if(trimed.empty()) for(hs = ""; hs.size()<dig; hs += " ");          //empty line -> no hash
+        if(trimed.empty() && st.size() == 100) for(hs = ""; hs.size()<dig; hs += " ");          //empty line -> no hash
 
 		hcode += _ESCAPE_ + "" + hs + " " + _ESCAPE_;
         hcode += l + "\n";

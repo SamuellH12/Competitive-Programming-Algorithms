@@ -333,9 +333,9 @@ string get_tex(const vector<pair<string, vector<t_section>>>& sections) {
             
             if (!description.empty()) {
                 tex += "\\vspace{-4pt}\n";
-                tex += "\\begin{lstlisting}[style=description]\n";
+                tex += "\\begin{listingframe}[]{}\n";
                 tex += description + "\n";
-                tex += "\\end{lstlisting}\n";
+                tex += "\\end{listingframe}\n";
             } 
             
             tex += "\\vspace{-5pt}\n";

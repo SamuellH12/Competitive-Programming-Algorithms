@@ -10,3 +10,6 @@ notebook.*
 .vscode
 texput.log
 texput.fls
+Notebook.pdf
+pdf/temp
+*.exe
