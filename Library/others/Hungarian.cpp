@@ -65,7 +65,7 @@ vector<pair<int, int>> getAssignment(int m){
 }
 
 /*LATEX_DESC_BEGIN***************************
-Hungarian Algorithm - Assignment Problem
+**Hungarian Algorithm** - Assignment Problem
 Algoritmo para o problema de atribuição mínima.
 
 **Complexity:** O(N^2 * M)

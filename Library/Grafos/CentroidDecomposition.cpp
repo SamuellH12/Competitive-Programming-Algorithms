@@ -36,10 +36,9 @@ void dfsc(int u=0, int p=-1, int f=-1, int sz=-1){
 }
 
 /*LATEX_DESC_BEGIN***************************
-Centroid Decomposition - O(N*LogN)
+**Centroid Decomposition** - O(N*LogN)
 
-dfsc() -> para criar a centroid tree
-
+dfsc()    -> para criar a centroid tree
 rem[u]    -> True se U já foi removido (pra dfsc)
 szt[u]    -> Size da subárvore de U (pra dfsc)
 parent[u] -> Pai de U na centroid tree *parent[ROOT] = -1

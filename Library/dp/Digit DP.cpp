@@ -31,11 +31,9 @@ ll solve(ll k){
 }
 
 /*LATEX_DESC_BEGIN***************************
-Digit DP - Sum of Digits
+**Digit DP** - Sum of Digits - O(D^2 * B^2)  (B = Base = 10)
 
 Solve(K)  ->  Retorna a soma dos dígitos de todo número X tal que: 0 <= X <= K
 dp[D][S][f]  ->  D: Quantidade de dígitos; S: Soma dos dígitos; f: Flag que indica o limite.
 int limite[D] -> Guarda os dígitos de K.
-
-**Complexity:** O(D^2 * B^2)  (B = Base = 10)
 *****************************LATEX_DESC_END*/

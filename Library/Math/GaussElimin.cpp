@@ -53,7 +53,7 @@ template<typename T> struct Gauss {
 
 
 /*LATEX_DESC_BEGIN***************************
-Eliminação Gaussiana - O(N*N*M)
+**Eliminação Gaussiana** - O(N*N*M)
 
 Resolve um sistema de equacoes lineares, escalonando a matriz;
 

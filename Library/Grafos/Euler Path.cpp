@@ -86,7 +86,7 @@ pair<vi, vi> EulerPath(int n, int src=0){
 
 
 /*LATEX_DESC_BEGIN***************************
-Euler Path - Algoritmo de Hierholzer para caminho Euleriano - O(V + E)
+**Euler Path** - Algoritmo de Hierholzer para caminho Euleriano - O(V + E)
 IMPORTANTE! O algoritmo está 0-indexado
 
 * Informações

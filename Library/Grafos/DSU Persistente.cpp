@@ -25,7 +25,7 @@ struct DSUp {
 	}
 };
 /*LATEX_DESC_BEGIN***************************
-SemiPersistent Disjoint Set Union - O(Log n)
+**SemiPersistent DSU** - O(Log n)
 find(u, q) -> Retorna o pai de U no tempo q
 * tim -> tempo em que o pai de U foi alterado
 *****************************LATEX_DESC_END*/

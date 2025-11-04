@@ -59,7 +59,7 @@ private:
 
 
 /*LATEX_DESC_BEGIN***************************
-Block Cut Tree - BiConnected Component
+**Block Cut Tree - BiConnected Component**
 BlockCutTree bcc(n);
 bcc.addEdge(u, v);
 bcc.build();

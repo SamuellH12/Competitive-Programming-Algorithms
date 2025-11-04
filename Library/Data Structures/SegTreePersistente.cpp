@@ -56,7 +56,7 @@ int kth(Node *Left, Node *Right, int l, int r, int k){
 }
 
 /*LATEX_DESC_BEGIN***************************
--> Segment Tree Persistente
+-> **Segment Tree Persistente**
 Build(1, N) -> Cria uma Seg Tree completa de tamanho N;	RETORNA um *Ponteiro pra Raíz
 Update(Root, 1, N, pos, v) 	-> Soma +V na posição POS; RETORNA um *Ponteiro pra Raíz da nova versão;
 Query(Root, 1, N, a, b) 	-> RETORNA o valor calculado no range [a, b];

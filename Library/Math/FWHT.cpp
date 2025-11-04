@@ -53,7 +53,7 @@ vector<ll> subset_multiply(vector<ll> a, vector<ll> b){ //OPTIONAL
 }
 
 /*LATEX_DESC_BEGIN***************************
-Fast Walsh Hadamard Transform - Convolução de XOR, OR e AND
+Fast Walsh Hadamard Transform - **Convolução de XOR, OR e AND**
 O(N log N)
 *****************************LATEX_DESC_END*/
 // Credits: https://github.com/gabrielpessoa1/ICPC-Library/blob/master/code/Math/FastWalshHadamardTransform.cpp

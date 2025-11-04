@@ -50,7 +50,7 @@ void kosaraju(int n){
 }
 
 /*LATEX_DESC_BEGIN***************************
-Kosaraju - Strongly Connected Component
+**Kosaraju - Strongly Connected Component**
 Algoritmo de Kosaraju para encontrar Componentes Fortemente Conexas
 
 Complexity: O(V + E)

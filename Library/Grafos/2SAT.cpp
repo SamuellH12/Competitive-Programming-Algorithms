@@ -64,7 +64,7 @@ private:
 };
 
 /*LATEX_DESC_BEGIN***************************
-2 SAT - Two Satisfiability Problem
+**2 SAT - Two Satisfiability Problem**
 Retorna uma valoração verdadeira se possível ou um vetor vazio se impossível;
 inverso de u = ~u
 @\vspace{-16pt}\begin{center}\begin{tabular}{|| c c || c | c | c | c | c | c | c ||}

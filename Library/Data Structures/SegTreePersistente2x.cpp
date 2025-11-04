@@ -74,7 +74,7 @@ int kth(Node& Left, Node& Right, int l, int r, int k){
 int kth(NodeId Left, NodeId Right, int k){ return kth(NODES[Left], NODES[Right], LSEG, RSEG, k); }
 
 /*LATEX_DESC_BEGIN***************************
--> Segment Tree Persistente: (2x mais rápido que com ponteiro)
+-> **Segment Tree Persistente:** (2x mais rápido que com ponteiro)
 Build(1, N) -> Cria uma Seg Tree completa de tamanho N;	RETORNA o NodeId da Raiz
 Update(Root, pos, v) -> Soma +V em POS; RETORNA o NodeId da nova Raíz;
 Query(Root, a, b) -> RETORNA o valor do range [a, b];

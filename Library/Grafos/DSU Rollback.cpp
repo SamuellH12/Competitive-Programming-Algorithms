@@ -33,7 +33,7 @@ struct DSUr {
 	}
 };
 /*LATEX_DESC_BEGIN***************************
-Disjoint Set Union with **Rollback** - O(Log n)
+**Disjoint Set Union with Rollback** - O(Log n)
 checkpoint() -> salva o estado atual
 rollback() -> restaura no último checkpoint
 save another var? +save in join & +line in pop 

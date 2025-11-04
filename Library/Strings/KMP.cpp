@@ -37,7 +37,7 @@ struct Automato {
 };
 
 /**************************
-KMP - Knuth–Morris–Pratt Pattern Searching
+**KMP** - Knuth–Morris–Pratt Pattern Searching
 Complexity: O(|S|+|T|)
 kmp(s, t) -> returns all occurences of t in s
 p = Pi(t) -> p[i] = biggest prefix that is a sufix of t[0,i]

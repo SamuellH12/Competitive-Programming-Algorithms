@@ -19,8 +19,7 @@ vector<int> manacher(string &st){
 	return p; //agora é o tamanho real
 }
 
-/******************
-Manacher Algorithm
+/*LATEX_DESC_BEGIN***************************
+**Manacher Algorithm** - O(N)
 Find every palindrome in string
-Complexidade: O(N)
-******************/
+*****************************LATEX_DESC_END*/

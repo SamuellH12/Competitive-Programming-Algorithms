@@ -38,14 +38,12 @@ int lca(int u, int v){
 	return bl[0][u];
 }
 /*LATEX_DESC_BEGIN***************************
-	LCA - Lowest Common Ancestor - Binary Lifting - O(Log N) - Build O(N Log N)
+	**LCA** - Lowest Common Ancestor - **Binary Lifting** - O(Log N) - Build O(N Log N)
 Encontrar o menor ancestral comum entre dois vértices em uma árvore enraizada
 IMPORTANTE! O algoritmo está 0-indexado 
-
-* Informações
-	-> chame dfs(root, root) para calcular o pai e a altura de cada vértice
-	-> chame buildBL() para criar a matriz do Binary Lifting
-	-> chame lca(u, v) para encontrar o menor ancestral comum
-	bl[i][u] -> Binary Lifting com o (2^i)-ésimo pai de u
-	lvl[u]   -> Altura ou level de U na árvore
+   -> chame dfs(root, root) para calcular o pai e a altura de cada vértice
+   -> chame buildBL() para criar a matriz do Binary Lifting
+   -> chame lca(u, v) para encontrar o menor ancestral comum
+   bl[i][u] -> Binary Lifting com o (2^i)-ésimo pai de u
+   lvl[u]   -> Altura ou level de U na árvore
 *****************************LATEX_DESC_END*/

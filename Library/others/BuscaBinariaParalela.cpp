@@ -44,7 +44,7 @@ void pbsR(vector<int> &qidx, int l, int r){
 }
 
 /*LATEX_DESC_BEGIN***************************
-Busca Binária Paralela - O(Q+K log K)
+**Busca Binária Paralela** - O(Q+K log K)
 
 Dado **K** updates ordenados pelo tempo, e **Q** queries da forma:
 - Qual o primeiro momento entre [0, K-1] em que * é verdade?

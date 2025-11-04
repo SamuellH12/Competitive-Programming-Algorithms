@@ -68,8 +68,8 @@ struct Aho {
 
 
 /*LATEX_DESC_BEGIN***************************
-Aho-Corasick: Trie automaton to search multiple patterns in a text
-**Complexity:** O(SUM|P| + |S|) * ALPHA
+**Aho-Corasick:** Trie automaton to search multiple patterns in a text
+O(SUM|P| + |S|) * ALPHA
 
 for(auto p: patterns) aho.add(p);
 aho.buildSufixLink();

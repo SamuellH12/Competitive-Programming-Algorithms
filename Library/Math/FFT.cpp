@@ -52,7 +52,7 @@ vector<ld> conv(const vector<ld>& a, const vector<ld>& b){
 }
 
 /*LATEX_DESC_BEGIN***************************
-Fast Fourier Transform for polynomials multiplication
+**Fast Fourier Transform** for polynomials multiplication
 
 @\texttt{conv(a, b) = c}, where $c[x] = \sum a[i]b[x-i]$.@
 

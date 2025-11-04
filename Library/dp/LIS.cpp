@@ -12,9 +12,7 @@ int LIS(vector<int>& nums){
 	return (int) lis.size();
 }
 /*LATEX_DESC_BEGIN***************************
-LIS - Longest Increasing Subsequence
-
-**Complexity:** O(N Log N)
+-> **LIS - Longest Increasing Subsequence** - O(N Log N)
 * For ICREASING sequence, use lower_bound()
 * For NON DECREASING sequence, use upper_bound()
 *****************************LATEX_DESC_END*/

@@ -19,10 +19,9 @@ template<typename T> struct Sparse {
 	}
 };
 
-/*************************************************
-Sparse Table for Range Minimum Query [L, R] [0, N-1]
-build:  O(N log N)	
-Query:  O(1)
+/*LATEX_DESC_BEGIN***************************
+**Sparse Table** for Range Minimum Query [L, R] [0, N-1]
+build:  O(N log N)	 Query:  O(1)
 build(v) -> v = Original Array
 if you want a static array, do this: for(int i=0; i<N; i++) table[0][i] = v[i];
-*************************************************/
+*****************************LATEX_DESC_END*/

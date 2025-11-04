@@ -22,7 +22,7 @@ void sosDPsub(){ // O(3^N) //suboptimal
 }
  
 /*LATEX_DESC_BEGIN***************************
-SOS DP - Sum over Subsets
+-> **SOS DP - Sum over Subsets**
 
 Dado que cada mask possui um valor inicial (iVal), computa 
 para cada mask a soma dos valores de todas as suas submasks.

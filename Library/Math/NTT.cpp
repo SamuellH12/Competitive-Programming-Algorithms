@@ -66,7 +66,7 @@ vector<ll> power(vector<ll> &p, int k, int limit=-1){ //O(n*limit)
 }
 
 /*LATEX_DESC_BEGIN***************************
-Number Theoretic Transform for polynomials multiplication MOD
+**Number Theoretic Transform for polynomials multiplication MOD**
 
 @\texttt{conv(a, b) = c}, where $c[x] = \sum a[i]b[x-i]$.@ 
 

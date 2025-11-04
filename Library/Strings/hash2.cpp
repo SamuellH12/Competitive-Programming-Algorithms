@@ -56,7 +56,7 @@ int hshComp(StringHash& a, int la, int ra, StringHash& b, int lb, int rb){
 }
 
 /*LATEX_DESC_BEGIN***************************
-String Hash - Double Hash
+**String Hash** - Double Hash
 precalc()    -> O(N)
 StringHash() -> O(|S|)
 gethash()    -> O(1)

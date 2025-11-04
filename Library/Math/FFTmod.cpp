@@ -30,7 +30,7 @@ template<const int mod> vector<ll> convMod(const vector<ll> &a, const vector<ll>
 }
 
 /*LATEX_DESC_BEGIN***************************
-Fast Fourier Transform for polynomials multiplication with MOD
+**Fast Fourier Transform** for polynomials multiplication with **MOD**
 FFT com **ALTA PRECISÃO** (não precisa do mod, só coloque cut=1<<15)
 Can be used for convolutions modulo arbitrary integers.
 @as long as $N\log_2N\cdot \text{mod} < 8.6 \cdot 10^{14}$ (in practice $10^{16}$ or higher).@

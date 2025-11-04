@@ -78,7 +78,7 @@ private:
 };
 
 /*LATEX_DESC_BEGIN***************************
-Heavy-Light Decomposition
+**Heavy-Light Decomposition**
 
 **Complexity:** O(LogN * (qry || updt)) 
 

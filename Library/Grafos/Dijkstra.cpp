@@ -26,10 +26,11 @@ vector<ll> dijkstra(int s, int N){
 	}
 	return dist;
 }
-/**************************************
+
+/*LATEX_IGNORED_BEGIN************************
 Dijkstra - Shortest Paths from Source -  O(N Log N)
 caminho minimo de um vertice u para todos os outros vertices de um grafo ponderado
 dijkstra(s)				->  s : Source, Origem. As distancias serao calculadas com base no vertice s
 g[u] = {v, c};  	->  u : Vertice inicial, v : Vertice final, c : Custo da aresta
 priority_queue<pii, vector<pii>, greater<pii>> ->  Ordena pelo menor custo -> {d, v} -> d : Distancia, v : Vertice
-***************************************/
+***************************LATEX_IGNORED_END*/

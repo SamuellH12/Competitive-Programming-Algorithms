@@ -57,7 +57,7 @@ inline ll hilbert(int x, int y){ //OPTIONAL
 }
 
 /*LATEX_DESC_BEGIN***************************
-Algoritmo de MO para query em range
+**Algoritmo de MO** para query em range
 
 **Complexity:** O( (N + Q) * SQRT(N) * F ) | F é a complexidade do Add e Remove
 

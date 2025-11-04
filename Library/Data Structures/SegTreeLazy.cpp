@@ -61,8 +61,8 @@ template<typename T> struct SegTree {
 };
 
 
-/******************************************************
--> Segment Tree - Lazy Propagation com:
+/*LATEX_DESC_BEGIN***************************
+-> **Segment Tree - Lazy Propagation** com:
 	- Query em Range
 	- Update em Range
 	- Closed interval & 0-indexed: [L, R] & [0, N-1]
@@ -71,4 +71,4 @@ Query:  O(log N) | seg.query(l, r);
 Update: O(log N) | seg.update(l, r, v);
 Unlazy: O(1)
 **Update Join, NEUTRO, Update and Unlazy if needed**
-*******************************************************/
+*****************************LATEX_DESC_END*/

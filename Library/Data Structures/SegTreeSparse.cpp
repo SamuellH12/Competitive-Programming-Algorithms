@@ -34,6 +34,6 @@ template<typename T> struct SparseSeg {
 	T query(int a, int b){ return query(root, 0, n, a, b); }
 };
 
-/*LATEX_DESC_BEGIN***************************
+/*LATEX_IGNORED_BEGIN************************
 -> Segment Tree Esparsa
-*****************************LATEX_DESC_END*/
+***************************LATEX_IGNORED_END*/

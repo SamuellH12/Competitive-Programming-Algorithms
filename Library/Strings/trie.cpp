@@ -33,7 +33,7 @@ struct Trie {
 };
 
 /*LATEX_DESC_BEGIN***************************
-Trie - Arvore de Prefixos
+**Trie - Arvore de Prefixos**
 insert(P) - O(|P|)
 count(P)  - O(|P|)
 sigma - Tamanho do alfabeto

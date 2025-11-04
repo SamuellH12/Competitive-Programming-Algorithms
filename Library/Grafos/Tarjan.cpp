@@ -31,7 +31,7 @@ void tarjan(int u, int p = -1){
 }
 
 /*LATEX_DESC_BEGIN***************************
-Tarjan - Pontes e Pontos de Articulação - O(V + E)
+**Tarjan - Pontes e Pontos de Articulação** - O(V + E)
 Algoritmo para encontrar pontes e pontos de articulação.
 
 pre[u]= "Altura", ou, x-ésimo elemento visitado na DFS. Usado para saber a posição de um vértice na árvore de DFS

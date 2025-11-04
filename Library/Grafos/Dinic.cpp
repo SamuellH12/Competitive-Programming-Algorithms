@@ -78,7 +78,7 @@ struct Dinic {
 	}
 };
 /*LATEX_DESC_BEGIN***************************
-    Dinic - Max Flow Min Cut
+    **Dinic - Max Flow Min Cut**
 Algoritmo de Dinitz para encontrar o Fluxo Máximo. 
 IMPORTANTE! O algoritmo está 0-indexado
 
@@ -112,7 +112,7 @@ O( sqrt(V) * E )  ->  grafos com cap = 1 para toda Edge // matching bipartido
 
 + **Maximum matching** (bipartite): maximum matching is equal to maximum flow. Add a src and a sink, edges from the src to every node at one partition and from each node of the other partition to the sink.
 
-+ **Minimum node cover** (bipartite): minimum set of nodes such each edge has at least one endpoint. The size of minimum node cover is equal to maximum matching (Konig’s theorem).
++ **Minimum node cover ** (bipartite) : minimum set of nodes such each edge has at least one endpoint. The size of minimum node cover is equal to maximum matching (Konig’s theorem).
 
 + **Maximum-independent-set** (bipartite): largest set of nodes such that no two nodes are connected with an edge. Contain the nodes that aren't in "Min node cover" (N - MAXFLOW).
 
