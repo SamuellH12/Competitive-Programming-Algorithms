@@ -37,7 +37,7 @@ vector<ll> shift(vector<ll> pol, ll n){ //para StirlingFirst
         return pol;
 }
 
-vector<ll> StirlingFirst(ll n, bool sign = false){  //O(n log^2 n)
+vector<ll> StirlingFirst(ll n, bool sign = false){  //O(n log^2 n) //lembrar do fat/finv
     if(n == 0) return {1};
     vector<ll> pol(n+1), q = n&1 ? StirlingFirst(n-1) : StirlingFirst(n/2);
 
@@ -54,7 +54,7 @@ vector<ll> StirlingFirst(ll n, bool sign = false){  //O(n log^2 n)
     return pol;
 }
 
-vector<ll> StirlingSecond(int n){ //O(n log^2 n)
+vector<ll> StirlingSecond(int n){ //O(n log^2 n) //lembrar do fat/finv
     vector<ll> a(n+1), b(n+1);
     for(int i=0; i<n+1; i++){
         a[i] = fexp(i, n) * finv[i] % mod;

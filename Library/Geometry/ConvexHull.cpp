@@ -21,11 +21,11 @@ vector<PT> ConvexHull(vector<PT> pts, bool sorted=false){
 	vector<PT> h(2*n+1);
 
 	for(int i=0; i<n; h[s++] = pts[i++])
-		while(s > 1 && (pts[i] - h[s-2]) % (h[s-1] - h[s-2]) >= 0 )
+		while(s > 1 && h[s-2].cross(pts[i], h[s-1]) >= 0 )
 			s--;
 
 	for(int i=n-2, t=s; ~i; h[s++] = pts[i--])
-		while(s > t && (pts[i] - h[s-2]) % (h[s-1] - h[s-2]) >= 0 )
+		while(s > t && h[s-2].cross(pts[i], h[s-1]) >= 0 )
 			s--;
 
 	h.resize(s-1);

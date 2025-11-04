@@ -16,7 +16,6 @@ struct PT {
 	bool operator==(const PT&a) const{ return x == a.x && y == a.y; }
 	bool operator< (const PT&a) const{ return tie(x, y) < tie(a.x, a.y); }
 	
-	// utils
 	ld len() const { return hypot(x,y); } // sqrt(p*p)
 	ll cross(const PT&a, const PT&b) const{ return (a-*this) % (b-*this); } // (a-p) % (b-p)
 	int quad() { return (x<0)^3*(y<0); } //cartesian plane quadrant |0++|1-+|2--|3+-|

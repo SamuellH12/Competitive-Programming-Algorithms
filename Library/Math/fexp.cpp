@@ -1,4 +1,5 @@
 #define ll long long
+#pragma once //LATEX_IGNORED_LINE
 ll mod = 1e9 + 7;
 
 ll fexp(ll b, ll p){

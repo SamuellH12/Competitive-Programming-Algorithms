@@ -65,7 +65,7 @@ O(N log N) // N=|A|+|B| (1s N <= 2^22)
 
 ||      +++ Four Sum i<j<k<l +++        ||     +++ Tree Sum i<j<k +++       ||
 || iiii = vx4;                          || iii = vx3; // vx3[i*3] = v[i]    ||
-|| iiij = conv(vx3, conv(v, v));        || iij = conv(vx2, v);              ||
+|| iiij = conv(vx3, v);                 || iij = conv(vx2, v);              ||
 || iijj = conv(vx2, vx2);               || ijk = conv(conv(v, v), v);       ||
 || iijk = conv(vx2, conv(v, v));        || ans = (ijk - 3*iij + 2*iii) / 6; ||
 || ijkl = conv(conv(v, v), conv(v, v)); || 
