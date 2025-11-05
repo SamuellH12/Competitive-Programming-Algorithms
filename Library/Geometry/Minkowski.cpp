@@ -29,7 +29,7 @@ vector<PT> minkowski(vector<PT> a, vector<PT> b){
 /*LATEX_DESC_BEGIN***************************
 **Minkowski Sum of convex polygons** - O(N)
 
-@\begin{minipage}{0.35\textwidth}
+@\begin{minipage}{0.85\textwidth}
 Returns a convex hull of two polygons minkowski sum.  \\
 
 The minkowski sum of polygons A and B is a polygon such that every vector 
@@ -37,7 +37,7 @@ inside it is the sum of a vector in A and a vector in B. \(A + B = C = \{a+b \mi
 
 min(a.size(), b.size()) >= 2
 
-\end{minipage}\hfill \begin{minipage}{0.09\textwidth} 
+\end{minipage}\hfill \begin{minipage}{0.15\textwidth} 
 \includegraphics[height=6\baselineskip]{geometry/minkowski} 
 \end{minipage}@
 *****************************LATEX_DESC_END*/

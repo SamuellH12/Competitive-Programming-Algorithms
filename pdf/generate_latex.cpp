@@ -16,7 +16,6 @@ const vector<string> IGNORED_LINES = {
     "Credits: ",
     "/********",
     "********/",
-    " \t \t \t \t ", //pra ocultar linhas sem chamar atenção no código
     "LATEX_DESC_BEGIN",
     "LATEX_DESC_END",
     "\t//////////////////////",
@@ -50,6 +49,7 @@ map<char32_t, char> char_changes = {
     {U'á', 'a'}, {U'à', 'a'}, {U'â', 'a'}, {U'ã', 'a'},
     {U'Á', 'A'}, {U'À', 'A'}, {U'Â', 'A'}, {U'Ã', 'A'},
     {U'é', 'e'}, {U'è', 'e'}, {U'ê', 'e'}, {U'ë', 'e'},
+    {U'É', 'E'}, {U'È', 'E'}, {U'Ê', 'E'}, {U'Ë', 'E'},
     {U'í', 'i'}, {U'ì', 'i'}, {U'î', 'i'}, {U'ï', 'i'},
     {U'ó', 'o'}, {U'ò', 'o'}, {U'ô', 'o'}, {U'õ', 'o'},
     {U'ú', 'u'}, {U'ù', 'u'}, {U'û', 'u'}, {U'ü', 'u'},
