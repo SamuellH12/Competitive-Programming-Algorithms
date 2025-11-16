@@ -305,7 +305,7 @@ string get_style(const string& filename) {
     string ext = filename.substr(dot_pos + 1);
     transform(ext.begin(), ext.end(), ext.begin(), ::tolower);
     
-    if (ext == "c" || ext == "cc" || ext == "cpp" || ext == "h") return "cpp";
+    if (ext == "c" || ext == "cc" || ext == "cpp" || ext == "h" || ext == "hpp") return "cpp";
     if (ext == "java") return "java";
     if (ext == "py") return "py";
     if (ext == "tex") return "tex";

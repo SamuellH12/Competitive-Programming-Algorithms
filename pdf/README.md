@@ -127,6 +127,8 @@ int main(){
 
 <sup><sub>* Inspirado e compatível com o Hash utilizado na Lib [brunomaletta/Biblioteca](https://github.com/brunomaletta/Biblioteca/) </sub></sup>
 
+- Nota: se o compilador reclamar da flag ```-lcrypto```, remova ela e em ```hash/md5hsh.cpp``` remova o ```#define FAST_HASH``` (linha ~40). Nesse caso, calcular o hash dos arquivos será mais lento.
+
 <hr>
 
 Esse código foi inspirado em alguns geradores de lib e latex famosos da comunidade, assim como adicionei novas funcionalidades. Sinta-se livre para copiar e modificar esse código também. =]
