@@ -35,3 +35,13 @@ PT lineProj(PT a, PT b, PT p, bool refl=false) {
 	PT v = b-a;
 	return p - rotateCCW90(v) * (1+refl) * (v%(p-a)) / (v*v);
 }
+
+/*BLOCK_DESC_BEGIN
+**Calculate coefficients** of the line equation **Ax + By = C**.
+BLOCK_DESC_END*/
+tuple<ll, ll, ll> ptToLine(PT s, PT t){
+    ll a = t.y - s.y; 
+    ll b = s.x - t.x;
+    ll c = a*s.x + b*s.y;
+    return {a, b, c};
+}
