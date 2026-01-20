@@ -317,6 +317,7 @@ string get_tex(const vector<pair<string, vector<t_section>>>& sections) {
     string tex, description;
     for(auto& [section_name, subsections] : sections) if(!subsections.empty()){
         tex += "\\section{" + section_name + "}\n";
+        tex += "\\raggedbottom";
         
         for(auto [filename, subsection_name, file_hash] : subsections){
             cout << get_style(filename) + "\t| " << filename << endl;
@@ -329,17 +330,20 @@ string get_tex(const vector<pair<string, vector<t_section>>>& sections) {
                 full_path = newpath;
 
             tex += "\\vspace{-2pt}\n";
+            tex += "\\raggedbottom";
             tex += "\\subsection{" + subsection_name + "}\n";
             
             if (!description.empty()) {
                 tex += "\\vspace{-4pt}\n";
+                tex += "\\raggedbottom";
                 tex += "\\begin{listingframe}[]{}\n";
                 tex += description + "\n";
                 tex += "\\end{listingframe}\n";
             } 
             
             tex += "\\vspace{-5pt}\n";
-            tex += "\\raggedbottom\\lstinputlisting[style="+get_style(filename) + "]{" + full_path + "}\n";
+            tex += "\\raggedbottom";
+            tex += "\\lstinputlisting[style="+get_style(filename) + "]{" + full_path + "}\n";
             tex += "\\hrulefill\n\n";
         }
         tex += "\n";

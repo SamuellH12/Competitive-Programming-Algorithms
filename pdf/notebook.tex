@@ -114,42 +114,20 @@
 }
 % LATEX DESC
 
-% define a pleasant default listings style (customize as you like)
-\lstdefinestyle{myListingStyle}{
-  basicstyle=\fontsize{7}{8}\ttfamily,
-  keywordstyle=\bfseries,
-  commentstyle=\itshape\color{gray},
-  stringstyle=\color{olive!60!black},
-  breaklines=true,
-  breakatwhitespace=true,
-  showstringspaces=false,
-  xleftmargin=0pt,
-  frame=none,
-  belowcaptionskip=0.05\baselineskip,
-  tabsize=2,
-  keepspaces=true,
-  showspaces=false,                
-  showtabs=false,   
-}
-
 \newtcblisting{listingframe}[2][]{%
   enhanced,
-  breakable,
+  breakable=true,
   listing only,
   listing engine=listings,
   colback=descboxbg,
   colframe=descboxfrm,
-  coltitle=black,
-  fonttitle=\sffamily\bfseries,
-  title={#1},            % optional title
-  attach title to upper,
   top=-1mm, bottom=-1mm, left=2mm, right=2mm,
   boxrule=0.6pt,
   arc=2mm,
   outer arc=2mm,
   borderline={0.5pt}{0pt}{descboxfrm},
-  shadow={0pt}{-1.5pt}{3pt}{black!12},
-  listing options={style=myListingStyle,#2}
+  % shadow={0pt}{-1.5pt}{3pt}{black!12},
+  listing options={breaklines, style=shared, #2}
 }
 
 
@@ -197,9 +175,11 @@
 
 \begin{document}
 \begin{landscape}
-\begin{multicols*}{2}  % MUDE A QUANTIDADE DE COLUNAS AQUI
+\begin{multicols}{3}  % MUDE A QUANTIDADE DE COLUNAS AQUI
 \raggedcolumns 
-\interlinepenalty=10000
+\interlinepenalty=1000000000
+\linepenalty=1000000000
+\widowpenalty=1000000000
 
 \maketitle
 \vspace{-13ex}
@@ -209,6 +189,6 @@
 
 \input contents.tex
 
-\end{multicols*}
+\end{multicols}
 \end{landscape}
 \end{document}
