@@ -4,24 +4,22 @@ using namespace std;
 #ifdef MAINFILE //LATEX_IGNORED_LINE
 
 string getHash(string s){
-	ofstream ip("temp.cpp"); ip << s; ip.close();
-	system("g++ -E -P -dD -fpreprocessed ./temp.cpp | tr -d '[:space:]' | md5sum > hsh.temp");
-	ifstream fo("hsh.temp"); fo >> s; fo.close();
+	ofstream("z.cpp") << s;
+	system("g++ -E -P -dD -fpreprocessed ./z.cpp | tr -d '[:space:]' | md5sum > sh");
+	ifstream("sh") >> s;
 	return s.substr(0, 3);
 }
-
 int main(){ 
 	string l, t;
-	vector<string> st(10);
+	stack<string> st({""});
 	while(getline(cin, l)){
-		t = l;
+        t = l;
 		for(auto c : l)
-			if(c == '{') st.push_back(""); else 
-			if(c == '}') t = st.back() + l, st.pop_back();
-		cout << getHash(t) + " " + l + "\n";
-		st.back() += t + "\n";
+			if(c == '{') st.push(""); else 
+			if(c == '}') t = st.top()+l, st.pop();
+		cout << getHash(t) + " " + l << endl;
+		st.top() += t;
 	}
-    return 0; //LATEX_IGNORED_LINE
 }
 
 #endif //LATEX_IGNORED_LINE
