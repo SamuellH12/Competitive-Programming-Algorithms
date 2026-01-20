@@ -2,11 +2,11 @@
 
 // rotate the polygon such that the (bottom, left)-most point is at the first position
 void reorder_polygon(vector<PT> &p){
-    int pos = 0;
-    for(int i = 1; i < p.size(); i++)
-        if(pair(p[i].y, p[i].x) < pair(p[pos].y, p[pos].x))  //if(p[i].y < p[pos].y || (p[i].y == p[pos].y && p[i].x < p[pos].x)) 
-            pos = i;
-    rotate(p.begin(), p.begin() + pos, p.end());
+    int j = 0;
+    for(int i=1; i<p.size(); i++)
+        if(pair(p[i].y, p[i].x) < pair(p[j].y, p[j].x)) 
+            j = i;
+    rotate(p.begin(), p.begin() + j, p.end());
 }
 
 vector<PT> minkowski(vector<PT> a, vector<PT> b){

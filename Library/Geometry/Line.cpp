@@ -10,7 +10,7 @@ bool onLine(PT s, PT e, PT p){ return p.cross(s, e) == 0;}
 \end{minipage}\hfill \begin{minipage}{0.15\textwidth} \includegraphics[height=4\baselineskip]{geometry/lineDistance} \end{minipage}
 BLOCK_DESC_END*/
 
-ld lineDist(PT& a, PT& b, PT& p){ return (b-a) % (p-a) / (b-a).len(); }
+ld sLineDist(PT& a, PT& b, PT& p){ return a.cross(b, p) / (b-a).len(); }
 
 /*BLOCK_DESC_BEGIN 
 **Intersection between two lines**   \\
