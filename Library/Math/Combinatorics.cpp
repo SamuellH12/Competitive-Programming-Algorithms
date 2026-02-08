@@ -17,7 +17,7 @@ ll choose(ll n, ll k){ if(k>n||k<0) return 0;
 } 
 
 ll chooseLinear(ll n, ll k){ //O(k) || min(k, n-k);
-	k = min(k, n-k);
+	k = max(k, n-k);
 	ll ans = 1, inv=1;
 	for(int i=n; i>k; i--) ans = ans*i % mod;
 	for(int i=1; i<=n-k; i++) inv = inv*i % mod;
@@ -27,6 +27,15 @@ ll chooseLinear(ll n, ll k){ //O(k) || min(k, n-k);
 ll permRepetition(const vector<int> &cnt){
 	ll n = accumulate(begin(cnt), end(cnt), 0ll), ans = fat[n];
 	for(int x : cnt) ans = ans * finv[x] % mod;
+	return ans;
+}
+
+//#Colorir N posicoes com exatamente K cores (equival stirling_2 * k!)
+ll RhymingK(ll n, ll k){ //O(K log N)
+    ll ans = 0;
+    for(int j=0; j<=k; j++)
+        if(j&1) ans = (ans + mod - choose(k, k-j) * fexp(k-j, n) % mod) % mod;
+        else    ans = (ans +       choose(k, k-j) * fexp(k-j, n) % mod) % mod;
 	return ans;
 }
 
