@@ -1,3 +1,11 @@
+## ↘️  Importando esse Código
+
+Execute esse comando na pasta parent da sua lib, ele vai criar uma pasta pdf com todos os códigos necessários para gerar o arquivo pdf.
+
+```bash
+git clone --depth=1 --filter=blob:none --sparse https://github.com/SamuellH12/Competitive-Programming-Algorithms.git temp && cd temp && git sparse-checkout set pdf && cp -r pdf .. && cd .. && rm -rf temp
+```
+
 ## 📄 Gerar PDF
 
 Para gerar o pdf execute o script shell.
