@@ -58,6 +58,24 @@ vector<PT> polygonCut(const vector<PT>& poly, PT s, PT e){
 }
 
 /*BLOCK_DESC_BEGIN 
+**getArea** Returns the area of the polygon formed by the points in range [L, R]. (Or [0, L] U [R, N) if R<L)
+Struct is only for lib purpose, copy the code inline.
+BLOCK_DESC_END*/
+struct PolygonAreaPS{
+  int n; vector<ll> ps = {0}; vector<PT> pts;
+  
+  PolygonAreaPS(vector<PT> pts) : pts(pts), n(pts.size()){
+    for(int i=1; i<n; i++)
+      ps.push_back(ps.back() + pts[i-1] % pts[i]);
+  }
+
+  ll getArea(int l, int r){
+      if(l <= r) return ps[r] - ps[l] + pts[r] % pts[l];
+      return getArea(0, n-1) - getArea(r, l);
+  }
+};
+
+/*BLOCK_DESC_BEGIN 
 Pick's theorem for **lattice points** in a simple polygon. (lattice points = integer points)
 Area = insidePts + boundPts/2 - 1
 2A - b + 2 = 2i
