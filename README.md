@@ -61,7 +61,7 @@ To generate a new PDF see [PDF](./pdf/README.md).
 - [LineContainer](./Library/Geometry/LineContainer.cpp)
 - [Minkowski](./Library/Geometry/Minkowski.cpp)
 - [Point](./Library/Geometry/Point.cpp)
-- [Poligons](./Library/Geometry/Poligons.cpp)
+- [Polygons](./Library/Geometry/Polygons.cpp)
 - [Segment](./Library/Geometry/Segment.cpp)
 
 ### dp
