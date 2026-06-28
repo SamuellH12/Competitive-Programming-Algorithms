@@ -5,7 +5,8 @@ using namespace std;
 
 struct PT {
 	ll x, y;
-	PT(ll x=0, ll y=0) : x(x), y(y) {}
+	PT(ll x, ll y) : x(x), y(y) {}
+	PT() : x(0), y(0){}
 
 	PT operator+(const PT&a)const{return PT(x+a.x, y+a.y);}
 	PT operator-(const PT&a)const{return PT(x-a.x, y-a.y);}

@@ -35,9 +35,18 @@ ll RhymingK(ll n, ll k){ //O(K log N)
     ll ans = 0;
     for(int j=0; j<=k; j++)
         if(j&1) ans = (ans + mod - choose(k, k-j) * fexp(k-j, n) % mod) % mod;
-        else    ans = (ans +       choose(k, k-j) * fexp(k-j, n) % mod) % mod;
+        else    ans = (ans + mod + choose(k, k-j) * fexp(k-j, n) % mod) % mod;
 	return ans;
 }
+
+//#Colorir N posições de um colar com M cores (array circular)
+ll burnsideLemma(ll n, ll m){
+    ll ans = fexp(m, n);
+    for(int i=1; i<n; i++) 
+        ans += fexp(m, gcd(i, n)), ans %= mod;
+    return ans * fexp(n, mod-2);
+}
+ 
 
 ll pascal[5001][5001]; // pascal[n][k] = choose(n, k);
 void Pascal(int N){
@@ -82,10 +91,10 @@ ll starsLowerUpperBound(ll n, const vector<ll> &lw, const vector<ll> &up){ //O(N
 }
 
 ///// Propriedades /////
-ll sumNci (ll n){ return fexp(2, n); }             //for(i=0; i<=n) sum+=choose(n, i);
-ll sumicK (ll n, ll k){ return choose(n+1, k+1); } //for(i=0; i<=n) sum+=choose(i, k);
-ll sumNKcK(ll n, ll k){ return choose(n+k+1, k); } //for(i=0; i<=k) sum+=choose(n+i, i);
-ll sumNsqr(ll n){ return choose(n+n, n); }         //for(i=0; i<=n) sum+=choose(n, i)**2;
+ll sumNci (ll n){ return fexp(2, n); }             //SUM(0<=i<=n) choose(n,i);
+ll sumicK (ll n, ll k){ return choose(n+1, k+1); } //SUM(0<=i<=n) choose(i,k);
+ll sumNKcK(ll n, ll k){ return choose(n+k+1, k); } //SUM(0<=i<=k) choose(n+i,i);
+ll sumNsqr(ll n){ return choose(n+n, n); }         //SUM(0<=i<=n) choose(n,i)^2;
 ll catalan(ll n){ return choose(2*n, n) * fexp(n+1, mod-2) % mod; }
 
 

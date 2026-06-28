@@ -23,7 +23,23 @@ bool ptInsideTriangle(PT p, PT a, PT b, PT c){
   bool x = (b-a) % (p-b) < 0;
   bool y = (c-b) % (p-c) < 0;
   bool z = (a-c) % (p-a) < 0;
-  return x == y && y == z;
+  return x == y && y == z;  
+}
+
+/*BLOCK_DESC_BEGIN 
+Returns 1 if a **point is inside a polygon**, 2 if in border, else 0. Non-convex O(n) 
+BLOCK_DESC_END*/
+int ptInsidePol(vector<PT>& pol, PT p){
+	int qt = 0;
+	for(int i=0, n=pol.size(); i<n; i++){
+		auto s = pol[i], e=pol[(i+1)%n];
+        
+    if(onSegment(s, e, p)) return 2;        
+		if((s.y < p.y) == (e.y < p.y)) continue;
+        
+		qt ^= (s.y < p.y) == (s.cross(p, e) > 0);
+	}
+	return qt != 0;
 }
 
 
