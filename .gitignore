@@ -15,3 +15,5 @@ pdf/temp
 *.exe
 a.out
 genLatex
+*.log
+*.aux
