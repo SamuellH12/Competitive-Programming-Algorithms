@@ -7,8 +7,8 @@ Returns **twice area of a simple polygon**. area*2 (Shoelace Formula: signed cro
 BLOCK_DESC_END*/
 ll Area2x(vector<PT>& p){
 	ll area = 0;  
-	for(int i=2; i < p.size(); i++)
-		area += (p[i]-p[0]) % (p[i-1]-p[0]);
+	for(int i=0, j=p.size()-1; i<p.size(); j=i++)
+		area += p[i] % p[j];
 	return abs(area);
 }
 

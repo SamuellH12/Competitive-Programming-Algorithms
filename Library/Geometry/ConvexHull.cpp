@@ -92,3 +92,39 @@ int maximizeScalarProduct(const std::vector<PT> &h, PT v) {
 	if(v*h[ans] < v*h[1] ) ans = 1;
 	return ans;
 }
+
+
+/*BLOCK_DESC_BEGIN 
+Returns the two tangent vectors from point p to the convex hull, like **the hull shadow from p**.
+This code assumes that there are NO 3 colinear points!
+BLOCK_DESC_END*/
+pair<PT, PT> eclipse(const vector<PT> &h, PT v){
+	int n = h.size();
+	PT vl = h[0], vr = h[0]; 
+	if(n < 15){
+		for(int i=0; i<n; i++){
+			if(v.cross(vl, h[i]) > 0) vl = h[i];
+			if(v.cross(vr, h[i]) < 0) vr = h[i];
+		}
+		return {vl-v, vr-v};
+    }
+
+	for(int md=-1; md<2; md+=2){
+		auto &u = md > 0 ? vl : vr;
+		for(int rep=0; rep<2; rep++){
+			int l = 1, r = n-1;
+			while(l != r){
+				int mid = (l+r+1)/2;
+				int f = v.cross(h[mid-1], h[mid]) * md >= 0; 
+
+				if(rep) f |= v.cross(h[mid-1], h[0]) * md >= 0;
+				else    f &= v.cross(h[mid], h[0]) * md < 0;
+				
+				if(f) l = mid;
+				else  r = mid - 1;
+			}
+			if(v.cross(u, h[l]) * md > 0) u = h[l];
+		}
+	}
+	return {vl-v, vr-v};
+}

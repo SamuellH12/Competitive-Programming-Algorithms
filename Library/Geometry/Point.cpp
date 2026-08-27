@@ -39,6 +39,7 @@ PT rotateCCW(PT p, ld t){
 	return PT(p.x*c - p.y*s, p.x*s + p.y*c); 
 }
 
+ostream &operator<<(ostream &os, const PT &p){ return os << "(" << p.x << "," << p.y << ")"; }
 
 /*LATEX_DESC_BEGIN***************************
 **Dot product** p*q @$= p \cdot q$@ | inner product | norm | lenght^2
