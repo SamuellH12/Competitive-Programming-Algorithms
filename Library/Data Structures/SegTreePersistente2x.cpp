@@ -73,7 +73,7 @@ int kth(Node& Left, Node& Right, int l, int r, int k){
 }
 int kth(NodeId Left, NodeId Right, int k){ return kth(NODES[Left], NODES[Right], LSEG, RSEG, k); }
 
-/*LATEX_DESC_BEGIN***************************
+/*LATEX_IGNORED_BEGIN***************************
 -> **Segment Tree Persistente:** (2x mais rápido que com ponteiro)
 Build(1, N) -> Cria uma Seg Tree completa de tamanho N;	RETORNA o NodeId da Raiz
 Update(Root, pos, v) -> Soma +V em POS; RETORNA o NodeId da nova Raíz;
@@ -92,4 +92,4 @@ Comportamento do K-th(SegL, SegR, 1, N, K):
 	A Seg deve ser utilizada como um array de frequências. Comece com a Seg zerada (Build). 
 	Para cada valor V do Array chame um update(roots.back(), 1, N, V, 1) e guarde o ponteiro da seg.
 	Consultar o K-ésimo menor valor de [L, R]: chame kth(roots[L-1], roots[R]);
-*****************************LATEX_DESC_END*/
+*****************************LATEX_IGNORED_END*/

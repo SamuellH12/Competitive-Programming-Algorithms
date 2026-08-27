@@ -66,11 +66,13 @@ $
 ../Library/Math/CRT.cpp              $ CRT
 ../Library/Math/Combinatorics.cpp    $ Combinatorics
 ../Library/Math/FFT.cpp              $ FFT
+../Library/Math/FFT-kctl.cpp         $ FFT-kctl
 ../Library/Math/FFTmod.cpp           $ FFTmod
 ../Library/Math/FWHT.cpp             $ FWHT
 ../Library/Math/GaussElimin.cpp      $ GaussElimin
 ../Library/Math/Matrix.cpp           $ Matrix
 ../Library/Math/NTT.cpp              $ NTT
+../Library/Math/NTT-sh.cpp           $ NTT-sh
 ../Library/Math/Sieve.cpp            $ Sieve
 ../Library/Math/StirlingNumbers.cpp  $ StirlingNumbers
 ../Library/Math/fexp.cpp             $ fexp
@@ -96,6 +98,7 @@ $
 ../Library/Others/Hungarian.cpp             $ Hungarian
 ../Library/Others/MO.cpp                    $ MO
 ../Library/Others/MOTree.cpp                $ MOTree
+../Library/Others/XorBasis.cpp              $ XorBasis
 
 [Theorems]
 ../Library/Theorems/DP.tex        $ DP

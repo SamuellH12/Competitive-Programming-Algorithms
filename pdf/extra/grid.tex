@@ -1,0 +1,190 @@
+\documentclass[10pt,landscape]{article}
+\usepackage[a4paper, margin=0.5cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\usepackage[table]{xcolor}
+
+% ==============================================================================
+% Toni - ICPC Library: Coordinate Grids & Contest Scratchpad (Maximized Area)
+% ==============================================================================
+
+% Colors
+\definecolor{gridminor}{gray}{0.82}
+\definecolor{gridmajor}{gray}{0.45}
+\definecolor{gridaxis}{gray}{0.12}
+\definecolor{boxbg}{gray}{0.96}
+\definecolor{accent}{RGB}{24,79,102}
+
+% -------------------------------------------------------------
+% Command: \cartesiangrid
+% Args: #1=xmin, #2=xmax, #3=ymin, #4=ymax, #5=step_cm, #6=major_step, #7=title
+% -------------------------------------------------------------
+\newcommand{\cartesiangrid}[7]{%
+  \begin{tikzpicture}[x=#5cm, y=#5cm]
+    % Title above the grid
+    \node[anchor=south west, font=\fontsize{7}{8}\selectfont\bfseries, text=accent] at (#1, {#4 + 0.35}) {#7};
+    
+    % Minor grid (every 1 unit)
+    \draw[gridminor, line width=0.22pt, step=1] (#1, #3) grid (#2, #4);
+    % Major grid (every #6 units)
+    \draw[gridmajor, line width=0.50pt, step=#6] (#1, #3) grid (#2, #4);
+    % Outer border
+    \draw[gridaxis, line width=0.7pt] (#1, #3) rectangle (#2, #4);
+    
+    % Perimeter alignment ticks (top and right)
+    \pgfmathtruncatemacro{\xmin}{#1}
+    \pgfmathtruncatemacro{\xmax}{#2}
+    \pgfmathtruncatemacro{\ymin}{#3}
+    \pgfmathtruncatemacro{\ymax}{#4}
+    \pgfmathtruncatemacro{\mstep}{#6}
+    
+    \foreach \x in {\xmin, \the\numexpr\xmin+\mstep\relax, ..., \xmax} {
+      \draw[gridmajor, line width=0.5pt] (\x, #4) -- (\x, {#4 - 0.15});
+      \draw[gridmajor, line width=0.5pt] (\x, #3) -- (\x, {#3 + 0.15});
+    }
+    \foreach \y in {\ymin, \the\numexpr\ymin+\mstep\relax, ..., \ymax} {
+      \draw[gridmajor, line width=0.5pt] (#2, \y) -- ({#2 - 0.15}, \y);
+      \draw[gridmajor, line width=0.5pt] (#1, \y) -- ({#1 + 0.15}, \y);
+    }
+
+    % Axes
+    \draw[gridaxis, line width=0.85pt, -{Stealth[length=3.5pt, width=2.5pt]}] (#1, 0) -- (#2 + 0.6, 0) node[right, font=\fontsize{5.5}{6.5}\selectfont\bfseries] {$x$};
+    \draw[gridaxis, line width=0.85pt, -{Stealth[length=3.5pt, width=2.5pt]}] (0, #3) -- (0, #4 + 0.6) node[above, font=\fontsize{5.5}{6.5}\selectfont\bfseries] {$y$};
+    
+    % Origin point
+    \filldraw[gridaxis] (0,0) circle (1.2pt);
+    \node[below left, font=\fontsize{4.5}{5.5}\selectfont\bfseries, inner sep=0.8pt, fill=white, fill opacity=0.9, text opacity=1, text=accent] at (-0.08,-0.08) {$(0,0)$};
+    
+    % X axis labels & ticks
+    \foreach \x in {\xmin, \the\numexpr\xmin+\mstep\relax, ..., \xmax} {
+      \ifnum\x=0\relax\else
+        \draw[gridaxis, line width=0.65pt] (\x, -0.18) -- (\x, 0.18);
+        \node[below, font=\fontsize{4.2}{5.0}\selectfont\bfseries, inner sep=0.4pt, fill=white, fill opacity=0.9, text opacity=1] at (\x, -0.15) {$\x$};
+      \fi
+    }
+    % Y axis labels & ticks
+    \foreach \y in {\ymin, \the\numexpr\ymin+\mstep\relax, ..., \ymax} {
+      \ifnum\y=0\relax\else
+        \draw[gridaxis, line width=0.65pt] (-0.18, \y) -- (0.18, \y);
+        \node[left, font=\fontsize{4.2}{5.0}\selectfont\bfseries, inner sep=0.4pt, fill=white, fill opacity=0.9, text opacity=1] at (-0.15, \y) {$\y$};
+      \fi
+    }
+  \end{tikzpicture}%
+}
+
+% -------------------------------------------------------------
+% Command: \matrixgrid
+% Args: #1=rows, #2=cols, #3=step_cm, #4=major_step, #5=title
+% -------------------------------------------------------------
+\newcommand{\matrixgrid}[5]{%
+  \begin{tikzpicture}[x=#3cm, y=#3cm]
+    \node[anchor=south west, font=\fontsize{7}{8}\selectfont\bfseries, text=accent] at (0, 0.35) {#5};
+    
+    % Minor grid
+    \draw[gridminor, line width=0.22pt, step=1] (0, -#1) grid (#2, 0);
+    % Major grid
+    \draw[gridmajor, line width=0.50pt, step=#4] (0, -#1) grid (#2, 0);
+    % Outer border
+    \draw[gridaxis, line width=0.7pt] (0, -#1) rectangle (#2, 0);
+    
+    \pgfmathtruncatemacro{\nrows}{#1}
+    \pgfmathtruncatemacro{\ncols}{#2}
+    \pgfmathtruncatemacro{\mstep}{#4}
+
+    % Perimeter alignment ticks (bottom and right)
+    \foreach \c in {0, \mstep, ..., \ncols} {
+      \draw[gridmajor, line width=0.5pt] (\c, -\nrows) -- (\c, {-\nrows + 0.15});
+    }
+    \foreach \r in {0, \mstep, ..., \nrows} {
+      \draw[gridmajor, line width=0.5pt] (\ncols, -\r) -- ({\ncols - 0.15}, -\r);
+    }
+    
+    % Axes
+    \draw[gridaxis, line width=0.85pt, -{Stealth[length=3.5pt, width=2.5pt]}] (0, 0) -- (\ncols + 0.6, 0) node[right, font=\fontsize{5.5}{6.5}\selectfont\bfseries] {$\text{col }$};
+    \draw[gridaxis, line width=0.85pt, -{Stealth[length=3.5pt, width=2.5pt]}] (0, 0) -- (0, -\nrows - 0.6) node[below, font=\fontsize{5.5}{6.5}\selectfont\bfseries] {$\text{row }$};
+    
+    % Origin
+    \filldraw[gridaxis] (0,0) circle (1.2pt);
+    \node[above left, font=\fontsize{4.5}{5.5}\selectfont\bfseries, inner sep=0.8pt, fill=white, fill opacity=0.9, text opacity=1, text=accent] at (-0.08,0.08) {$(0,0)$};
+    
+    % Col ticks & labels (top)
+    \foreach \c in {0, \mstep, ..., \ncols} {
+      \ifnum\c=0\relax\else
+        \draw[gridaxis, line width=0.65pt] (\c, -0.18) -- (\c, 0.18);
+        \node[above, font=\fontsize{4.2}{5.0}\selectfont\bfseries, inner sep=0.4pt, fill=white, fill opacity=0.9, text opacity=1] at (\c, 0.15) {$\c$};
+      \fi
+    }
+    % Row ticks & labels (left)
+    \foreach \r in {0, \mstep, ..., \nrows} {
+      \ifnum\r=0\relax\else
+        \draw[gridaxis, line width=0.65pt] (-0.18, -\r) -- (0.18, -\r);
+        \node[left, font=\fontsize{4.2}{5.0}\selectfont\bfseries, inner sep=0.4pt, fill=white, fill opacity=0.9, text opacity=1] at (-0.15, -\r) {$\r$};
+      \fi
+    }
+  \end{tikzpicture}%
+}
+
+\begin{document}
+
+
+% =============================================================
+% 6 Cartesian Grids 
+% =============================================================
+\noindent
+\begin{minipage}[t]{0.32\linewidth}
+  \centering
+  \cartesiangrid{-20}{20}{-20}{20}{0.22}{5}{Grid A}\vspace{1cm}
+  \cartesiangrid{-20}{20}{-20}{20}{0.22}{5}{Grid D}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.32\linewidth}
+  \centering
+  \cartesiangrid{-20}{20}{-20}{20}{0.22}{5}{Grid B}\vspace{1cm}
+  \cartesiangrid{-20}{20}{-20}{20}{0.22}{5}{Grid E}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.32\linewidth}
+  \centering
+  \cartesiangrid{-20}{20}{-20}{20}{0.22}{5}{Grid C}\vspace{1cm}
+  \cartesiangrid{-20}{20}{-20}{20}{0.22}{5}{Grid F}
+\end{minipage}
+
+\newpage
+
+
+% =============================================================
+% 2x Cartesian Grid
+% =============================================================
+\noindent
+
+\begin{minipage}[t]{0.485\linewidth}
+  \centering
+  \cartesiangrid{-35}{35}{-25}{25}{0.38}{5}{}
+\end{minipage}\hfill
+\newpage
+
+\begin{minipage}[t]{0.485\linewidth}
+  \centering
+  \cartesiangrid{-35}{35}{-25}{25}{0.38}{5}{}
+\end{minipage}
+\newpage
+
+
+
+% =============================================================
+% 2x Matrix Grid (Top-Left Origin)  
+% =============================================================
+\noindent
+\begin{minipage}[t]{0.485\linewidth}
+  \centering
+  \matrixgrid{50}{70}{0.38}{5}{}
+\end{minipage}\hfill
+\newpage
+
+
+\begin{minipage}[t]{0.485\linewidth}
+  \centering
+  \matrixgrid{50}{70}{0.38}{5}{}
+\end{minipage}
+\newpage
+
+
+\end{document}

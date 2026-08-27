@@ -6,7 +6,7 @@ template<typename T> struct SegTree {
 	int N;
 	T NEUTRO = T(0);
 	SegTree(int n) : N(n) { seg.assign(4*n, NEUTRO); }
-	SegTree(vector<T> &lista) : N(lista.size()) { seg.assign(4*N); build(1, 0, N-1, lista); }
+	SegTree(vector<T> &lista) : N(lista.size()) { seg.assign(4*N, NEUTRO); build(1, 0, N-1, lista); }
 	T join(T lv, T rv){ return lv + rv; }
 		
 	T query(int no, int l, int r, int a, int b){

@@ -1,0 +1,94 @@
+\documentclass[10pt,a4paper,landscape]{article}
+\usepackage[margin=0.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{tikz}
+
+% Define colors matching the original image
+\definecolor{titlebg}{HTML}{7A9D9F}
+\definecolor{headerbg}{HTML}{99B8EB}
+\definecolor{subbg}{HTML}{E2EBEB}
+\definecolor{mainbg}{HTML}{F2F2F2}
+\newcommand{\Rexy}{T}
+\newcommand{\Spino}{S}
+\newcommand{\Giga}{P}
+\newcommand{\txtAngle}{0}
+\newcommand{\ProblemName}[1]{\textbf{\large #1}}
+
+\newlength{\IdColWidth}
+\newlength{\StatusColWidth}
+\newlength{\SmallColWidth}
+\newlength{\WriteColWidth}
+\newlength{\BlockWidth}
+\newlength{\RowHeight}
+\newlength{\TableWidth}
+
+\setlength{\IdColWidth}{0.5cm}
+\setlength{\StatusColWidth}{0.3cm}
+\setlength{\SmallColWidth}{0.7cm}
+\setlength{\RowHeight}{1.33cm}
+\setlength{\TableWidth}{\dimexpr\textwidth - 0.8pt\relax}
+\setlength{\WriteColWidth}{\dimexpr(\TableWidth - 3\IdColWidth - 3\StatusColWidth - 3\SmallColWidth)/3\relax}
+\setlength{\BlockWidth}{\dimexpr\IdColWidth + \StatusColWidth + \SmallColWidth + \WriteColWidth\relax}
+
+\newcommand{\BlockLeft}[1]{\dimexpr#1\BlockWidth\relax}
+\newcommand{\IdRight}[1]{\dimexpr#1\BlockWidth + \IdColWidth\relax}
+\newcommand{\StatusRight}[1]{\dimexpr#1\BlockWidth + \IdColWidth + \StatusColWidth\relax}
+\newcommand{\WriteStart}[1]{\dimexpr#1\BlockWidth + \IdColWidth + \StatusColWidth + \SmallColWidth\relax}
+\newcommand{\IdCenter}[1]{\dimexpr#1\BlockWidth + \IdColWidth/2\relax}
+\newcommand{\StatusCenter}[1]{\dimexpr#1\BlockWidth + \IdColWidth + \StatusColWidth/2\relax}
+
+\newcommand{\FillTableBackgrounds}{%
+\fill[mainbg] (0pt,0) rectangle (\TableWidth,-15);
+\foreach \block in {0,1,2}
+	\fill[headerbg] (\BlockLeft{\block},0) rectangle (\IdRight{\block},-15);
+}
+
+\newcommand{\DrawTableGrid}{%
+\foreach \block in {0,1,2} {
+	\draw[line width=0.8pt] (\BlockLeft{\block},0) -- (\BlockLeft{\block},-15);
+	\draw[line width=0.8pt] (\IdRight{\block},0) -- (\IdRight{\block},-15);
+	\draw[line width=0.8pt] (\StatusRight{\block},0) -- (\StatusRight{\block},-15);
+	\draw[line width=0.8pt] (\WriteStart{\block},0) -- (\WriteStart{\block},-15);
+}
+\draw[line width=0.8pt] (\TableWidth,0) -- (\TableWidth,-15);
+
+\foreach \row in {0,3,6,9,12,15}
+	\draw[line width=0.8pt] (0pt,-\row) -- (\TableWidth,-\row);
+
+\foreach \row in {1,2,4,5,7,8,10,11,13,14}
+	\foreach \block in {0,1,2}
+		\draw[line width=1.2pt] (\IdRight{\block},-\row) -- (\WriteStart{\block},-\row);
+}
+
+\newcommand{\ProblemBlock}[3]{%
+\node at (\IdCenter{#1},{-#2 - 1.5}) {\ProblemName{#3}};
+\node at (\StatusCenter{#1},{-#2 - 0.5}) {\rotatebox{\txtAngle}{\Rexy}};
+\node at (\StatusCenter{#1},{-#2 - 1.5}) {\rotatebox{\txtAngle}{\Spino}};
+\node at (\StatusCenter{#1},{-#2 - 2.5}) {\rotatebox{\txtAngle}{\Giga}};
+}
+
+\newcommand{\ProblemGroup}[4]{%
+\ProblemBlock{0}{#1}{#2}
+\ProblemBlock{1}{#1}{#3}
+\ProblemBlock{2}{#1}{#4}
+}
+
+\begin{document}
+\pagestyle{empty}
+\ttfamily\footnotesize % Use typewriter font to match aesthetic
+
+\begin{center}
+% 3-column setup (each block contains: ID, Subtype, Small Col, Wide Writing Area X)
+\begin{tikzpicture}[x=1pt,y=\RowHeight]
+\FillTableBackgrounds
+\DrawTableGrid
+
+\ProblemGroup{0}{A}{B}{C}
+\ProblemGroup{3}{D}{E}{F}
+\ProblemGroup{6}{G}{H}{I}
+\ProblemGroup{9}{J}{K}{L}
+\ProblemGroup{12}{M}{N}{O}
+\end{tikzpicture}
+\end{center}
+\end{document}

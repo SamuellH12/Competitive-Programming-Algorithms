@@ -1,0 +1,67 @@
+\documentclass[10pt,a4paper,landscape]{article}
+\usepackage[margin=0.5cm]{geometry}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{graphicx}
+
+% Define colors matching the original image
+\definecolor{titlebg}{HTML}{7A9D9F}
+\definecolor{headerbg}{HTML}{99B8EB}
+\definecolor{subbg}{HTML}{E2EBEB}
+\definecolor{mainbg}{HTML}{F2F2F2}
+\newcommand{\shouldUseBg}{} %{ \cellcolor{mainbg} }
+\newcommand{\Rexy}{T}
+\newcommand{\Spino}{S}
+\newcommand{\Giga}{P}
+\newcommand{\txtAngle}{0}
+
+% Define custom column types for vertical centering (3-column layout structure)
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+\begin{document}
+\pagestyle{empty}
+\ttfamily\footnotesize % Use typewriter font to match aesthetic
+
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\setlength{\tabcolsep}{2.5pt}
+\setlength{\arrayrulewidth}{0.8pt}
+
+% 3-Column setup (each block contains: ID, Subtype, Small Col, Wide Writing Area X)
+\begin{tabularx}{\textwidth}{|C{0.5cm}|C{0.4cm}|C{0.6cm}|X|C{0.5cm}|C{0.4cm}|C{0.6cm}|X|C{0.5cm}|C{0.4cm}|C{0.6cm}|X|}
+\hline
+\cellcolor{headerbg} \rule{0pt}{1.2cm} & \shouldUseBg \rotatebox{\txtAngle}{\Rexy} & \shouldUseBg & \cellcolor{mainbg} & \cellcolor{headerbg} \rule{0pt}{1.2cm} & \shouldUseBg \rotatebox{\txtAngle}{\Rexy} & \shouldUseBg & \cellcolor{mainbg} & \cellcolor{headerbg} \rule{0pt}{1.2cm} & \shouldUseBg \rotatebox{\txtAngle}{\Rexy} & \shouldUseBg & \cellcolor{mainbg} \\
+\cline{2-3} \cline{6-7} \cline{10-11}
+\cellcolor{headerbg} \rule{0pt}{1.2cm} \textbf{\large A } & \shouldUseBg \rotatebox{\txtAngle}{\Spino} & \shouldUseBg & \cellcolor{mainbg} & \cellcolor{headerbg} \rule{0pt}{1.2cm} \textbf{\large B} & \shouldUseBg \rotatebox{\txtAngle}{\Spino} & \shouldUseBg & \cellcolor{mainbg} & \cellcolor{headerbg} \rule{0pt}{1.2cm} \textbf{\large C} & \shouldUseBg \rotatebox{\txtAngle}{\Spino} & \shouldUseBg & \cellcolor{mainbg} \\
+\cline{2-3} \cline{6-7} \cline{10-11}
+\cellcolor{headerbg} \rule{0pt}{1.2cm} & \shouldUseBg \rotatebox{\txtAngle}{\Giga} & \shouldUseBg & \cellcolor{mainbg} & \cellcolor{headerbg} \rule{0pt}{1.2cm} & \shouldUseBg \rotatebox{\txtAngle}{\Giga} & \shouldUseBg & \cellcolor{mainbg} & \cellcolor{headerbg} \rule{0pt}{1.2cm} & \shouldUseBg \rotatebox{\txtAngle}{\Giga} & \shouldUseBg & \cellcolor{mainbg} \\
+\hline
+\cellcolor{headerbg} \rule{0pt}{1.2cm} & \shouldUseBg \rotatebox{\txtAngle}{\Rexy} & \shouldUseBg & \cellcolor{mainbg} & \cellcolor{headerbg} \rule{0pt}{1.2cm} & \shouldUseBg \rotatebox{\txtAngle}{\Rexy} & \shouldUseBg & \cellcolor{mainbg} & \cellcolor{headerbg} \rule{0pt}{1.2cm} & \shouldUseBg \rotatebox{\txtAngle}{\Rexy} & \shouldUseBg & \cellcolor{mainbg} \\
+\cline{2-3} \cline{6-7} \cline{10-11}
+\cellcolor{headerbg} \rule{0pt}{1.2cm} \textbf{\large D} & \shouldUseBg \rotatebox{\txtAngle}{\Spino} & \shouldUseBg & \cellcolor{mainbg} & \cellcolor{headerbg} \rule{0pt}{1.2cm} \textbf{\large E} & \shouldUseBg \rotatebox{\txtAngle}{\Spino} & \shouldUseBg & \cellcolor{mainbg} & \cellcolor{headerbg} \rule{0pt}{1.2cm} \textbf{\large F} & \shouldUseBg \rotatebox{\txtAngle}{\Spino} & \shouldUseBg & \cellcolor{mainbg} \\
+\cline{2-3} \cline{6-7} \cline{10-11}
+\cellcolor{headerbg} \rule{0pt}{1.2cm} & \shouldUseBg \rotatebox{\txtAngle}{\Giga} & \shouldUseBg & \cellcolor{mainbg} & \cellcolor{headerbg} \rule{0pt}{1.2cm} & \shouldUseBg \rotatebox{\txtAngle}{\Giga} & \shouldUseBg & \cellcolor{mainbg} & \cellcolor{headerbg} \rule{0pt}{1.2cm} & \shouldUseBg \rotatebox{\txtAngle}{\Giga} & \shouldUseBg & \cellcolor{mainbg} \\
+\hline
+\cellcolor{headerbg} \rule{0pt}{1.2cm} & \shouldUseBg \rotatebox{\txtAngle}{\Rexy} & \shouldUseBg & \cellcolor{mainbg} & \cellcolor{headerbg} \rule{0pt}{1.2cm} & \shouldUseBg \rotatebox{\txtAngle}{\Rexy} & \shouldUseBg & \cellcolor{mainbg} & \cellcolor{headerbg} \rule{0pt}{1.2cm} & \shouldUseBg \rotatebox{\txtAngle}{\Rexy} & \shouldUseBg & \cellcolor{mainbg} \\
+\cline{2-3} \cline{6-7} \cline{10-11}
+\cellcolor{headerbg} \rule{0pt}{1.2cm} \textbf{\large G} & \shouldUseBg \rotatebox{\txtAngle}{\Spino} & \shouldUseBg & \cellcolor{mainbg} & \cellcolor{headerbg} \rule{0pt}{1.2cm} \textbf{\large H} & \shouldUseBg \rotatebox{\txtAngle}{\Spino} & \shouldUseBg & \cellcolor{mainbg} & \cellcolor{headerbg} \rule{0pt}{1.2cm} \textbf{\large I} & \shouldUseBg \rotatebox{\txtAngle}{\Spino} & \shouldUseBg & \cellcolor{mainbg} \\
+\cline{2-3} \cline{6-7} \cline{10-11}
+\cellcolor{headerbg} \rule{0pt}{1.2cm} & \shouldUseBg \rotatebox{\txtAngle}{\Giga} & \shouldUseBg & \cellcolor{mainbg} & \cellcolor{headerbg} \rule{0pt}{1.2cm} & \shouldUseBg \rotatebox{\txtAngle}{\Giga} & \shouldUseBg & \cellcolor{mainbg} & \cellcolor{headerbg} \rule{0pt}{1.2cm} & \shouldUseBg \rotatebox{\txtAngle}{\Giga} & \shouldUseBg & \cellcolor{mainbg} \\
+\hline
+\cellcolor{headerbg} \rule{0pt}{1.2cm} & \shouldUseBg \rotatebox{\txtAngle}{\Rexy} & \shouldUseBg & \cellcolor{mainbg} & \cellcolor{headerbg} \rule{0pt}{1.2cm} & \shouldUseBg \rotatebox{\txtAngle}{\Rexy} & \shouldUseBg & \cellcolor{mainbg} & \cellcolor{headerbg} \rule{0pt}{1.2cm} & \shouldUseBg \rotatebox{\txtAngle}{\Rexy} & \shouldUseBg & \cellcolor{mainbg} \\
+\cline{2-3} \cline{6-7} \cline{10-11}
+\cellcolor{headerbg} \rule{0pt}{1.2cm} \textbf{\large J} & \shouldUseBg \rotatebox{\txtAngle}{\Spino} & \shouldUseBg & \cellcolor{mainbg} & \cellcolor{headerbg} \rule{0pt}{1.2cm} \textbf{\large K} & \shouldUseBg \rotatebox{\txtAngle}{\Spino} & \shouldUseBg & \cellcolor{mainbg} & \cellcolor{headerbg} \rule{0pt}{1.2cm} \textbf{\large L} & \shouldUseBg \rotatebox{\txtAngle}{\Spino} & \shouldUseBg & \cellcolor{mainbg} \\
+\cline{2-3} \cline{6-7} \cline{10-11}
+\cellcolor{headerbg} \rule{0pt}{1.2cm} & \shouldUseBg \rotatebox{\txtAngle}{\Giga} & \shouldUseBg & \cellcolor{mainbg} & \cellcolor{headerbg} \rule{0pt}{1.2cm} & \shouldUseBg \rotatebox{\txtAngle}{\Giga} & \shouldUseBg & \cellcolor{mainbg} & \cellcolor{headerbg} \rule{0pt}{1.2cm} & \shouldUseBg \rotatebox{\txtAngle}{\Giga} & \shouldUseBg & \cellcolor{mainbg} \\
+\hline
+\cellcolor{headerbg} \rule{0pt}{1.2cm} & \shouldUseBg \rotatebox{\txtAngle}{\Rexy} & \shouldUseBg & \cellcolor{mainbg} & \cellcolor{headerbg} \rule{0pt}{1.2cm} & \shouldUseBg \rotatebox{\txtAngle}{\Rexy} & \shouldUseBg & \cellcolor{mainbg} & \cellcolor{headerbg} \rule{0pt}{1.2cm} & \shouldUseBg \rotatebox{\txtAngle}{\Rexy} & \shouldUseBg & \cellcolor{mainbg} \\
+\cline{2-3} \cline{6-7} \cline{10-11}
+\cellcolor{headerbg} \rule{0pt}{1.2cm} \textbf{\large M} & \shouldUseBg \rotatebox{\txtAngle}{\Spino} & \shouldUseBg & \cellcolor{mainbg} & \cellcolor{headerbg} \rule{0pt}{1.2cm} \textbf{\large N} & \shouldUseBg \rotatebox{\txtAngle}{\Spino} & \shouldUseBg & \cellcolor{mainbg} & \cellcolor{headerbg} \rule{0pt}{1.2cm} \textbf{\large O} & \shouldUseBg \rotatebox{\txtAngle}{\Spino} & \shouldUseBg & \cellcolor{mainbg} \\
+\cline{2-3} \cline{6-7} \cline{10-11}
+\cellcolor{headerbg} \rule{0pt}{1.2cm} & \shouldUseBg \rotatebox{\txtAngle}{\Giga} & \shouldUseBg & \cellcolor{mainbg} & \cellcolor{headerbg} \rule{0pt}{1.2cm} & \shouldUseBg \rotatebox{\txtAngle}{\Giga} & \shouldUseBg & \cellcolor{mainbg} & \cellcolor{headerbg} \rule{0pt}{1.2cm} & \shouldUseBg \rotatebox{\txtAngle}{\Giga} & \shouldUseBg & \cellcolor{mainbg} \\
+\hline
+\end{tabularx}
+\end{center}
+\end{document}
