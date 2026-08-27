@@ -22,7 +22,7 @@ void fft(vector<CD> &a, bool inverse=false){
 			}
 		}
 	}
-	if(inverse) for (CD &x : a) x /= n;
+	if(inverse) for(CD &x : a) x /= n;
 }
 
 vector<ld> conv(const vector<ld>& a, const vector<ld>& b){
@@ -62,4 +62,3 @@ O(N log N) // N=|A|+|B| (1s N <= 2^22)
 |ans = (ijkl -6*iijk +3*iijj +8*iiij -6*iiii) / 24
 * similar pra FWHT, mas vx3 vira V^V^V ou V|V|V e etc...
 *****************************LATEX_DESC_END*/
-//Credits: https://github.com/kth-competitive-programming/kactl/blob/main/content/numerical/FastFourierTransform.h
