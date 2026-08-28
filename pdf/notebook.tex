@@ -117,6 +117,7 @@
 \newtcblisting{listingframe}[2][]{%
   enhanced,
   breakable=true,
+  lines before break=1,
   listing only,
   listing engine=listings,
   colback=descboxbg,
@@ -177,9 +178,9 @@
 \begin{landscape}
 \begin{multicols}{3}  % MUDE A QUANTIDADE DE COLUNAS AQUI
 \raggedcolumns 
-\interlinepenalty=1000000000
-\linepenalty=1000000000
-\widowpenalty=1000000000
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
 
 \maketitle
 \vspace{-13ex}
