@@ -39,13 +39,13 @@ struct StringHash{
 
 // OPTIONAL
 int firstDiff(StringHash& a, int la, int ra, StringHash& b, int lb, int rb){
-	int l=0, r=min(ra-la, rb-lb), diff=r+1;	
+	int l=0, r=min(ra-la, rb-lb);	
 	while(l <= r){	
 		int m = (l+r)/2;
 		if(a.gethash(la, la+m) == b.gethash(lb, lb+m)) l = m+1;
-		else r = m-1, diff = m;
+		else r = m-1;
 	}
-	return diff;
+	return l;
 }
 
 int hshComp(StringHash& a, int la, int ra, StringHash& b, int lb, int rb){
